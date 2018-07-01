@@ -1,0 +1,11 @@
+.tooltip {
+  position: absolute;
+  padding: 5px;
+
+  font-family: "PT Sans Narrow";
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ff0000;
+
+  word-wrap: normal;
+}

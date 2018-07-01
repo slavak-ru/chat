@@ -1,0 +1,20 @@
+{
+  "name": "chat",
+  "version": "1.0.0",
+  "description": "CHAT - educational project. Single page application on JS Components",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "CHAT"
+  ],
+  "author": "Vyacheslav Knyazev",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.24.5",
+    "gulp": "^3.9.1",
+    "gulp4": "^4.0.2",
+    "jshint": "^2.9.5"
+  }
+}
