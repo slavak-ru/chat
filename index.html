@@ -8,19 +8,27 @@
   <link rel="preload" href="/fonts/pt-sans-narrow-700.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/fonts/pt-sans-narrow-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/components/tooltip/tooltip.css">
   <link rel="stylesheet" href="/components/form/form.css">
   <link rel="stylesheet" href="/components/chat/chat.css">
-  <link rel="stylesheet" href="/components/tooltip/tooltip.css">
 </head>
 <body class="body">
-  <div class="chat" id="chat"></div>
 
-  <div class="form" id="form"></div>
-  
+  <div class="chat-wrapper" id="app"></div>
+
+
+  <script src="\components\chat\chat.templ.js"></script>
   <script src="\components\chat\chat.js"></script>
+  <script src="\components\form\form.templ.js"></script>
   <script src="\components\form\form.js"></script>
   <script src="\components\textarea\textarea.js"></script>
   <script src="\components\tooltip\tooltip.js"></script>
-  <script src="app.js"></script>
+  <script src="\components\app\app.js"></script>
+
+  <script>
+    'use strict';
+    
+    let app = new window.App({element: document.getElementById('app')});
+  </script>
 </body>
 </html>

@@ -1,13 +1,19 @@
 (function(){
-  'use strict'
+  'use strict';
+
+  const formTemplate = window.formTemplate;
+
   /** @description Class Form collect data from form-elements on Submint event. */
   class Form {
     /**
 			* @description check and collect data from form-elements.
-			* @param {object} element - the Form (DOM-element).
+      * @param {object} element - the Form (DOM-element).
+      * @param {class} tooltip - class Tooltip for create tooltips.
 		*/
-    constructor(element) {
+    constructor({element, tooltip}) {
       this.form = element;
+      this.createTooltip = tooltip;
+      this.tooltips = {}; 
 
       this._onSubmit = this._onSubmit.bind(this);
       this._initEvents();
@@ -23,22 +29,10 @@
 
     /**
 			* @method render()
-			* @description Public method - create inners DOM-elements in the Form.
+			* @description Public method - create inners DOM-elements (inputs and submit button) in the Form.
 		*/
     render() {
-      let inner = `
-        <form>
-        <label class="form__label"><span class="label__text">Пользователь</span>
-        <input class="form__input form__input_user-name" type="text" data-tooltip="Введите Ваше имя" name="user">
-        </label>
-        <label class="form__label"><span class="label__text">Сообщение</span>
-        <textarea class="form__textarea" rows="3" cols="53" data-tooltip="Введите сообщение" name="message"></textarea>
-        </label>
-        <input type="submit" value="ОТПРАВИТЬ"class="form__button">
-        </form>
-      `;
-
-      this.form.innerHTML = inner;
+      this.form.innerHTML = formTemplate();
     }
 
     /**
@@ -75,10 +69,24 @@
         } 
 
         this._removeErrorClass(elem);
-        collectData[elem.name] = elem.value
+        collectData[elem.name] = elem.value;
       });
 
+      collectData.time = this._setMessageTime();
+
       return collectData;
+    }
+
+    /**
+			* @method _setMessageTime()
+      * @description Inner method - return message's time.
+      * @return {string} time of message (dd.mm.yy; hh:mm:ss).
+		*/
+    _setMessageTime() {
+      let dataOption = {day: '2-digit', month: '2-digit', year: '2-digit', minute: '2-digit',  hour:'2-digit', second:'2-digit'};
+      let messageDate = new Date().toLocaleString('ru', dataOption);
+
+      return messageDate;
     }
 
     /**
@@ -87,6 +95,11 @@
 		*/
     _setErrorClass(elem) {
       elem.classList.add('error');
+
+      if (!this.createTooltip) return;
+
+      this.tooltips[elem] = new this.createTooltip(elem);
+      this.tooltips[elem].createTooltip();
 
     }
 
@@ -97,7 +110,8 @@
     _removeErrorClass(elem) {
       if(elem.classList.contains('error')) {
         elem.classList.remove('error');
-      }  
+      }
+      if (this.tooltips[elem]) this.tooltips[elem].removeTooltip();
     }
 
   }

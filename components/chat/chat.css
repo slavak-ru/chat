@@ -1,8 +1,7 @@
 .chat {
 
-  max-width: 400px;
+  width: 400px;
   margin: 0 auto;
-  box-sizing: inherit;
   padding: 0;
 
   font-size: 1rem;
@@ -15,7 +14,6 @@
   /* flex-wrap: wrap; */
   margin-top: 1rem;
 
-  box-sizing: inherit;
 }
 
 .user,
@@ -26,7 +24,6 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
 
-  box-sizing: inherit;
 }
 
 .user {
