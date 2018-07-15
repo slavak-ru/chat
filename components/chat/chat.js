@@ -8,7 +8,7 @@
 			* @param {object} element - the Chat (DOM-element).
 			* @param {object} data - contains all chat messages.
 		*/
-    constructor(element, data = {messages:[]}) {
+    constructor(element, data = {chat: {messages:[], users: []}}) {
       this.chat = element;
       this.data = data;
       this.count = 0;
@@ -21,7 +21,7 @@
 		*/
     render() { 
       let div;
-      if (this.data.messages.length > this.count ) {
+      if (this.data.chat.messages.length > this.count ) {
         div = document.createElement('div');
         div.className = 'message-wrapper';
         div.innerHTML = this.chatTemplate(this.data);
@@ -30,7 +30,6 @@
       }
       
       if(div) this.chat.appendChild(div);
-      
     }
 
     /**
@@ -38,7 +37,7 @@
 			* @description Public method - adding new key and value to the data-object.
 		*/
     addMessage(message) {
-        this.data.messages.push([message.user, message.time ,message.message]);
+        this.data.chat.messages.push({user: message.user, time: message.time , message: message.message});
       }
   }
 

@@ -1,9 +1,9 @@
 .form {
-
-  width: 400px;
-  margin: 0 auto;
-  margin-bottom: 10px;
-  padding: 0;
+  width: var(--chatWidth);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   font-size: 1rem;
 }
@@ -17,15 +17,23 @@
 .form__button {
   display: block;
   margin: auto;
-  margin-bottom: 10px;
+  margin-bottom: 0.7rem;
   position: relative;
 
   line-height: 1.2rem;
   
-  border: 1px solid #2591b4;
+  border: 1px solid var(--formBorderColor);
   border-radius: 0.3rem;
+  outline: none;  
 
 }
+
+.form__input:focus,
+.form__textarea:focus,
+.form__button:focus {
+  border: 1px solid var(--focuseBorderColor);
+}
+
 
 .form__input {
   width: 98%;
@@ -38,62 +46,60 @@
 .form__button  {
   width: 98%;
   position: relative;
-  padding: 10px 20px;
-  padding-right: 50px;
+  margin: 0 auto;
+  margin-bottom: 0.2rem;
+  padding: 0.7rem 1.1rem;
+  padding-right: 3rem;
 
-  
+  font-family: "PT Sans Narrow";
   font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
   text-decoration: none;
-  color: #fff;
+  color: var(--buttonFontColor);
   
-  background-image: linear-gradient(to bottom, #2ca0ca, #3eb8e5);
+  background-image: linear-gradient(to bottom, var(--buttonBgColorStart), var(--buttonBgColorEnd));
   border-radius: 5px;
 
   cursor: pointer;
 }
 
-.form__button::before {
-  background-position: center center;
-  content: "hey";
-  width: 20px;
-  height: 20px;
-
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin-top: -9px;
-
-  background-color: #2591b4;
- /* background-image: url(../images/right_arrow.png);
-  background-repeat: no-repeat;*/
-  border-radius: 50%;
-  box-shadow: inset 0px 1px 0px #052756, 0px 1px 0px #60c9f0;
-}
-
 .form__button:active {
-  color: #156785;
-  box-shadow: inset -3px 3px 3px 0px #156785, 
-              inset 3px 0px 3px 0px #156785;
+  color: var(--buttonShadowColor);
+  box-shadow: inset -0.1rem 0.1rem 0.1rem 0rem var(--buttonShadowColor), 
+              inset 0.1rem 0rem 0.1rem 0rem var(--buttonShadowColor);
   outline: none;
 }
-/*
 
+.form__button::before {
+  width: 1.8rem;
+  height: 1.8rem;
+
+  position: absolute;
+  content: "";
+  right: 1rem;
+  top: 0.85rem;
+  margin-top: -9px;
+  
+  background-color: var(--buttonBgColorEnd);
+/*
+  background-image: linear-gradient(to bottom, var(--buttonBgColorStart), var(--buttonBgColorEnd));
 */
-
-/*
-.form__button {
-  width: 98%;
-  padding: 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-bottom: 0;
-
-  font-family: "PT Sans Narrow";
-  font-weight: bold;
-  font-size: 1.2rem;
+  background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><title>_443</title><path d="M31.5 0.196q0.589 0.429 0.482 1.143l-4.571 27.429q-0.089 0.518-0.571 0.804-0.25 0.143-0.554 0.143-0.196 0-0.429-0.089l-8.089-3.304-4.321 5.268q-0.321 0.411-0.875 0.411-0.232 0-0.393-0.071-0.339-0.125-0.545-0.42t-0.205-0.652v-6.232l15.429-18.911-19.089 16.518-7.054-2.893q-0.661-0.25-0.714-0.982-0.036-0.714 0.571-1.054l29.714-17.143q0.268-0.161 0.571-0.161 0.357 0 0.643 0.196z" fill="#fff" stroke="#fff"></path></svg>');
+  
+  background-position: 40% center;
+  background-repeat: no-repeat;
+  background-size: 60%;
+  border-radius: 50%;
+  box-shadow: inset 0rem 0.05rem 0rem #052756, 0rem 0.05rem 0rem var(--buttonShadowColor);
 }
-*/
+
+.form__button:active::before {
+  background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><title>_443</title><path d="M31.5 0.196q0.589 0.429 0.482 1.143l-4.571 27.429q-0.089 0.518-0.571 0.804-0.25 0.143-0.554 0.143-0.196 0-0.429-0.089l-8.089-3.304-4.321 5.268q-0.321 0.411-0.875 0.411-0.232 0-0.393-0.071-0.339-0.125-0.545-0.42t-0.205-0.652v-6.232l15.429-18.911-19.089 16.518-7.054-2.893q-0.661-0.25-0.714-0.982-0.036-0.714 0.571-1.054l29.714-17.143q0.268-0.161 0.571-0.161 0.357 0 0.643 0.196z" fill="#156785" stroke="#156785"></path></svg>');
+  
+  box-shadow: 0.01rem 0.1rem 0.12rem #052756, 0rem 0.05rem 0.12rem var(--buttonShadowColor);
+}
 
 .error {
-  border: 1px solid #ff0000;
+  border: 1px solid var(--errorColor);
 }

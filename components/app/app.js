@@ -10,44 +10,28 @@
 		*/
     constructor ({element}) {
       this.app = element;
-  
-      this._startChat();
+      this.appTemplate = window.appTemplate.bind(this);
+
+      this._initialCreateChat();
 
       this.form.onSubmit = this.onSubmit.bind(this);
     }
 
+    
     /**
-			* @method _startChat()
+			* @method _initialCreateChat()
 			* @description Inner method - create initial Chat and Form DOM-elements and render them.
 		*/
-    _startChat() {
-      
-      let chatElement = this._createElement({tag: 'div', className: 'chat', id: 'chat'});
-      let formElement = this._createElement({tag: 'div', className: 'form', id: 'form'});
+    _initialCreateChat() {
+      this.app.innerHTML = this.appTemplate();
 
-      this.chat = new Chat(chatElement);
-      this.form = new Form({element: formElement, tooltip: Tooltip});
+      this.chat = new Chat(document.getElementById('chat'));
+      this.form = new Form({element: document.getElementById('form'), tooltip: Tooltip});
 
       this.chat.render();
       this.form.render();
   
       this.textarea = new Textarea({element: document.querySelector('textarea[name="message"]')});
-    }
-
-    /**
-			* @method _createElement(option)
-			* @description Inner method - create DOM-element and append element to the App.
-			* @param {object} option - contains TAG-name, ClassName and ID of the element.
-			* @return {object} element - created element.
-		*/
-    _createElement({tag, className, id}) {
-      let element = document.createElement(tag);
-      element.className = className;
-      element.id = id;
-
-      this.app.appendChild(element);
-
-      return element;
     }
   
     /**
@@ -62,36 +46,9 @@
       this.chat.addMessage(message);
       this.chat.render();
       this.form.render();
+
     }
   }
 
   window.App = App;
 })();
-
-
-
-
-
-/** @description app.js - is a control module, create and manage all components of the Chat*/
-/*
-let chat = new Chat({element: document.getElementById('chat')});
-let form = new Form({element: document.getElementById('form'), tooltip: Tooltip});
-
-chat.render();
-form.render();
-
-let textarea = new Textarea({element: document.querySelector('textarea[name="message"]')});
-
-form.onSubmit = (message) => {
-  let tooltip = {};
-  
-  if (!message.user || !message.message ) return;
-
-  let tooltips = document.querySelectorAll('.tooltip');
-  tooltips.forEach((elem)=> document.body.removeChild(elem) )
-
-  chat.addMessage(message);
-  chat.render();
-  form.render();
-}
-*/

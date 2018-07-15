@@ -95,8 +95,7 @@
 		*/
     _setErrorClass(elem) {
       elem.classList.add('error');
-
-      if (!this.createTooltip) return;
+      if (!this.createTooltip || this.tooltips[elem]) return;
 
       this.tooltips[elem] = new this.createTooltip(elem);
       this.tooltips[elem].createTooltip();

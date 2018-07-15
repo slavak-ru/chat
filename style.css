@@ -1,3 +1,22 @@
+:root {
+  --chatWidth: 400px;
+  --chatHeaderHeight: 10vh;
+
+  --messageBackgroundColor: #fff;
+  --messageBorderRadius: 0.4rem;
+
+  --formBorderColor: #2591b4;
+  --buttonFontColor: #fff;
+  --buttonBgColorStart: #2ca0ca;
+  --buttonBgColorEnd: #3eb8e5;
+  --buttonShadowColor: #156785;
+
+  --focuseBorderColor: #052756;
+
+  --errorColor: #ff0000;
+
+}
+
 @font-face {
 	font-family: "PT Sans Narrow";
 	font-style: normal;
@@ -34,9 +53,5 @@ html {
 
 .body {
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
 
-  min-height: 100vh;
 }

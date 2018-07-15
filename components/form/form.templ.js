@@ -17,4 +17,6 @@ pug_html = pug_html + "Сообщение\u003C\u002Fspan\u003E";
 ;pug_debug_line = 8;pug_debug_filename = "C:\\Users\\God Father\\projects\\chat\\components\\form\\form.templ.pug";
 pug_html = pug_html + "\u003Ctextarea class=\"form__textarea\" rows=\"3\" cols=\"53\" data-tooltip=\"Введите сообщение\" name=\"message\"\u003E\u003C\u002Ftextarea\u003E\u003C\u002Flabel\u003E";
 ;pug_debug_line = 10;pug_debug_filename = "C:\\Users\\God Father\\projects\\chat\\components\\form\\form.templ.pug";
-pug_html = pug_html + "\u003Cinput class=\"form__button\" type=\"submit\" value=\"ОТПРАВИТЬ\"\u002F\u003E\u003C\u002Fform\u003E";} catch (err) {pug_rethrow(err, pug_debug_filename, pug_debug_line);};return pug_html;}
+pug_html = pug_html + "\u003Cbutton class=\"form__button\" type=\"submit\" value=\"ОТПРАВИТЬ\"\u003E";
+;pug_debug_line = 10;pug_debug_filename = "C:\\Users\\God Father\\projects\\chat\\components\\form\\form.templ.pug";
+pug_html = pug_html + "ОТПРАВИТЬ\u003C\u002Fbutton\u003E\u003C\u002Fform\u003E";} catch (err) {pug_rethrow(err, pug_debug_filename, pug_debug_line);};return pug_html;}
