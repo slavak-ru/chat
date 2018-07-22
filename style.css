@@ -5,6 +5,7 @@
   --messageBackgroundColor: #fff;
   --messageBorderRadius: 0.4rem;
 
+  --inputsWidth: 98%;
   --formBorderColor: #2591b4;
   --buttonFontColor: #fff;
   --buttonBgColorStart: #2ca0ca;
@@ -43,6 +44,7 @@ html {
   font-size: 18px;
 
   box-sizing: border-box;
+  user-select: none;
 }
 
 *,
@@ -53,5 +55,4 @@ html {
 
 .body {
   margin: 0;
-
 }

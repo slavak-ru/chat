@@ -4,34 +4,3 @@
 
   margin: 0 auto;
 }
-
-.chat__content_wrapper {
-  margin: 0;
-  padding: 0;
-  overflow-y: auto;
-}
-
-.chat {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: space-between;
-  align-content: space-around;
-  
-  background-color: rgb(228, 225, 255);
-}
-
-.chat__header {
-  width: 100%;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-/*  height: var(--chatHeaderHeight); */
-
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 0.1rem;
-  color: var(--buttonFontColor);
-
-  background-image: linear-gradient(to bottom, var(--buttonBgColorStart), var(--buttonBgColorEnd));
-}

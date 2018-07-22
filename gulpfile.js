@@ -4,6 +4,7 @@
 const gulp = require("gulp");
 const browserSync = require('browser-sync').create();
 const pug = require('gulp-pug');
+const through2 = require('through2').obj;
 //const path = require('path');
 //const debug = require('gulp-debug');
 
@@ -41,17 +42,22 @@ gulp.task('compileForm', function buildHTML() {
 
 // compile chat pug template into fuction
 
-let pugOption = {
-        name: 'chatTemplate',
-}
+const setFuncName = through2(function(file, enc, callback) {  
+    this.funcName = file.relative.split('\\').slice(-1).join().split('.')[0] + 'Template';
+    this.pugOptions = {client: true, name: this.funcName};
+    //this.push(this.pugOptions); // валит поток
+    callback(null, file);
+});
 
 gulp.task('compileChat', function buildHTML() {
-    return gulp.src('./components/chat/chat.templ.pug')
-    //.pipe(pug(Object.assign({client: true, name: 'Template'}, {name: path.basename(__filename)})))
-    .pipe(pug(Object.assign({client: true, name: 'Template'}, pugOption)))
+    return gulp.src('./components/chat/*.pug')
+
+    .pipe(setFuncName)
+    //.pipe(pug(this.pugOptions))
+    .pipe(pug({client: true, name: 'chatTemplate'}))
     .pipe(gulp.dest('./components/chat'))
 });
-setTimeout(()=>console.log(pugOption.name), 1000)
+
 
 // static server
 gulp.task('serve', function () {
