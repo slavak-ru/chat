@@ -1,20 +1,10 @@
-.form {
-  width: var(--chatWidth);
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  font-size: 1rem;
-}
-
 .label__text {
   padding-left: 10px;
 }
 
 .form__input,
 .form__textarea,
-.form__button {
+.button {
   display: block;
   width: var(--inputsWidth);
   margin: auto;
@@ -31,7 +21,7 @@
 
 .form__input:focus,
 .form__textarea:focus,
-.form__button:focus {
+.button:focus {
   border: 1px solid var(--focuseBorderColor);
 }
 
@@ -39,26 +29,26 @@
   resize: none;
 }
 
-.form__button  {
+.button  {
   margin: 0 auto;
   margin-bottom: 0.2rem;
   padding: 0.7rem 1.1rem;
-  padding-right: 3rem;
 
   font-family: "PT Sans Narrow";
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.1rem;
   text-decoration: none;
+  text-transform: uppercase;
   color: var(--buttonFontColor);
   
   background-image: linear-gradient(to bottom, var(--buttonBgColorStart), var(--buttonBgColorEnd));
-  border-radius: 5px;
+  border-radius: 0.3rem;
 
   cursor: pointer;
 }
 
-.form__button:active {
+.button:active {
   color: var(--buttonShadowColor);
   box-shadow: inset -0.1rem 0.1rem 0.1rem 0rem var(--buttonShadowColor), 
               inset 0.1rem 0rem 0.1rem 0rem var(--buttonShadowColor);
@@ -75,26 +65,30 @@
 
   position: absolute;
   content: "";
-  right: -21rem;
+  right: -16.5rem;
   top: -1.95rem;
   margin-top: -9px;
   
   background-color: var(--buttonBgColorEnd);
-/*
-  background-image: linear-gradient(to bottom, var(--buttonBgColorStart), var(--buttonBgColorEnd));
-*/
-  background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><title>_443</title><path d="M31.5 0.196q0.589 0.429 0.482 1.143l-4.571 27.429q-0.089 0.518-0.571 0.804-0.25 0.143-0.554 0.143-0.196 0-0.429-0.089l-8.089-3.304-4.321 5.268q-0.321 0.411-0.875 0.411-0.232 0-0.393-0.071-0.339-0.125-0.545-0.42t-0.205-0.652v-6.232l15.429-18.911-19.089 16.518-7.054-2.893q-0.661-0.25-0.714-0.982-0.036-0.714 0.571-1.054l29.714-17.143q0.268-0.161 0.571-0.161 0.357 0 0.643 0.196z" fill="#fff" stroke="#fff"></path></svg>');
-  
+
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(255, 255, 255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>');
+ 
   background-position: 40% center;
   background-repeat: no-repeat;
   background-size: 60%;
-  border-radius: 50%;
-  box-shadow: inset 0rem 0.05rem 0rem #052756, 0rem 0.05rem 0rem var(--buttonShadowColor);
+  border-radius: 0.3rem;
+  box-shadow: inset 0rem 0.05rem 0rem rgb(5, 39, 86), 0rem 0.05rem 0rem var(--buttonShadowColor);
 }
 
-.form__button:active ~ .button__icon::after {
-  background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><title>_443</title><path d="M31.5 0.196q0.589 0.429 0.482 1.143l-4.571 27.429q-0.089 0.518-0.571 0.804-0.25 0.143-0.554 0.143-0.196 0-0.429-0.089l-8.089-3.304-4.321 5.268q-0.321 0.411-0.875 0.411-0.232 0-0.393-0.071-0.339-0.125-0.545-0.42t-0.205-0.652v-6.232l15.429-18.911-19.089 16.518-7.054-2.893q-0.661-0.25-0.714-0.982-0.036-0.714 0.571-1.054l29.714-17.143q0.268-0.161 0.571-0.161 0.357 0 0.643 0.196z" fill="#156785" stroke="#156785"></path></svg>');
-  
+@media (min-width: 768px) { 
+  .button__icon::after {
+    right: -26.3rem;
+  }
+}
+
+.button_form:active ~ .button__icon::after {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(21, 103, 133)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>');
+
   box-shadow: 0.01rem 0.1rem 0.12rem #052756, 0rem 0.05rem 0.12rem var(--buttonShadowColor);
 }
 

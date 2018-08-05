@@ -1,6 +1,133 @@
-.app {
+.app__wrapper {
   width: var(--chatWidth);
   height: 100vh;
-
+  height: calc(var(--vh, 1vh) * 100);
   margin: 0 auto;
+}
+
+.app {
+  height: 100%;
+
+}
+
+.app,
+.app__content_wrapper,
+.app__form {
+  background-color: rgb(228, 225, 255);
+}
+
+.app__header {
+  width: 100%;
+  min-height: 4.4rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+  color: var(--buttonFontColor);
+
+  background-image: linear-gradient(to bottom, var(--buttonBgColorStart), var(--buttonBgColorEnd));
+}
+
+.menu__item {
+  width: 4rem;
+  margin: 0;
+  padding: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-left: 0.4rem;
+  
+  min-height: 2.2rem;
+  line-height: 2.2rem;
+  text-transform: uppercase;
+
+  border: none;
+  border-radius: 0.3rem;
+  box-shadow: inset 0rem 0.05rem 0rem rgb(5, 39, 86), 0rem 0.05rem 0rem var(--buttonShadowColor);
+
+  background-color: var(--buttonBgColorEnd);
+}
+
+@media (min-width: 768px) { 
+  .menu__item {
+    width: 6rem;
+  }
+}
+
+.menu__item:active {
+  color: var(--buttonShadowColor);
+  box-shadow: inset -0.1rem 0.1rem 0.1rem 0rem var(--buttonShadowColor), 
+              inset 0.1rem 0rem 0.1rem 0rem var(--buttonShadowColor);
+  outline: none;
+}
+
+.menu__item:last-child {
+  margin-right: 0.4rem;
+}
+
+.item__icon {
+  position: relative;
+}
+
+.item__icon_chat {
+  padding-left: 2rem;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(255, 255, 255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>');
+  background-position: 0.2rem 0.45rem;
+  background-repeat: no-repeat;
+}
+
+.item__icon_chat:active {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(21, 103, 133)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>');
+}
+
+.item__icon_login {
+  padding-right: 2rem;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(255, 255, 255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>');
+  background-position: 4.4rem 0.45rem;
+  background-repeat: no-repeat;
+}
+
+.item__icon_login:active {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(21, 103, 133)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>');
+}
+
+.app__header_user {
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 2.2rem;
+}
+
+.alert {
+  font-weight: 400;
+  animation: colors 1s infinite alternate;
+}
+
+.app__content_wrapper {
+  min-height: 5rem;
+  margin: 0;
+  padding: 0;
+
+}
+
+.app__content {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+
+  font-size: 1rem;
+}
+
+.app__form {
+  width: var(--chatWidth);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  font-size: 1rem;
+  
 }

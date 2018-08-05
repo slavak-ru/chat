@@ -1,21 +1,32 @@
 :root {
-  --chatWidth: 400px;
+  --mini-devices: 320px;
+  --medium-devices: 768px;
+  --large-devices: 1200px;
+  
+  --chatWidth: 320px;
+  
   --chatHeaderHeight: 10vh;
 
-  --messageBackgroundColor: #fff;
+  --messageBackgroundColor: rgb(255, 255, 255);
   --messageBorderRadius: 0.4rem;
 
   --inputsWidth: 98%;
-  --formBorderColor: #2591b4;
-  --buttonFontColor: #fff;
-  --buttonBgColorStart: #2ca0ca;
-  --buttonBgColorEnd: #3eb8e5;
-  --buttonShadowColor: #156785;
+  --formBorderColor: rgb(37, 145, 180);
+  --buttonFontColor: rgb(255, 255, 255);
+  --buttonBgColorStart: rgb(44, 160, 202);
+  --buttonBgColorEnd: rgb(62, 184, 229);
+  --buttonShadowColor: rgb(21, 103, 133);
 
-  --focuseBorderColor: #052756;
+  --focuseBorderColor: rgb(5, 39, 86);
 
-  --errorColor: #ff0000;
+  --errorColor: rgb(255, 0, 0);
 
+}
+
+@media (min-width: 768px) { 
+  :root {
+    --chatWidth: 500px;
+  }
 }
 
 @font-face {
@@ -55,4 +66,12 @@ html {
 
 .body {
   margin: 0;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+
+  color: rgb(255, 255, 255);
+  text-decoration: none;
 }

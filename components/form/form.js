@@ -66,15 +66,28 @@
         if (!elem.value.length) {
           this._setErrorClass(elem);
           return;
-        } 
+        }
+        
+        if(elem.name === 'mail' && !this._checkMail(elem.value)) {
+        
+          this._setErrorClass(elem);
+          return;
+        }
 
         this._removeErrorClass(elem);
         collectData[elem.name] = elem.value;
       });
 
       collectData.time = this._setMessageTime();
+      collectData.formName = this.form.name;
 
       return collectData;
+    }
+
+    _checkMail(mail) {
+      let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+      return reg.test(mail);
     }
 
     /**
@@ -93,13 +106,12 @@
 			* @method _setErrorClass(elem)
 			* @description Inner method - set Error class to the from form-elements if value is empty.
 		*/
-    _setErrorClass(elem) {
+    _setErrorClass(elem, tooltipName) {
       elem.classList.add('error');
       if (!this.createTooltip || this.tooltips[elem]) return;
 
-      this.tooltips[elem] = new this.createTooltip(elem);
-      this.tooltips[elem].createTooltip();
-
+      this.tooltips[elem.name] = new this.createTooltip({element: elem, tooltipName: tooltipName});
+      this.tooltips[elem.name].createTooltip();
     }
 
     /**

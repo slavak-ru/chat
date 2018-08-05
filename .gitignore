@@ -4,6 +4,7 @@
 *.log
 *.pdf
 *.psd
+*-lock.json
 *.sublime*
 node_modules/
 Thumbs.db

@@ -20,12 +20,40 @@ gulp.task('test', function() {
     }
 );
 
+const funcNames = {};
+/*
+const setFuncName = through2(function(file, enc, callback) {  
+    //this.funcName = file.relative.split('\\').slice(-1).join().split('.')[0] + 'Template';
+    console.log('path', file.path)
+    console.log('cwd', file.cwd)
+    console.log('base', file.base)
+    console.log('relative', file.relative)
+
+    this.pugOptions = {client: true, name: this.funcName};
+    //this.push(this.pugOptions); // валит поток
+    callback(null, file);
+});
+*/
+
+gulp.task('setFuncName', function() {
+    return gulp.src('./components/**/*.pug')
+    .on('data', function(file){
+        funcNames[file.relative] = file.relative.split('\\').slice(-1).join().split('.')[0] + 'Template';
+    })
+    .pipe(gulp.dest('./components/'))
+});
+
+// compile login pug template into fuction
+gulp.task('compileLogin', function buildHTML() {
+    return gulp.src('./components/login/login.templ.pug')
+    .pipe(pug({client: true, name: 'loginTemplate'}))
+    .pipe(gulp.dest('./components/login'))
+});
+
 // compile app pug template into fuction
 gulp.task('compileApp', function buildHTML() {
     return gulp.src('./components/app/app.templ.pug')
-    .pipe(pug({
-        client: true,
-        name: 'appTemplate',
+    .pipe(pug({client: true, name: 'appTemplate',
     }))
     .pipe(gulp.dest('./components/app'))
 });
@@ -33,26 +61,16 @@ gulp.task('compileApp', function buildHTML() {
 // compile form pug template into fuction
 gulp.task('compileForm', function buildHTML() {
     return gulp.src('./components/form/form.templ.pug')
-    .pipe(pug({
-        client: true,
-        name: 'formTemplate',
-    }))
+    .pipe(pug({client: true, name: 'formTemplate'}))
     .pipe(gulp.dest('./components/form'))
 });
 
 // compile chat pug template into fuction
 
-const setFuncName = through2(function(file, enc, callback) {  
-    this.funcName = file.relative.split('\\').slice(-1).join().split('.')[0] + 'Template';
-    this.pugOptions = {client: true, name: this.funcName};
-    //this.push(this.pugOptions); // валит поток
-    callback(null, file);
-});
 
 gulp.task('compileChat', function buildHTML() {
     return gulp.src('./components/chat/*.pug')
-
-    .pipe(setFuncName)
+    //.pipe(setFuncName)
     //.pipe(pug(this.pugOptions))
     .pipe(pug({client: true, name: 'chatTemplate'}))
     .pipe(gulp.dest('./components/chat'))
@@ -69,4 +87,4 @@ gulp.task('serve', function () {
 });
 
 
-gulp.task('default', ['compileApp', 'compileForm', 'compileChat', 'serve']);
+gulp.task('default', ['compileLogin', 'compileApp', 'compileForm', 'compileChat', 'serve']);

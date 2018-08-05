@@ -4,29 +4,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="CHAT: Single Page Application on JavaScript components. Educational project">
+
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+
   <title>CHAT</title>
+  
   <link rel="preload" href="/fonts/pt-sans-narrow-700.woff2" as="font" type="font/woff2" crossorigin>
-	<link rel="preload" href="/fonts/pt-sans-narrow-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/pt-sans-narrow-regular.woff2" as="font" type="font/woff2" crossorigin>
+
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/components/login/login.css">
   <link rel="stylesheet" href="/components/app/app.css">
   <link rel="stylesheet" href="/components/tooltip/tooltip.css">
   <link rel="stylesheet" href="/components/form/form.css">
   <link rel="stylesheet" href="/components/chat/chat.css">
+  <link rel="stylesheet" href="/components/modal/modal.css">
 </head>
 <body class="body">
 
-  <div class="app" id="app"></div>
+
+  <div class="app__wrapper" id="app"></div>
 
 
-  <script src="\components\app\app.templ.js"></script>
-  <script src="\components\chat\chat.templ.js"></script>
-  <script src="\components\form\form.templ.js"></script>
-  <script src="\components\chat\chat.js"></script>
-  <script src="\components\form\form.js"></script>
-  <script src="\components\textarea\textarea.js"></script>
-  <script src="\components\tooltip\tooltip.js"></script>
-  <script src="\components\xhr\xhr.js"></script>
-  <script src="\components\app\app.js"></script>
+  <script src="/components/networkService/networkService.js"></script>
+  <script src="/components/users/users.js"></script>
+  <script src="/components/login/login.templ.js"></script>
+  <script src="/components/app/app.templ.js"></script>
+  <script src="/components/chat/chat.templ.js"></script>
+  <script src="/components/form/form.templ.js"></script>
+  <script src="/components/chat/chat.js"></script>
+  <script src="/components/form/form.js"></script>
+  <script src="/components/modal/modal.js"></script>
+  <script src="/components/textarea/textarea.js"></script>
+  <script src="/components/tooltip/tooltip.js"></script>
+  <script src="/components/login/login.js"></script>
+  <script src="/components/app/app.js"></script>
 
   <script>
     'use strict';

@@ -9,10 +9,11 @@
 			* @param {number} top - top position of target.
 			* @param {number} left - left position of target.
 		*/
-    constructor(element) {
+    constructor({element, tooltipName, mesage}) {
       this.target = element;
       this.top = this.target.getBoundingClientRect().top + pageYOffset;
       this.left = this.target.getBoundingClientRect().left;
+      this.tooltipName = (tooltipName)? tooltipName: 'tooltip';
       this.tooltip;
     }
 
@@ -24,7 +25,7 @@
       this.tooltip = document.createElement('div');
       this.tooltip.className = 'tooltip';
       this.tooltip.dataset.show = 'show-tooltip'
-      this.tooltip.innerHTML = this.target.dataset.tooltip;
+      this.tooltip.innerHTML = this.target.dataset[this.tooltipName];
 
       document.body.appendChild(this.tooltip);
 

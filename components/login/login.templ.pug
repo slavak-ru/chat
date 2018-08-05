@@ -1,0 +1,51 @@
+.login#login
+  .app__header
+    a(class="a menu__item item__icon item__icon_chat app__header_title" href="#" title="Главная страница") чат
+    span.app__header_user#username
+    a(class="a menu__item item__icon item__icon_login" title="Войти в чат") войти
+
+  input(class='input_radio input_radio-login' type='radio' name='login' id='radio-login' checked hidden)
+  input(class='input_radio input_radio-sign' type='radio' name='login' id='radio-sign' hidden)
+  input(class='input_radio input_radio-forgot' type='radio' name='login' id='radio-forgot' hidden)
+  .labels
+    label(class='label__radio login__label_login' for='radio-login') Войти
+    label(class='label__radio login__label_sign' for='radio-sign') Регистрация
+    label(class='label__radio login__label_forgot' for='radio-forgot') Восстановить
+
+  .login__content_wrapper
+    form(class='form login__content login__content_login' name='login')
+        label.label.label__user
+          span.label__text Логин
+          input(class='input input_user-name' type='text' data-tooltip='Введите логин' name='user-name')
+        label.label.label__password.label__password_lock
+          span.label__text Пароль
+          input(class='input input_password' type='password' data-tooltip='Введите пароль' name='pass')
+        input(class='button button_form' type='submit' value='Войти' id='login-button')
+
+    form(class='form login__content login__content_sign' name='sign')
+        label.label.label__user
+          span.label__text Логин
+          input(class='input input_user-name' type='text' data-tooltip='Введите логин' name='user-name')
+        label.label.label__email
+          span.label__text E-mail
+          input(class='input input_email' type='text' data-tooltip='Введите Ваш e-mail' name='e-mail')
+        label.label.label__password.label__password_lock
+          span.label__text Пароль
+          input(class='input input_password' type='password' data-tooltip='Введите пароль' name='pass')
+        input(class='button button_form' type='submit' value='Зарегистрироваться' id='sign-button')
+    
+    form(class='form login__content  login__content_forgot' name='forgot')
+        label.label.label__user
+          span.label__text Логин
+          input(class='input input_user-name' type='text' data-tooltip='Введите логин' name='user-name')
+        label.label.label__email
+          span.label__text E-mail
+          input(class='input input_email' type='text' data-tooltip='Введите Ваш e-mail' name='e-mail')
+        label.label.label__password.label__password_lock
+          span.label__text Новый пароль
+          input(class='input input_password' type='pass' data-tooltip='Введите новый пароль' name='pass')
+
+        input(class='button button_form' type='submit' value='Восстановить' id='forgot-button')
+
+    
+  
