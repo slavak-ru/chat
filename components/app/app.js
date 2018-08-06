@@ -44,7 +44,7 @@
     }
 
     _initialStartChat() {
-      this.networkService({url: '/components/app/urls.json', type: 'GET'})
+      this.networkService({url: 'components/app/urls.json', type: 'GET'})
                   .then(response => {
                     this.messagesUrl = JSON.parse(response).messages;
                     this.usersUrl = JSON.parse(response).users;
