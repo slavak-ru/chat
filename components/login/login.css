@@ -19,7 +19,7 @@
 .label__radio {
   margin: 0;
   padding: 0;
-  width: 33.3%;
+  width: 33.33%;
   padding-top: 1rem;
   padding-bottom: 1rem;
 
@@ -171,20 +171,21 @@ input:focus {
 
 .input_password {
   padding-right: 2.2rem;
+  pointer-events: none;
 }
 
 .label__password::after {
   position: absolute;
-    top: -2.45rem;
-    left: 15.5rem;
-    width: 1.3rem;
-    height: 1.3rem;
-    content: '';
-    z-index: 1;
-    background-repeat: no-repeat;
-    background-size: 100%;
+  top: -2.45rem;
+  left: 15.5rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  content: '';
+  z-index: 1;
+  background-repeat: no-repeat;
+  background-size: 100%;
 
-    cursor: pointer;
+  cursor: pointer;
 }
 
 @media (min-width: 768px) { 

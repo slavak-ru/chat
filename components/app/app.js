@@ -1,7 +1,9 @@
 (function(){
   'use strict';
 
- 
+  import Chat from '../chat/chat.js';
+  import Form from '../form/form.js';
+  
   /** @description Class App - manages Form and Chat */
   class App {
 
