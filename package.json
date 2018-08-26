@@ -4,27 +4,31 @@
   "description": "CHAT - educational project. Single page application on JS Components",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "chat:dev": "webpack-dev-server",
+    "chat:prod": "set NODE_ENV=production&&webpack"
   },
-  "keywords": [
-    "CHAT"
-  ],
-  "author": "Vyacheslav Knyazev",
+  "author": "Vaycheslav Knyazev",
   "license": "ISC",
   "devDependencies": {
+    "autoprefixer": "^9.1.3",
+    "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
     "babel-runtime": "^6.26.0",
-    "browser-sync": "^2.24.5",
-    "gulp": "^3.9.1",
-    "gulp-pug": "^4.0.1",
-    "gulp4": "^4.0.2",
-    "hoek": "^5.0.3",
-    "jshint": "^2.9.5",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^1.0.0",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.2",
+    "postcss-loader": "^3.0.0",
     "pug": "^2.0.3",
     "pug-cli": "^1.0.0-alpha6",
-    "through2": "^2.0.3",
-    "webpack": "^4.16.5",
-    "webpack-cli": "^3.1.0"
-  },
-  "dependencies": {}
+    "pug-loader": "^2.4.0",
+    "uglifyjs-webpack-plugin": "^1.3.0",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.6"
+  }
 }
