@@ -8,6 +8,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 let pathsToClean = [
   'dev',
@@ -61,7 +62,43 @@ module.exports = {
       hash: false,
       template: './chat.html',
       filename: 'index.html',
-      title: 'CHAT'
+      title: 'CHAT',
+    }),
+    new FaviconsWebpackPlugin({
+      // Your source logo
+      logo: './my-logo.png',
+      appName: 'CHAT',                            // Your application's name. `string`
+      appDescription: 'CHAT - the single page application on js-components',                     // Your application's description. `string`
+      developerName: 'Vyacheslav Knyazev',                      // Your (or your developer's) name. `string`
+      developerURL: 'https://github.com/slavak-ru',                       // Your (or your developer's) URL. `string`
+      dir: "auto",                              // Primary text direction for name, short_name, and description
+      lang: "en-US",                            // Primary language for name and short_name
+      background: "#fff",                       // Background colour for flattened icons. `string`
+      theme_color: "#fff",                      // Theme color user for example in Android's task switcher. `string`
+      appleStatusBarStyle: "black-translucent", // Style for Apple status bar: "black-translucent", "default", "black". `string`
+      display: "standalone",                    // Preferred display mode: "fullscreen", "standalone", "minimal-ui" or "browser". `string`
+      orientation: "portrait",                       // Default orientation: "any", "natural", "portrait" or "landscape". `string`
+      start_url: "/?homescreen=1",              // Start URL when launching the application from a device. `string`
+      version: "1.0",                           // Your application's version string. `string`
+      logging: false,                           // Print logs to console? `boolean`  
+      // Inject the html into the html-webpack-plugin
+      inject: true,
+      // favicon background color (see https://github.com/haydenbleasel/favicons#usage)
+      background: '#fff',
+      // favicon app title (see https://github.com/haydenbleasel/favicons#usage)
+      title: 'CHAT',
+  
+      // which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
+      icons: {
+        android: true,              // Create Android homescreen icon. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
+        appleIcon: true,            // Create Apple touch icons. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
+        appleStartup: true,         // Create Apple startup images. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
+        coast: true,                // Create Opera Coast icon. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
+        favicons: true,             // Create regular favicons. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
+        firefox: true,              // Create Firefox OS icons. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
+        windows: true,              // Create Windows 8 tile icons. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
+        yandex: true                // Create Yandex browser icon. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }`
+      }
     })
   ],
 
@@ -127,30 +164,8 @@ module.exports = {
         ]  
       },
       {
-        test:/\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-                plugins: [
-                    autoprefixer({
-                        browsers:['ie >= 11', 'last 3 version']
-                    })
-                ],
-                sourceMap: true
-            }
-          },
-        ]  
-      },
-      {
         test: /\.(png|jpg|gif|svg)$/,
+        //exclude: /fav/,
         use: [
           {
             loader: 'file-loader',
@@ -160,7 +175,31 @@ module.exports = {
             }
           }
         ]
-      }
+      },
+      {
+        test: /\.(woff|woff2)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/'
+            }
+          }
+        ]
+      },
+      // {
+      //   test: /\.json/,
+      //   exclude: /(node_modules|bower_components)/,
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         name: '[name].[ext]',
+      //       }
+      //     }
+      //   ]
+      // },
     ]
   },
 
