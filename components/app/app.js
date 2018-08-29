@@ -1,7 +1,6 @@
 (function(){
-  'use strict';
+//  'use strict';
 
- 
   /** @description Class App - manages Form and Chat */
   class App {
 
