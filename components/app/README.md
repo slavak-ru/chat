@@ -8,14 +8,33 @@
 ## Functions
 
 <dl>
-<dt><a href="#_startChat_new">_startChat()()</a></dt>
-<dd><p>Inner method - create initial Chat and Form DOM-elements and render them.</p>
+<dt><a href="#_initialStartApp">_initialStartApp()</a></dt>
+<dd><p>Inner method - create header of the App.</p>
 </dd>
-<dt><a href="#_createElement(option)">_createElement(option)</a> ⇒ <code>object</code></dt>
-<dd><p>Inner method - create DOM-element and append element to the App.</p>
+<dt><a href="#_getUrls">_getUrls()</a></dt>
+<dd><p>Inner method - get the database URLs for messages and users from json file from server.</p>
 </dd>
-<dt><a href="#onSubmit(message)">onSubmit(message)</a></dt>
-<dd><p>Public method - adding new message in the Chat.</p>
+<dt><a href="#_renderAppTemplate">_renderAppTemplate()</a></dt>
+<dd><p>Inner method - render App template (header).</p>
+</dd>
+<dt><a href="#_pagesRegistration">_pagesRegistration()</a></dt>
+<dd><p>Inner method - page registration, creating the object with page-name, page-url, method for page and HTMLAnchorElement for
+page.</p>
+</dd>
+<dt><a href="#_initEvents">_initEvents()</a></dt>
+<dd><p>Inner method - creating events for click (click on HTMLAnchorElement); and events for the window resizing.</p>
+</dd>
+<dt><a href="#_startChat">_startChat()</a></dt>
+<dd><p>Inner method - creating Chat page.</p>
+</dd>
+<dt><a href="#_setVh">_setVh()</a></dt>
+<dd><p>Inner method - sets the VH size for window resizing and sets app content height.</p>
+</dd>
+<dt><a href="#onLoginSubmit(userName)">onLoginSubmit(userName)</a></dt>
+<dd><p>Public method - which sets behavior Login page on submit event.</p>
+</dd>
+<dt><a href="#_startLogin">_startLogin()</a></dt>
+<dd><p>Inner method - creating Login page.</p>
 </dd>
 </dl>
 
@@ -25,39 +44,65 @@
 **Kind**: global class
 <a name="new_App_new"></a>
 
-### new App(element)
+### new App()
 Class App - manages Form and Chat
 
+<a name="_initialStartApp"></a>
+
+## _initialStartApp()
+Inner method - create header of the App.
+
+**Kind**: global function
+<a name="_getUrls"></a>
+
+## _getUrls()
+Inner method - get the database URLs for messages and users from json file from server.
+
+**Kind**: global function
+<a name="_renderAppTemplate"></a>
+
+## _renderAppTemplate()
+Inner method - render App template (header).
+
+**Kind**: global function
+<a name="_pagesRegistration"></a>
+
+## _pagesRegistration()
+Inner method - page registration, creating the object with page-name, page-url, method for page and HTMLAnchorElement for page.
+
+**Kind**: global function
+<a name="_initEvents"></a>
+
+## _initEvents()
+Inner method - creating events for click (click on HTMLAnchorElement); and events for the window resizing.
+
+**Kind**: global function
+<a name="_startChat"></a>
+
+## _startChat()
+Inner method - creating Chat page.
+
+**Kind**: global function
+<a name="_setVh"></a>
+
+## _setVh()
+Inner method - sets the VH size for window resizing and sets app content height.
+
+**Kind**: global function
+<a name="onLoginSubmit(userName)"></a>
+
+## onLoginSubmit(userName)
+Public method - which sets behavior Login page on submit event.
+
+**Kind**: global function
 
 | Param | Type | Description |
 | --- | --- | --- |
-| element | <code>object</code> | the App DOM-element. |
+| userName | <code>object</code> | the current user name. |
 
-<a name="_startChat_new"></a>
+<a name="_startLogin"></a>
 
-## _startChat()()
-Inner method - create initial Chat and Form DOM-elements and render them.
-
-**Kind**: global function
-<a name="_createElement(option)"></a>
-
-## _createElement(option) ⇒ <code>object</code>
-Inner method - create DOM-element and append element to the App.
+## _startLogin()
+Inner method - creating Login page.
 
 **Kind**: global function
-**Returns**: <code>object</code> - element - created element.
-
-| Param | Type | Description |
-| --- | --- | --- |
-| option | <code>object</code> | contains TAG-name, ClassName and ID of the element. |
-
-<a name="onSubmit(message)"></a>
-
-## onSubmit(message)
-Public method - adding new message in the Chat.
-
-**Kind**: global function
-
-| Param | Type | Description |
-| --- | --- | --- |
-| message | <code>object</code> | contains user-name, message-content and message time-creation |

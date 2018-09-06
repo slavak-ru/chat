@@ -27,6 +27,7 @@
 
 .form__textarea {
   resize: none;
+  caret-color: var(--formBorderColor);
 }
 
 .button  {

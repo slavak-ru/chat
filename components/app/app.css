@@ -1,19 +1,19 @@
 .app__wrapper {
+  
+  margin: 0 auto;
+}
+
+.app {
   width: var(--chatWidth);
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
   margin: 0 auto;
 }
 
-.app {
-  height: 100%;
-
-}
-
 .app,
 .app__content_wrapper,
 .app__form {
-  background-color: rgb(228, 225, 255);
+  background-color: rgb(241, 241, 241);
 }
 
 .app__header {
@@ -25,9 +25,12 @@
   display: flex;
   justify-content: space-between;
 
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 500;
   letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 2.3rem;
   color: var(--buttonFontColor);
 
   background-image: linear-gradient(to bottom, var(--buttonBgColorStart), var(--buttonBgColorEnd));
@@ -42,24 +45,26 @@
 
 .menu__item {
   width: 4rem;
+<<<<<<< HEAD:components/app/app.css
 
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   margin-left: 0.4rem;
 
   min-height: 2.2rem;
+=======
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-left: 0.4rem;
+  
+  min-height: 1rem;
+>>>>>>> webpack:src/components/app/app.css
 
   border: none;
   border-radius: 0.3rem;
   box-shadow: inset 0rem 0.05rem 0rem rgb(5, 39, 86), 0rem 0.05rem 0rem var(--buttonShadowColor);
 
   background-color: var(--buttonBgColorEnd);
-}
-
-@media (min-width: 768px) { 
-  .menu__item {
-    width: 6rem;
-  }
 }
 
 .menu__item:active {
@@ -77,24 +82,12 @@
   position: relative;
 }
 
-.item__icon_chat {
-  padding-left: 2rem;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(255, 255, 255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>');
-  background-position: 0.2rem 0.45rem;
-  background-repeat: no-repeat;
-}
-
-.item__icon_chat:active {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(21, 103, 133)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>');
-}
-
+.item__icon_chat,
 .item__icon_login {
-  padding-right: 2rem;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(255, 255, 255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>');
-  background-position: 4.4rem 0.45rem;
   background-repeat: no-repeat;
 }
 
+<<<<<<< HEAD:components/app/app.css
 .item__icon_login:active {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(21, 103, 133)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>');
 }
@@ -103,29 +96,71 @@
   font-weight: 400;
   animation: colors 1s infinite alternate;
 }
-
-.app__content_wrapper {
-  min-height: 5rem;
-  margin: 0;
-  padding: 0;
-
-}
+=======
+>>>>>>> webpack:src/components/app/app.css
 
 .app__content {
   width: 100%;
-  margin: 0 auto;
-  padding: 0;
-
-  font-size: 1rem;
-}
-
-.app__form {
-  width: var(--chatWidth);
   margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  font-size: 1rem;
+  /* position: relative; */
+}
+
+@keyframes loader {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.app__content:empty:after {
+  width: 3rem;
+  height: 3rem;
+  content: '';
+  position: absolute;
+  top: 30%;
+  left: 43%;
+  font-size: 1.5rem;
+  text-align: center;
+  color: var(--buttonBgColorEnd);
+
+  border: 0.4rem solid var(--buttonShadowColor);
+	border-left-color: var(--formBorderColor);
+	border-bottom-color: var(--buttonBgColorStart);
+	border-right-color: transparent;
+	border-radius: 100%;
+	animation: loader 0.5s infinite linear;
+}
+
+@media (min-width: 768px) { 
+  .app__content:empty:after {
+    left: 47.5%;
+  }
+  .menu__item {
+    width: 6rem;
+  }
+
+
+  .item__icon_chat {
+    padding-left: 1.7rem;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(255, 255, 255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>');
+    background-position: 0.3rem 0.6rem;
+  }
   
+  .item__icon_chat:active {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(21, 103, 133)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>');
+  }
+  
+  .item__icon_login {
+    padding-right: 1.7rem;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(255, 255, 255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>');
+    background-position: 4.6rem 0.6rem;
+  }
+  
+  .item__icon_login:active {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(21, 103, 133)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>');
+  }
 }

@@ -6,97 +6,70 @@
   justify-content: space-between;
 
   font-size: 1rem;
-/*  overflow: hidden; */
+
+  background-color: var(--messageBackgroundColor);
 }
 
-.labels {
+.buttons {
   display: flex;
   justify-content: space-between;
   margin: 0;
   padding: 0;
 }
 
-.label__radio {
-  margin: 0;
+.button_login {
+  width: 33.3%;
+  min-height: 3rem;
   padding: 0;
+<<<<<<< HEAD:components/login/login.css
   width: 33.3%;
   padding-top: 1rem;
   padding-bottom: 1rem;
+=======
+>>>>>>> webpack:src/components/login/login.css
 
+  font-size: 1rem;
+  font-weight: 400;
   text-align: center;
-
-  cursor: pointer;
+  text-transform: none;
+  letter-spacing: 0rem;
+  color: var(--formBorderColor);
 
   background-color: #dbdbdb;
+  background-image: none;
+
+  border: none;
+  border-radius: 0;
 }
 
-.label__radio:hover {
+@media (min-width: 768px) { 
+  .button_login {
+    font-size: 1.1rem;
+    letter-spacing: 0.1rem;
+  }
+}
+
+.button_login:active {
   color: var(--formBorderColor);
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+.button_login:hover {
+  color: var(--formBorderColor);
+  border: none;
   border-left: 1px solid var(--formBorderColor);
   border-right: 1px solid var(--formBorderColor);
-
-  box-sizing: border-box;
+  color: var(--focuseBorderColor);
 }
 
+.button_login:focus {
+  border: none;
+}
 
-.input_radio-login:checked ~ 
-  .labels
-  .login__label_login {
+.button_active {
   background-color: #fff;
-}
-
-.input_radio-sign:checked ~ 
-  .labels
-  .login__label_sign {
-  background-color: #fff;
-}
-
-.input_radio-forgot:checked ~ 
-  .labels
-  .login__label_forgot {
-  background-color: #fff;
-}
-
-.input_radio-login:checked ~ 
-  .login__content_wrapper
-  .login__content_login {
-  display: block;
-}
-.input_radio-login:checked ~ 
-  .login__content_wrapper
-  .login__content_sign,
-  .input_radio-login:checked ~ 
-  .login__content_wrapper
-  .login__content_forgot {
-  display: none;
-}
-
-.input_radio-sign:checked ~ 
-  .login__content_wrapper
-  .login__content_sign {
-  display: block;
-}
-.input_radio-sign:checked ~ 
-  .login__content_wrapper
-  .login__content_login,
-.input_radio-sign:checked ~ 
-  .login__content_wrapper
-  .login__content_forgot {
-  display: none;
-}
-
-.input_radio-forgot:checked ~ 
-  .login__content_wrapper
-  .login__content_forgot {
-  display: block;
-}
-.input_radio-forgot:checked ~ 
-  .login__content_wrapper
-  .login__content_login,
-.input_radio-forgot:checked ~ 
-  .login__content_wrapper
-  .login__content_sign {
-  display: none;
 }
 
 .login__content_wrapper {
@@ -113,6 +86,30 @@
 @media (min-width: 768px) { 
   .login__content {
     min-width: 80%;
+  }
+}
+
+.label {
+  position: relative;
+}
+
+.icon-password {
+  position: absolute;
+  top: -2.45rem;
+  left: 15.5rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  content: '';
+  z-index: 1;
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  cursor: pointer;
+}
+
+@media (min-width: 768px) { 
+  .icon-password {
+    left: 20rem;
   }
 }
 
@@ -133,44 +130,24 @@
   border: 1px solid var(--formBorderColor);
   border-radius: 0.3rem;
   outline: none;  
+
+  background-repeat: no-repeat;
+  background-position: 2% center;
+
+  caret-color: var(--formBorderColor);
 }
 
-input:focus {
+.input:focus {
   border: 1px solid var(--focuseBorderColor);
 }
 
-.label {
-  position: relative;
-}
-
-.label::before {
-  position: absolute;
-  top: 1.6rem;
-  left: 0.5rem;
-  width: 1.3rem;
-  height: 1.3rem;
-  content: '';
-
-  z-index: 1;
-
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-
-.label__user::before {
+.input_user-name {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>');
-}
-
-.label__password::before {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>');
-}
-
-.label__email::before {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>');
 }
 
 .input_password {
   padding-right: 2.2rem;
+<<<<<<< HEAD:components/login/login.css
 }
 
 .label__password::after {
@@ -185,18 +162,21 @@ input:focus {
     background-size: 100%;
 
     cursor: pointer;
+=======
+  pointer-events: none;
+
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>');
+>>>>>>> webpack:src/components/login/login.css
 }
 
-@media (min-width: 768px) { 
-  .label__password::after {
-    left: 20rem;
-  }
+.input_email {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>');
 }
 
-.label__password_lock::after {
+.icon-password_lock {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>');
 }
 
-.label__password_unlock::after {
+.icon-password_unlock {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>');
 }
