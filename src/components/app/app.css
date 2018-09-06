@@ -36,29 +36,13 @@
   background-image: linear-gradient(to bottom, var(--buttonBgColorStart), var(--buttonBgColorEnd));
 }
 
-.menu__item,
-.app__header_user {
-  text-transform: uppercase;
-  line-height: 2.4rem;
-}
-
-
 .menu__item {
   width: 4rem;
-<<<<<<< HEAD:components/app/app.css
-
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  margin-left: 0.4rem;
-
-  min-height: 2.2rem;
-=======
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   margin-left: 0.4rem;
   
   min-height: 1rem;
->>>>>>> webpack:src/components/app/app.css
 
   border: none;
   border-radius: 0.3rem;
@@ -87,17 +71,6 @@
   background-repeat: no-repeat;
 }
 
-<<<<<<< HEAD:components/app/app.css
-.item__icon_login:active {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(21, 103, 133)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>');
-}
-
-.alert {
-  font-weight: 400;
-  animation: colors 1s infinite alternate;
-}
-=======
->>>>>>> webpack:src/components/app/app.css
 
 .app__content {
   width: 100%;
