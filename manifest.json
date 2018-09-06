@@ -1,11 +1,11 @@
 {
   "name": "CHAT",
   "short_name": "CHAT",
-  "description": "CHAT - Educational project. Single Page Application on JavaScript components",
+  "description": null,
   "dir": "auto",
   "lang": "en-US",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "any",
   "start_url": "/?homescreen=1",
   "background_color": "#fff",
   "icons": [
