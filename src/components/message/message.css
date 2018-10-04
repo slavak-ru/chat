@@ -18,19 +18,36 @@
 }
 
 .user {
-  max-width: 30%;
+  width: 25%;
   margin-left: 0.2rem;
   padding: 0.7rem;
   display: flex;
   flex-direction: column;
   align-content: center;
+  align-items: center;
 
   text-align: center;
 }
 
 .user__name {
+  width: 100%;
+  position: relative;
+
+  color: var(--messageUserNameColor);
   white-space: nowrap;
+  overflow-x: hidden; 
+  text-overflow: ellipsis;
 }
+/* 
+.user__name::after {
+  content: '';
+  position: absolute;
+  right: 0; 
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.2) 70%,var(--buttonBgColorStart) 100%);
+} */
 
 .user__image {
   width: 2.3rem;

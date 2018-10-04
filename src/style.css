@@ -7,6 +7,7 @@
   
   --chatHeaderHeight: 10vh;
 
+  --messageUserNameColor: rgb(62, 184, 229);
   --messageBackgroundColor: rgb(255, 255, 255);
   --messageBorderRadius: 0.4rem;
 

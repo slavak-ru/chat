@@ -41,7 +41,6 @@ export default class Login {
       
     this.currentRadioChecked = document.querySelector('input[type="radio"]:checked')
 
-    this.clearErrors = this._clearErrors.bind(this);
     this._initEvents();
    }
 
@@ -78,7 +77,6 @@ export default class Login {
           !this.tabsList[tabName].tab.classList.contains('button_active')) {
             this.tabsList[tabName].tab.classList.add('button_active');
             this._renderForm(this.tabsList[tabName].template);
-            this._clearErrors();
       }
       if (elemOnClick.tab !== this.tabsList[tabName].tab && 
           this.tabsList[tabName].tab.classList.contains('button_active')) {
@@ -93,23 +91,14 @@ export default class Login {
 		* @param {object} template - template for creating loggin form.
 	*/  
   _renderForm(template) {
-    this.loginsContent.innerHTML = template();
-    this.currentForm = new this.form({element: this.logins.querySelector('form'), tooltip: this.tooltip});
+    
+    //this.loginsContent.innerHTML = template();
+    this.currentForm = new this.form({element: this.loginsContent, template: template, tooltip: this.tooltip});
+    this.currentForm.render();
+    
     this.currentForm.onSubmit = this.onLoginSubmit.bind(this);
+    
   }
-
-  /**
-		* @method _clearErrors
-		* @description Inner method - removing error class from element (input) of the login form.
-	*/  
-  _clearErrors() {
-    let tooltips = document.querySelectorAll('.tooltip');
-    let errors = document.querySelectorAll('.error');
-
-    tooltips.forEach((elem) => document.body.removeChild(elem));
-    errors.forEach((elem) => elem.classList.remove('error'));
-  }
-
 
   /**
 		* @method onLoginSubmit(data)
@@ -117,6 +106,7 @@ export default class Login {
 		* @param {object} data - data (user information) from login form.
 	*/
   onLoginSubmit(data) {
+
     if(!data['user-name'] || !data.pass) return;
     if(data.formName != 'login' && !data['e-mail']) return;
 
@@ -128,13 +118,12 @@ export default class Login {
                                               pass: data.pass
                                             })
                       ) {
-                        this._clearErrors();
+                       
                         this.modalWindow = new this.modal({string: this.loginErrorText});
                         this.modalWindow.onEvent = this._onModalEvent.bind(this);
                         
                         return;
                     }
-                    this._clearErrors();
                     this.onSubmit(data['user-name']);
                     return;
 
@@ -145,7 +134,6 @@ export default class Login {
                                               mail: data['e-mail']
                                             })
                       ) {
-                        this._clearErrors();
                         this.modalWindow = new this.modal({string: this.signErrorText});
                         this.modalWindow.onEvent = this._onModalEvent.bind(this);
                        
@@ -153,8 +141,7 @@ export default class Login {
                     }
 
                     this.users.setNewUser({data: data, usersUrl: this.usersUrl});
-                     
-                    this._clearErrors();
+
                     this.onSubmit(data['user-name']);
                     return;
 
@@ -165,7 +152,6 @@ export default class Login {
                                               mail: data['e-mail']
                                             })
                       ) {
-                      this._clearErrors();
                       this.modalWindow = new this.modal({string: this.forgotErrorText});
                       this.modalWindow.onEvent = this._onModalEvent.bind(this);
                         
@@ -173,8 +159,7 @@ export default class Login {
                     }
                     
                     this.users.changePassword({data: data, usersUrl: this.usersUrl});
-                      
-                    this._clearErrors();
+
                     this.onSubmit(data['user-name']);
                     return;
     }

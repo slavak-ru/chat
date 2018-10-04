@@ -1,6 +1,7 @@
 import css from'./chat.css';
 import chatTemplate from'./chat.templ.pug';
 import Message from '../message/message.js';
+import formTemplate from'../form/form.templ.pug';
 
 /** 
  * @class Chat
@@ -55,7 +56,7 @@ export default class Chat {
                           messages: this.messages,
                           currentUser: this.currentUser
                 });
-    this.form = new this.form({element: document.getElementById('form'), tooltip: this.tooltip});
+    this.form = new this.form({element: document.getElementById('form'), template: formTemplate, tooltip: this.tooltip});
     this.form.onSubmit = this.onSubmit.bind(this);
     this._updateMessages();
     this._render(this.currentUser);

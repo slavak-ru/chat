@@ -36,6 +36,13 @@
   background-image: linear-gradient(to bottom, var(--buttonBgColorStart), var(--buttonBgColorEnd));
 }
 
+.app__header_user {
+  max-width: 40%;
+  white-space: nowrap;
+  overflow-x: hidden; 
+  text-overflow: ellipsis;
+}
+
 .menu__item {
   width: 4rem;
   padding-left: 0.5rem;
