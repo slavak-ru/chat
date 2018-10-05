@@ -78,7 +78,11 @@ export default class Form {
   _setErrorClass(elem, tooltipName) {
     elem.classList.add('error');
     if (!this.createTooltip || this.tooltips[elem.name]) return;
-    this.tooltips[elem.name] = new this.createTooltip({element: elem, tooltipName: tooltipName});
+    this.tooltips[elem.name] = new this.createTooltip({
+                                                        element: elem, 
+                                                        tooltipName: tooltipName, 
+                                                        form: this.form.firstElementChild
+                                                      });
     this.tooltips[elem.name].createTooltip();
   }
 
@@ -130,29 +134,7 @@ export default class Form {
 		* @description Public method - create inners DOM-elements (inputs and submit button) in the Form.
 	*/
   render() {
-    this.observer();
     this.form.innerHTML = this.template();
-  }
-
-  /**
-		* @method observer
-		* @description Public method - observe changing DOM-element (parrent form element) and removing tooltips.
-	*/
-  observer() {
-    let options, target, observer;
-
-    options = {
-      'childList': true,
-    };
-
-    target = this.form;
-    observer = new MutationObserver( (mutations)=>{
-        let tooltips = document.querySelectorAll('.tooltip');
-        tooltips.forEach((elem) => document.body.removeChild(elem));
-      } 
-    );
-
-    observer.observe(target, options);
   }
 
 }

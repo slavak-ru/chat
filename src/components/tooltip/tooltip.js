@@ -10,9 +10,10 @@ export default class Tooltip {
 		* @param {object} element - target element.
 		* @param {string} tooltipName - tooltip name.
 	*/
-  constructor({element, tooltipName = 'tooltip', message}) {
+  constructor({element, tooltipName = 'tooltip', form}) {
     this.target = element;
     this.tooltipName = tooltipName;
+    this.form = form;
     this.tooltip;
     this.trotting = this._throttle(this._setTooltipPosition, 500);
 
@@ -25,6 +26,7 @@ export default class Tooltip {
 	*/
   _initEvents() {
     window.addEventListener('resize', () =>{
+      if (!this.tooltip) return;
       this.trotting();
     });
   }
@@ -83,9 +85,10 @@ export default class Tooltip {
     this.tooltip.dataset.show = 'show-tooltip'
     this.tooltip.innerHTML = this.target.dataset[this.tooltipName];
 
-    document.body.appendChild(this.tooltip);
+    this.form.appendChild(this.tooltip);
 
     this._setTooltipPosition();
+
   }
 
   /**
@@ -94,9 +97,6 @@ export default class Tooltip {
 	*/
   _setTooltipPosition() {
     this._defineCoordinate();
-    // console.log(this.target);
-    // console.log(this.tooltip);
-    // console.log(`new coordinates. top: ${this.top}, left: ${this.left}`);
 
     this.tooltip.style.top = Math.round(this.top + this.target.offsetHeight + 2) + 'px';
     if ( this.top - this.tooltip.offsetHeight - pageYOffset > 0 ) {
@@ -111,7 +111,8 @@ export default class Tooltip {
 		* @description Public method - remove tooltip from the target element.
 	*/
   removeTooltip() {
-    if (this.tooltip) document.body.removeChild(this.tooltip);
+    if (this.tooltip) this.form.removeChild(this.tooltip);
     this.tooltip = null;
   }
+
 }

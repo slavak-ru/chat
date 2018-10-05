@@ -28,9 +28,10 @@ export default class App {
     this.messagesUrl;
     this.usersUrl;
     this.currentUser;
+    this.currentPage;
 
     this._initialStartApp();
-    this._startChat();
+    this._initEvents();
   }
 
   /**
@@ -43,7 +44,9 @@ export default class App {
         this._renderAppTemplate();
         return response;
       })
-      .then(() => this._pagesRegistration());
+      .then(() => this._router())
+      .then(() => this._startChat())
+      .catch(error => console.log(error));
    }
 
   /**
@@ -60,6 +63,9 @@ export default class App {
           return response;
         }
       )
+      .catch(error => {
+        console.log(error); 
+      });
   }
 
   /**
@@ -68,6 +74,27 @@ export default class App {
 	*/
   _renderAppTemplate() {
     this.app.innerHTML = this.appTemplate();
+  }
+
+  /**
+		* @method _router
+    * @description Inner method - pages router.
+	*/
+  _router() {
+    this.currentPage = '/chat';
+    this._pagesRegistration();
+
+    let addressBarListener = setInterval(()=>{
+      let location = window.location.pathname;
+      if (this.currentPage === location) return; 
+    
+      for (let i in this.pages) {
+        if (this.pages[i].url === location) {
+          this.pages[i].method();
+          this.currentPage = this.pages[i].url;
+        }
+      };
+    }, 1000);
   }
 
   /**
@@ -84,8 +111,6 @@ export default class App {
         this.pages[elem.name].element = elem;
       }
     });
-    this._initEvents();
-
   }
 
   /**
@@ -98,6 +123,7 @@ export default class App {
       if(target.getAttribute('href')) {
         e.preventDefault();
         this.pages[target.name].method();
+        this.currentPage = this.pages[target.name].url;
       }
     })
 
@@ -121,7 +147,9 @@ export default class App {
     this.currentUser = (document.getElementById('username').innerHTML)?
     document.getElementById('username').innerHTML :
     window.sessionStorage.getItem('currentUser');
+
     document.getElementById('username').innerHTML = this.currentUser;
+    this.currentPage = this.pages['startChat'].url;
     window.history.pushState({}, '', this.pages['startChat'].url);
 
     this.chat = new Chat({
@@ -133,7 +161,7 @@ export default class App {
       currentUser: this.currentUser
     });
     this.chat.initialStartChat();
-    
+   
     this._setVh();
   }
 
@@ -200,6 +228,9 @@ export default class App {
     });
     this.login.onSubmit = this.onLoginSubmit.bind(this);
     this.login.initialStartLogin();
+
+    this.currentPage = this.pages['startLogin'].url;
     window.history.pushState({}, '', this.pages['startLogin'].url);
   }
+
 }

@@ -91,11 +91,9 @@ export default class Login {
 		* @param {object} template - template for creating loggin form.
 	*/  
   _renderForm(template) {
-    
-    //this.loginsContent.innerHTML = template();
+
     this.currentForm = new this.form({element: this.loginsContent, template: template, tooltip: this.tooltip});
     this.currentForm.render();
-    
     this.currentForm.onSubmit = this.onLoginSubmit.bind(this);
     
   }
