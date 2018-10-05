@@ -54,16 +54,11 @@ export default class Form {
     
     elements.forEach((elem)=>{ 
       if(elem.tagName === 'FORM') return;
-      if (!elem.value.length) {
+      if (!elem.value.length || (elem.name === 'e-mail' && !this._checkMail(elem.value))) {
         this._setErrorClass(elem);
         return;
       }
 
-      if(elem.name === 'e-mail' && !this._checkMail(elem.value)) {
-        this._setErrorClass(elem);
-        return;
-      }
-      
       this._removeErrorClass(elem);
       collectData[elem.name] = elem.value;
     });
@@ -81,7 +76,6 @@ export default class Form {
     * @param {string} tooltipName - tooltip name. 
 	*/
   _setErrorClass(elem, tooltipName) {
-    console.log(elem)
     elem.classList.add('error');
     if (!this.createTooltip || this.tooltips[elem.name]) return;
     this.tooltips[elem.name] = new this.createTooltip({element: elem, tooltipName: tooltipName});

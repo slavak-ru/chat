@@ -1,8 +1,12 @@
+.label {
+  position: relative;
+}
+
 .label__text {
   padding-left: 10px;
 }
 
-.form__input,
+.input,
 .form__textarea,
 .button {
   display: block;
@@ -19,6 +23,7 @@
 
 }
 
+.input:focus,
 .form__input:focus,
 .form__textarea:focus,
 .button:focus {
@@ -26,8 +31,66 @@
 }
 
 .form__textarea {
-  resize: none;
   caret-color: var(--formBorderColor);
+}
+
+.input, 
+.form__textarea {
+  caret-color: var(--formBorderColor);
+}
+
+
+.input_login {
+  padding: 0;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  padding-left: 2rem;
+
+  background-repeat: no-repeat;
+  background-position: 2% center;
+}
+
+.icon-password {
+  position: absolute;
+  top: -2.45rem;
+  left: 15.5rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  content: '';
+  z-index: 1;
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  cursor: pointer;
+}
+
+@media (min-width: 768px) { 
+  .icon-password {
+    left: 20rem;
+  }
+}
+
+.input_user-name {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>');
+}
+
+.input_password {
+  padding-right: 2.2rem;
+  pointer-events: none;
+
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>');
+}
+
+.input_email {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>');
+}
+
+.icon-password_lock {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>');
+}
+
+.icon-password_unlock {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>');
 }
 
 .button  {
@@ -91,6 +154,55 @@
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(21, 103, 133)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>');
 
   box-shadow: 0.01rem 0.1rem 0.12rem #052756, 0rem 0.05rem 0.12rem var(--buttonShadowColor);
+}
+
+.button_login {
+  width: 33.3%;
+  min-height: 3rem;
+  padding: 0;
+
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+  text-transform: none;
+  letter-spacing: 0rem;
+  color: var(--formBorderColor);
+
+  background-color: #dbdbdb;
+  background-image: none;
+
+  border: none;
+  border-radius: 0;
+}
+
+@media (min-width: 768px) { 
+  .button_login {
+    font-size: 1.1rem;
+    letter-spacing: 0.1rem;
+  }
+}
+
+.button_login:active {
+  color: var(--formBorderColor);
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+.button_login:hover {
+  color: var(--formBorderColor);
+  border: none;
+  border-left: 1px solid var(--formBorderColor);
+  border-right: 1px solid var(--formBorderColor);
+  color: var(--focuseBorderColor);
+}
+
+.button_login:focus {
+  border: none;
+}
+
+.button_active {
+  background-color: #fff;
 }
 
 .error {
