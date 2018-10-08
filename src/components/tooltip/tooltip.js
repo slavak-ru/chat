@@ -85,7 +85,7 @@ export default class Tooltip {
     this.tooltip.dataset.show = 'show-tooltip'
     this.tooltip.innerHTML = this.target.dataset[this.tooltipName];
 
-    this.form.appendChild(this.tooltip);
+    document.body.appendChild(this.tooltip);
 
     this._setTooltipPosition();
 
@@ -111,7 +111,8 @@ export default class Tooltip {
 		* @description Public method - remove tooltip from the target element.
 	*/
   removeTooltip() {
-    if (this.tooltip) this.form.removeChild(this.tooltip);
+    console.log(this.tooltip)
+    if (this.tooltip) document.body.removeChild(this.tooltip);
     this.tooltip = null;
   }
 

@@ -81,7 +81,7 @@ export default class Form {
     this.tooltips[elem.name] = new this.createTooltip({
                                                         element: elem, 
                                                         tooltipName: tooltipName, 
-                                                        form: this.form.firstElementChild
+                                                        form: this.form,
                                                       });
     this.tooltips[elem.name].createTooltip();
   }
@@ -135,6 +135,37 @@ export default class Form {
 	*/
   render() {
     this.form.innerHTML = this.template();
+    this._observer();
+  }
+
+  /**
+		* @method _observer
+		* @description Inner method - observing the parent element of the form, when the target element was remove - remove tooltip.
+	*/
+  _observer() {
+    let targets, observer, observerOptions;
+
+    targets = [this.form, this.form.parentElement];
+    
+    observer = new MutationObserver((mutation) => {
+      if (!document.querySelector(`[name=${this.form.name}]`)) {
+        if (!Object.keys(this.tooltips).length) return;
+        
+        Object.keys(this.tooltips).forEach((key) => {
+          document.body.removeChild(this.tooltips[key].tooltip);
+          delete this.tooltips[key];
+        });
+      };
+    })
+
+    observerOptions = {
+      childList: true,
+    }
+
+    return targets.forEach((target) => {
+      return observer.observe(target, observerOptions);
+    });
+    
   }
 
 }
