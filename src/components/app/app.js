@@ -26,21 +26,25 @@ export default class App {
     this.appTemplate = appTemplate.bind(this);
     this.networkService = new NetworkService();
     this.router = Router.bind(this);
-    
-    this.onLoginSubmit = this.onLoginSubmit.bind(this);
-    this.startChat = this._startChat.bind(this);
-    this.startLogin = this._startLogin.bind(this);
-    
+       
     this.pages = {};
     this.messagesUrl;
     this.usersUrl;
     this.currentUser;
     this.currentPage;
 
+    this._methodBinding(this.onLoginSubmit, this._startChat, this._startLogin)
     this._initialStartApp();
     this._initEvents();
   }
 
+  _methodBinding(...args) {
+    args.forEach(method => {
+      let name = (method.name.charAt(0) === "_")? method.name.slice(1): method.name;
+      //console.log(method.name, name)})
+      return this[name] = method.bind(this);
+    })
+  }
   /**
 		* @method _initialStartApp
 		* @description Inner method - create header of the App.

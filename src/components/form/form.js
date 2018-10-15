@@ -264,9 +264,12 @@ export default class Form {
   }
 
   _removeTooltip({ group, elem }) {
-    if (this.tooltips[group][elem.name]) {
+    if(!this.tooltips[group] || !this.tooltips[group][elem.name]) {
+      return;
+    }
+
       this.tooltips[group][elem.name].removeTooltip();
       delete this.tooltips[group][elem.name];
-    }
+
   }
 }
