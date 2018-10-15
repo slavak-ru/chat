@@ -4,9 +4,17 @@
 
   font-family: "PT Sans Narrow";
   font-size: 1rem;
-  font-weight: 700;
   color: var(--errorColor);
 
   word-wrap: normal;
   white-space: nowrap;
+}
+
+.tooltip_error {
+  color: var(--errorColor);
+  font-weight: 700;
+}
+
+.tooltip_placeholder {
+  color: var(--formBorderColor);
 }

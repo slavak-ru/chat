@@ -1,12 +1,9 @@
 form(class='form login__content login__content_sign' name='sign')
   label.label.label__user
-    span.label__text Логин
-    input(class='input input_login input_user-name' type='text' data-tooltip='Введите логин' name='user-name')
+    input(class='input input_login input_user-name' type='text' placeholder='Логин' data-tooltip='Введите логин' name='user-name')
   label.label.label__email
-    span.label__text E-mail
-    input(class='input input_login input_email' type='text' data-tooltip='Введите Ваш e-mail' name='e-mail')
+    input(class='input input_login input_email' type='text' placeholder='E-mail' data-tooltip='Введите Ваш e-mail' name='e-mail')
   label.label.label__password
-    span.label__text Пароль
-    input(class='input input_login input_password' type='password' data-tooltip='Введите пароль' name='pass')
+    input(class='input input_login input_password' type='password' placeholder='Пароль' data-tooltip='Введите пароль' name='pass')
     .icon-password.icon-password_lock
   input(class='button button_form' type='submit' value='Зарегистрироваться' id='sign-button')

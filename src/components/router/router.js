@@ -1,57 +1,65 @@
 export default class Router {
-  constructor ({element}) {
-      this.element = element;
-      this.pages = {};
+  constructor() {
   }
 
   /**
-   * Пеперйти на заданный путь
-   * @param {strin} path
-   * @returns {boolean} если путь не найден - false
-   */
-  go (path) {
-      let pageView = this.pages[path];
+		* @method start
+    * @description 
+	*/
+  start() {
+    let addressBarListener = setInterval(() => {
+      let location = window.location.pathname;
+      if (this.currentPage === location) return;
 
-      if (!pageView) {
-          return false;
+      for (let i in this.pages) {
+        if (this.pages[i].url === location) {
+          this.pages[i].method();
+          this.currentPage = this.pages[i].url;
+        }
       }
-
-      pageView.show();
-
-      if (this._currentView) {
-          this._currentView.hide();
-      }
-
-      this._currentView = pageView;
-
-      window.history.pushState({}, '', path);
-
-      return true;
+    }, 1000);
   }
 
   /**
-   * @param {string} path
-   * @param {PageView} pageView
+   * @method pagesRegistration
+   * @description Inner method - page registration, creating the object with page-name, page-url, method for page and HTMLAnchorElement for page.
    */
-  register (path, pageView) {
-      this.pages[path] = pageView;
+  pagesRegistration() {
+    this.pages = {};
+    let anchors = document.querySelectorAll('a');
+    
+    anchors.forEach(elem => {
+      if (elem.getAttribute('href')) {
+        this.pages[elem.name] = {};
+        this.pages[elem.name].url = elem.getAttribute('href');
+        this.pages[elem.name].method = this[elem.name];
+        this.pages[elem.name].element = elem;
+      }
+    });
+    return this.pages;
   }
 
-  start () {
-      this.element.addEventListener('click', event => {
-          if (!(event.target instanceof HTMLAnchorElement)) {
-              return;
-          }
+  /**
+   * @method initEvents(elem)
+   * @description Inner method - creating events for click (click on HTMLAnchorElement).
+   */
+  initEvents(elem) {
+    elem.addEventListener(
+      'click',
+      e => {
+        let target = e.target;
+        if (target.getAttribute('href')) {
+          e.preventDefault();
+          this.currentPage = this.pages[target.name].url;
+          this.pages[target.name].method();
+        }
+      },
+      true
+    );
+  }
 
-          if (this.go(event.target.getAttribute('href'))) {
-              event.preventDefault();
-          }
-      });
-
-      window.location.reload(false);
-    //   window.addEventListener('popstate', event => {
-    //       console.log('hey')
-    //       this.go(location.pathname);
-    //   });
+  setCurentPage(name) {
+    this.currentPage = this.pages[name].url;
+    window.history.pushState({}, '', this.pages[name].url);
   }
 }

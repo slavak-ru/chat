@@ -1,10 +1,10 @@
 .label {
-  /* position: relative; */
+  position: relative;
 }
 
-.label__text {
+/* .label__text {
   padding-left: 10px;
-}
+} */
 
 .input,
 .form__textarea,
@@ -30,15 +30,41 @@
   border: 1px solid var(--focuseBorderColor);
 }
 
-.form__textarea {
-  caret-color: var(--formBorderColor);
-}
-
 .input, 
 .form__textarea {
+  margin-top: 1.5rem;
   caret-color: var(--formBorderColor);
 }
 
+.form__textarea {
+  resize: none;
+}
+
+.form__textarea::-webkit-input-placeholder,
+.input::-webkit-input-placeholder { 
+  color: var(--formBorderColor);
+  font-size: 0.9rem;
+  font-family: "PT Sans Narrow";
+}
+
+.form__textarea:-ms-input-placeholder,  
+.input:-ms-input-placeholder { 
+  color: var(--formBorderColor);
+  font-size: 0.9rem;
+  font-family: "PT Sans Narrow";
+}
+.form__textarea::-ms-input-placeholder,
+.input::-ms-input-placeholder { 
+  color: var(--formBorderColor);
+  font-size: 0.9rem;
+  font-family: "PT Sans Narrow";
+}
+.input::placeholder,
+.form__textarea::placeholder { 
+  color: var(--formBorderColor);
+  font-size: 0.9rem;
+  font-family: "PT Sans Narrow";
+} 
 
 .input_login {
   padding: 0;
@@ -204,6 +230,7 @@
 .button_active {
   background-color: #fff;
 }
+
 
 .error {
   border: 1px solid var(--errorColor);

@@ -8,6 +8,7 @@ import Users from '../users/users.js';
 import Modal from '../modal/modal.js';
 import Chat from '../chat/chat.js';
 import Login from '../login/login.js';
+import Router from '../router/router.js';
   
 /** 
  * @class App
@@ -24,6 +25,12 @@ export default class App {
     this.app = element;
     this.appTemplate = appTemplate.bind(this);
     this.networkService = new NetworkService();
+    this.router = Router.bind(this);
+    
+    this.onLoginSubmit = this.onLoginSubmit.bind(this);
+    this.startChat = this._startChat.bind(this);
+    this.startLogin = this._startLogin.bind(this);
+    
     this.pages = {};
     this.messagesUrl;
     this.usersUrl;
@@ -44,7 +51,13 @@ export default class App {
         this._renderAppTemplate();
         return response;
       })
-      .then(() => this._router())
+      //.then(() => this._router())
+      .then(() => {
+        this.router = new this.router;
+        this.pages = this.router.pagesRegistration.call(this, this.app);
+        this.router.initEvents.call(this, this.app);
+        this.router.setCurentPage.call(this, 'startChat');
+      })
       .then(() => this._startChat())
       .catch(error => console.log(error));
    }
@@ -77,56 +90,10 @@ export default class App {
   }
 
   /**
-		* @method _router
-    * @description Inner method - pages router.
-	*/
-  _router() {
-    this.currentPage = '/chat';
-    this._pagesRegistration();
-
-    let addressBarListener = setInterval(()=>{
-      let location = window.location.pathname;
-      if (this.currentPage === location) return; 
-    
-      for (let i in this.pages) {
-        if (this.pages[i].url === location) {
-          this.pages[i].method();
-          this.currentPage = this.pages[i].url;
-        }
-      };
-    }, 1000);
-  }
-
-  /**
-		* @method _pagesRegistration
-    * @description Inner method - page registration, creating the object with page-name, page-url, method for page and HTMLAnchorElement for page.
-	*/
-  _pagesRegistration() {
-    let anchors = document.querySelectorAll('a');
-    anchors.forEach(elem => {
-      if (elem.getAttribute('href')) {
-        this.pages[elem.name] = {};
-        this.pages[elem.name].url = elem.getAttribute('href');
-        this.pages[elem.name].method = this['_' + elem.name].bind(this);
-        this.pages[elem.name].element = elem;
-      }
-    });
-  }
-
-  /**
 		* @method _initEvents
     * @description Inner method - creating events for click (click on HTMLAnchorElement); and events for the window resizing.
 	*/
   _initEvents() {
-    this.app.addEventListener('click', (e)=>{
-      let target = e.target;
-      if(target.getAttribute('href')) {
-        e.preventDefault();
-        this.pages[target.name].method();
-        this.currentPage = this.pages[target.name].url;
-      }
-    })
-
     window.addEventListener('resize', () => this._setVh());
   }
 
@@ -139,7 +106,7 @@ export default class App {
     
     if(!element) {
       setTimeout(()=> {
-        this._startChat();
+        this.startChat();
       }, 100);
     }
     if(!element) return;
@@ -149,8 +116,7 @@ export default class App {
     window.sessionStorage.getItem('currentUser');
 
     document.getElementById('username').innerHTML = this.currentUser;
-    this.currentPage = this.pages['startChat'].url;
-    window.history.pushState({}, '', this.pages['startChat'].url);
+    this.router.setCurentPage.call(this, 'startChat');
 
     this.chat = new Chat({
       element: element,
@@ -200,7 +166,7 @@ export default class App {
     window.sessionStorage.setItem('currentUser', userName);
     this.messagesLength = 0;
     this.currentUser = document.getElementById('username').innerHTML = userName;
-    this._startChat();
+    this.startChat();
   }
 
   /**
@@ -226,11 +192,10 @@ export default class App {
       users: Users,
       modal: Modal
     });
-    this.login.onSubmit = this.onLoginSubmit.bind(this);
+    this.login.onSubmit = this.onLoginSubmit;
     this.login.initialStartLogin();
 
-    this.currentPage = this.pages['startLogin'].url;
-    window.history.pushState({}, '', this.pages['startLogin'].url);
+    this.router.setCurentPage.call(this, 'startLogin');
   }
 
 }

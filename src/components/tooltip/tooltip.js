@@ -1,19 +1,21 @@
-import css from'./tooltip.css';
+import css from './tooltip.css';
 
-/** 
-  * @class Tooltip
- * @description Component Tooltip create DOM-element if form-element value is empty. 
+/**
+ * @class Tooltip
+ * @description Component Tooltip create DOM-element if form-element value is empty.
  * */
 export default class Tooltip {
   /**
-		* @description create Tooltip.
-		* @param {object} element - target element.
-		* @param {string} tooltipName - tooltip name.
-	*/
-  constructor({element, tooltipName = 'tooltip', form}) {
+   * @description create Tooltip.
+   * @param {object} element - target element.
+   * @param {string} tooltipContent - tooltip's content.
+   * @param {string} group - group of the tooltip.
+   */
+  constructor({ element, tooltipContent = 'placeholder', group }) {
     this.target = element;
-    this.tooltipName = tooltipName;
-    this.form = form;
+    this.tooltipContent = tooltipContent;
+    this.group = group;
+
     this.tooltip;
     this.trotting = this._throttle(this._setTooltipPosition, 500);
 
@@ -21,37 +23,36 @@ export default class Tooltip {
   }
 
   /**
-		* @method _initEvents
-    * @description Inner method - creating events for the window resizing.
-	*/
+   * @method _initEvents
+   * @description Inner method - creating events for the window resizing.
+   */
   _initEvents() {
-    window.addEventListener('resize', () =>{
+    window.addEventListener('resize', () => {
       if (!this.tooltip) return;
       this.trotting();
     });
   }
 
   /**
-		* @method _throttle(func, ms)
-    * @description Inner method - throttle (ms - delay time) in the execution of any methods (func).
-	*/
+   * @method _throttle(func, ms)
+   * @description Inner method - throttle (ms - delay time) in the execution of any methods (func).
+   */
   _throttle(func, ms) {
     let isThrottled = false,
-        savedArgs,
-        savedThis;
-  
+      savedArgs,
+      savedThis;
+
     function wrapper() {
-  
       if (isThrottled) {
         savedArgs = arguments;
         savedThis = this;
         return;
       }
-  
+
       func.apply(this, arguments);
-  
+
       isThrottled = true;
-  
+
       setTimeout(function() {
         isThrottled = false;
         if (savedArgs) {
@@ -60,60 +61,85 @@ export default class Tooltip {
         }
       }, ms);
     }
-  
+
     return wrapper;
   }
 
   /**
-		* @method _defineCoordinate
-    * @description Inner method - define coordinates for tooltip.
-	*/
-  _defineCoordinate() {
-    this.top = this.target.getBoundingClientRect().top + pageYOffset;
-    this.left = this.target.getBoundingClientRect().left;
-  }
-
-  /**
-		* @method createTooltip
-		* @description Public method - create tooltip for the target element.
-	*/
-   createTooltip() {
-    this._defineCoordinate();
-
+   * @method createTooltip
+   * @description Public method - create tooltip for the target element.
+   */
+  createTooltip() {
     this.tooltip = document.createElement('div');
-    this.tooltip.className = 'tooltip';
-    this.tooltip.dataset.show = 'show-tooltip'
-    this.tooltip.innerHTML = this.target.dataset[this.tooltipName];
+    this.tooltip.className = `tooltip tooltip_${this.group}`;
+    this.tooltip.dataset.show = 'show-tooltip';
+    this.tooltip.innerHTML = this.tooltipContent;
 
     document.body.appendChild(this.tooltip);
 
-    this._setTooltipPosition();
+    this.targetBorderRadius = getComputedStyle(this.target, null).borderRadius
+      ? parseFloat(getComputedStyle(this.target, null).borderRadius)
+      : 0;
 
+    this._setTooltipPosition();
   }
 
   /**
-		* @method _defineCoordinate
-    * @description Inner method - set tooltip position.
-	*/
+   * @method _setTooltipPosition
+   * @description Inner method - set tooltip position.
+   */
   _setTooltipPosition() {
     this._defineCoordinate();
 
-    this.tooltip.style.top = Math.round(this.top + this.target.offsetHeight + 2) + 'px';
-    if ( this.top - this.tooltip.offsetHeight - pageYOffset > 0 ) {
-      this.tooltip.style.top = Math.round(this.top - this.tooltip.offsetHeight + 2) + 'px';
-    }
-  
-    this.tooltip.style.left = Math.round(this.left) + this.target.offsetWidth - this.tooltip.offsetWidth + 'px';
+    this.tooltip.style.top = Math.round(this.top) + 'px';
+
+    this.tooltip.style.left = Math.round(this.left) + 'px';
   }
 
   /**
-		* @method removeTooltip
-		* @description Public method - remove tooltip from the target element.
-	*/
+   * @method _defineCoordinate
+   * @description Inner method - define coordinates for tooltip.
+   */
+  _defineCoordinate() {
+    this.top =
+      this.target.getBoundingClientRect().top -
+      this.tooltip.offsetHeight +
+      pageYOffset;
+
+    if (this.top - this.tooltip.offsetHeight - pageYOffset < 0) {
+      this.top -= this.tooltip.offsetHeight;
+    }
+
+    let paddingLeft = parseFloat(getComputedStyle(this.target, null)['paddingLeft']);
+    let marginLeft = parseFloat(getComputedStyle(this.target, null)['marginLeft']);
+
+    if (this.group === 'placeholder') {
+      this.left =
+        this.target.getBoundingClientRect().left +
+        this.targetBorderRadius +
+        paddingLeft +
+        marginLeft +
+        pageXOffset;
+
+      return;
+    }
+
+    this.left =
+      this.target.getBoundingClientRect().left +
+      this.target.offsetWidth -
+      marginLeft -
+      this.tooltip.offsetWidth -
+      this.targetBorderRadius +
+      pageXOffset;
+
+  }
+
+  /**
+   * @method removeTooltip
+   * @description Public method - remove tooltip from the target element.
+   */
   removeTooltip() {
-    console.log(this.tooltip)
     if (this.tooltip) document.body.removeChild(this.tooltip);
     this.tooltip = null;
   }
-
 }
