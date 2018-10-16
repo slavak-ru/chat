@@ -14,6 +14,7 @@ var config = {
 firebase.initializeApp(config);
 
 // Initialize FB SDK
+/*
 window.fbAsyncInit = function() {
   FB.init({
     appId            : '2115973775398203',
@@ -33,5 +34,6 @@ window.fbAsyncInit = function() {
     'https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v3.1&appId=2115973775398203';
   fjs.parentNode.insertBefore(js, fjs);
 })(document, 'script', 'facebook-jssdk');
+*/
 
 let app = new App({ element: document.getElementById('app') });

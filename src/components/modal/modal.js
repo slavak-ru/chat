@@ -6,19 +6,19 @@ import css from './modal.css';
  * @param {string} string - information that should be in the modal window.
  */
 export default class Modal {
-  constructor({ string }) {
-    this.modalContent = string;
+  constructor() {
     this._onEvent = this._onEvent.bind(this);
-
-    this._createModal();
-    this._initEvent();
+    this.modal;
   }
 
   /**
-   * @method _createModal
-   * @description Inner method - creates modal window.
+   * @method createModal
+   * @description Public method - creates modal window.
+   * @param {string} modalMessage - text content for modal window
    */
-  _createModal() {
+  createModal(modalMessage) {
+    if (this.modal) return;
+
     this.modal = document.createElement('div');
     this.modal.className = 'modal';
 
@@ -26,7 +26,7 @@ export default class Modal {
     content.className = 'modal__content';
     let text = document.createElement('div');
     text.className = 'modal__text';
-    text.innerHTML = this.modalContent;
+    text.innerHTML = modalMessage;
     let button = document.createElement('button');
     button.className = 'button button_modal';
     button.type = 'submit';
@@ -37,6 +37,17 @@ export default class Modal {
 
     this.modal.appendChild(content);
     document.body.appendChild(this.modal);
+
+    this._initEvent();
+  }
+
+  /**
+   * @method _createModal
+   * @description Public method - removes modal window.
+   */
+  removeModal() {
+    document.body.removeChild(this.modal);
+    this.modal = null;
   }
 
   /**

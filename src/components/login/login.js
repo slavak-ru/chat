@@ -37,7 +37,8 @@ export default class Login {
       usersUrl: this.usersUrl,
       networkService: this.networkService,
     });
-    this.modal = modal;
+    this.modal = new modal;
+    this.modal.onEvent = this._onModalEvent.bind(this);
     this.loginHeaderTemplate = loginHeaderTemplate;
     this.loginTemplate = loginTemplate;
     this.signTemplate = signTemplate;
@@ -52,6 +53,7 @@ export default class Login {
     this.forgotErrorText =
       'Пользователя с таким логином и мейлом не существует';
     this.tabsList = {};
+    
 
     this.currentRadioChecked = document.querySelector(
       'input[type="radio"]:checked'
@@ -143,8 +145,7 @@ export default class Login {
             pass: data.pass,
           })
         ) {
-          this.modalWindow = new this.modal({ string: this.loginErrorText });
-          this.modalWindow.onEvent = this._onModalEvent.bind(this);
+          this.modal.createModal(this.loginErrorText);
 
           return;
         }
@@ -159,8 +160,7 @@ export default class Login {
             mail: data['e-mail'],
           })
         ) {
-          this.modalWindow = new this.modal({ string: this.signErrorText });
-          this.modalWindow.onEvent = this._onModalEvent.bind(this);
+          this.modal.createModal(this.signErrorText);
 
           return;
         }
@@ -178,8 +178,7 @@ export default class Login {
             mail: data['e-mail'],
           })
         ) {
-          this.modalWindow = new this.modal({ string: this.forgotErrorText });
-          this.modalWindow.onEvent = this._onModalEvent.bind(this);
+          this.modal.createModal(this.forgotErrorText);
 
           return;
         }
@@ -196,8 +195,7 @@ export default class Login {
    * @description Inner method - removing modal window.
    */
   _onModalEvent() {
-    document.body.removeChild(this.modalWindow.modal);
-    this.modalWindow = null;
+    this.modal.removeModal();
   }
 
   /**

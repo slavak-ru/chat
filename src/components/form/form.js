@@ -1,5 +1,6 @@
 import css from './form.css';
 import formTemplate from './form.templ.pug';
+// import Tooltip from'../tooltip/tooltip.js';
 
 /**
  * @class Form
@@ -259,7 +260,7 @@ export default class Form {
       this.tooltips[group] = {};
     }
 
-    if (!this.tooltip || this.tooltips[group][elem.name]) return;
+    if (this.tooltips[group][elem.name]) return;
 
     this.tooltips[group][elem.name] = new this.tooltip({
       element: elem,
