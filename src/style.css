@@ -2,7 +2,8 @@
   --mini-devices: 320px;
   --medium-devices: 768px;
   --large-devices: 1200px;
-  
+
+  --app-background-color: rgb(241, 241, 241);
   --chatWidth: 320px;
   
   --chatHeaderHeight: 10vh;

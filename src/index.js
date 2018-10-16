@@ -1,8 +1,6 @@
 'use strict';
 import css from'./style.css';
 import App from'./components/app/app';
-// import NetworkService from './components/networkService/networkService.js';
-// import Chat from './components/chat/chat.js';
 
 // Initialize Firebase
 var config = {
@@ -14,7 +12,6 @@ var config = {
   messagingSenderId: "242297640263"
 };
 firebase.initializeApp(config);
-
 
 
 let app = new App({element: document.getElementById('app')});

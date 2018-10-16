@@ -46,7 +46,7 @@ export default class Login {
 
   /**
 		* @method _initEvents()
-		* @description Inner method - adding EventListener on Submit to the Login forms.
+		* @description Inner method - adding EventListener 
 	*/
   _initEvents() {
     this.logins.addEventListener('click', (e)=>{
@@ -197,6 +197,9 @@ export default class Login {
     });
     
     this._renderForm(this.tabsList.login.template);
+
    }
+
+   
  
 }

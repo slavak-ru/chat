@@ -12,7 +12,7 @@ import Router from '../router/router.js';
   
 /** 
  * @class App
- * @description Class App - manages Form and Chat 
+ * @description Class App - manages Form and Chat of the application
  * 
 */
 export default class App {
@@ -25,7 +25,6 @@ export default class App {
     this.app = element;
     this.appTemplate = appTemplate.bind(this);
     this.networkService = new NetworkService();
-    this.router = Router.bind(this);
        
     this.pages = {};
     this.messagesUrl;
@@ -38,16 +37,21 @@ export default class App {
     this._initEvents();
   }
 
+  /**
+		* @method _methodBinding(...args)
+    * @description Inner method - for binding of the methods around this.
+    * @param {object} ...args - array of the arguments. Each argument is a method.
+    * @return {object} method -  method binded around App class.
+	*/
   _methodBinding(...args) {
     args.forEach(method => {
       let name = (method.name.charAt(0) === "_")? method.name.slice(1): method.name;
-      //console.log(method.name, name)})
       return this[name] = method.bind(this);
     })
   }
   /**
 		* @method _initialStartApp
-		* @description Inner method - create header of the App.
+		* @description Inner method - creats the header of the App, start Router and start Chat
 	*/
   _initialStartApp() {
     this._getUrls()
@@ -55,15 +59,20 @@ export default class App {
         this._renderAppTemplate();
         return response;
       })
-      //.then(() => this._router())
       .then(() => {
-        this.router = new this.router;
-        this.pages = this.router.pagesRegistration.call(this, this.app);
+        this.router = new Router;
+        this.router.pagesRegistration.call(this, this.app);
         this.router.initEvents.call(this, this.app);
         this.router.setCurentPage.call(this, 'startChat');
+        this.router.start.call(this);
       })
       .then(() => this._startChat())
-      .catch(error => console.log(error));
+      .catch(error => {
+        let chat = document.getElementById('chat');
+        chat.classList.remove('chat__content_empty');
+        chat.classList.add('network_error');
+        console.log(error);
+      });
    }
 
   /**
@@ -103,7 +112,7 @@ export default class App {
 
   /**
 		* @method _startChat
-    * @description Inner method - creating Chat page.
+    * @description Inner method - creating the Chat page and initializing the Chat.
 	*/
   _startChat() {
     let element = document.querySelector('.app__content');
@@ -175,7 +184,7 @@ export default class App {
 
   /**
 		* @method _startLogin
-		* @description Inner method - creating Login page.
+		* @description Inner method - creating Login and initializing the Logins methods.
 	*/
   _startLogin() {
     let element = document.querySelector('.app__content');

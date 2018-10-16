@@ -9,7 +9,7 @@
 
 <dl>
 <dt><a href="#_initialStartApp">_initialStartApp()</a></dt>
-<dd><p>Inner method - create header of the App.</p>
+<dd><p>Inner method - creats the header of the App, start Router and start Chat</p>
 </dd>
 <dt><a href="#_getUrls">_getUrls()</a></dt>
 <dd><p>Inner method - get the database URLs for messages and users from json file from server.</p>
@@ -17,15 +17,11 @@
 <dt><a href="#_renderAppTemplate">_renderAppTemplate()</a></dt>
 <dd><p>Inner method - render App template (header).</p>
 </dd>
-<dt><a href="#_pagesRegistration">_pagesRegistration()</a></dt>
-<dd><p>Inner method - page registration, creating the object with page-name, page-url, method for page and HTMLAnchorElement for
-page.</p>
-</dd>
 <dt><a href="#_initEvents">_initEvents()</a></dt>
 <dd><p>Inner method - creating events for click (click on HTMLAnchorElement); and events for the window resizing.</p>
 </dd>
 <dt><a href="#_startChat">_startChat()</a></dt>
-<dd><p>Inner method - creating Chat page.</p>
+<dd><p>Inner method - creating the Chat page and initializing the Chat.</p>
 </dd>
 <dt><a href="#_setVh">_setVh()</a></dt>
 <dd><p>Inner method - sets the VH size for window resizing and sets app content height.</p>
@@ -34,7 +30,7 @@ page.</p>
 <dd><p>Public method - which sets behavior Login page on submit event.</p>
 </dd>
 <dt><a href="#_startLogin">_startLogin()</a></dt>
-<dd><p>Inner method - creating Login page.</p>
+<dd><p>Inner method - creating Login and initializing the Logins methods.</p>
 </dd>
 </dl>
 
@@ -45,12 +41,12 @@ page.</p>
 <a name="new_App_new"></a>
 
 ### new App()
-Class App - manages Form and Chat
+Class App - manages Form and Chat of the application
 
 <a name="_initialStartApp"></a>
 
 ## _initialStartApp()
-Inner method - create header of the App.
+Inner method - creats the header of the App, start Router and start Chat
 
 **Kind**: global function
 <a name="_getUrls"></a>
@@ -65,12 +61,6 @@ Inner method - get the database URLs for messages and users from json file from 
 Inner method - render App template (header).
 
 **Kind**: global function
-<a name="_pagesRegistration"></a>
-
-## _pagesRegistration()
-Inner method - page registration, creating the object with page-name, page-url, method for page and HTMLAnchorElement for page.
-
-**Kind**: global function
 <a name="_initEvents"></a>
 
 ## _initEvents()
@@ -80,7 +70,7 @@ Inner method - creating events for click (click on HTMLAnchorElement); and event
 <a name="_startChat"></a>
 
 ## _startChat()
-Inner method - creating Chat page.
+Inner method - creating the Chat page and initializing the Chat.
 
 **Kind**: global function
 <a name="_setVh"></a>
@@ -103,6 +93,6 @@ Public method - which sets behavior Login page on submit event.
 <a name="_startLogin"></a>
 
 ## _startLogin()
-Inner method - creating Login page.
+Inner method - creating Login and initializing the Logins methods.
 
 **Kind**: global function

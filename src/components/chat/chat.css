@@ -20,7 +20,7 @@
   font-size: 1rem;
 }
 
-.chat__content:empty:after {
+.chat__content_empty:empty:after {
   content: 'В чате нет сообщений';
   position: absolute;
   top: 3rem;
@@ -30,9 +30,27 @@
   color: var(--buttonBgColorEnd);
 }
 
+@keyframes color {
+	from {
+		color: var(--errorColor);
+  }
+  to {
+    color: var(--app-background-color);
+  }
+}
+
+.database_error:empty:after {
+  content: 'Database Error';
+  left: 28%;
+  animation: color 1s infinite alternate;
+}
+
 @media (min-width: 768px) { 
-  .chat__content:empty:after {
+  .chat__content_empty:empty:after {
     left: 28%;
+  }
+  .database_error:empty:after {
+    left: 35%
   }
 }
 

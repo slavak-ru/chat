@@ -44,6 +44,11 @@ export default class Chat {
                     this._startChat();
                    }
                 )
+                .catch(error => {
+                  let chat = document.getElementById('chat');
+                  chat.classList.add('database_error');
+                  console.log(error); 
+                });
    }
 
   /**

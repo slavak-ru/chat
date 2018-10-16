@@ -9,6 +9,7 @@ export default class Router {
   start() {
     let addressBarListener = setInterval(() => {
       let location = window.location.pathname;
+      
       if (this.currentPage === location) return;
 
       for (let i in this.pages) {

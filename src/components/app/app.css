@@ -13,7 +13,7 @@
 .app,
 .app__content_wrapper,
 .app__form {
-  background-color: rgb(241, 241, 241);
+  background-color: var(--app-background-color);
 }
 
 .app__header {
@@ -86,8 +86,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  /* position: relative; */
 }
 
 @keyframes loader {
