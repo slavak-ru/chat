@@ -2,11 +2,13 @@
   --mini-devices: 320px;
   --medium-devices: 768px;
   --large-devices: 1200px;
-  
+
+  --app-background-color: rgb(241, 241, 241);
   --chatWidth: 320px;
   
   --chatHeaderHeight: 10vh;
 
+  --messageUserNameColor: rgb(62, 184, 229);
   --messageBackgroundColor: rgb(255, 255, 255);
   --messageBorderRadius: 0.4rem;
 
@@ -82,6 +84,7 @@ a {
   color: rgb(255, 255, 255);
   text-decoration: none;
 }
+
 .app__wrapper {
   
   margin: 0 auto;
@@ -97,7 +100,7 @@ a {
 .app,
 .app__content_wrapper,
 .app__form {
-  background-color: rgb(241, 241, 241);
+  background-color: var(--app-background-color);
 }
 
 .app__header {
@@ -128,6 +131,14 @@ a {
   background-image: -o-linear-gradient(top, var(--buttonBgColorStart), var(--buttonBgColorEnd));
 
   background-image: linear-gradient(to bottom, var(--buttonBgColorStart), var(--buttonBgColorEnd));
+}
+
+.app__header_user {
+  max-width: 40%;
+  white-space: nowrap;
+  overflow-x: hidden; 
+  -o-text-overflow: ellipsis; 
+     text-overflow: ellipsis;
 }
 
 .menu__item {
@@ -183,8 +194,6 @@ a {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-
-  /* position: relative; */
 }
 
 @-webkit-keyframes loader {
@@ -250,11 +259,15 @@ a {
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(21, 103, 133)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>');
   }
 }
-.label__text {
-  padding-left: 10px;
+.label {
+  position: relative;
 }
 
-.form__input,
+/* .label__text {
+  padding-left: 10px;
+} */
+
+.input,
 .form__textarea,
 .button {
   display: block;
@@ -271,15 +284,118 @@ a {
 
 }
 
+.input:focus,
 .form__input:focus,
 .form__textarea:focus,
 .button:focus {
   border: 1px solid var(--focuseBorderColor);
 }
 
+.input, 
+.form__textarea {
+  margin-top: 1.5rem;
+  caret-color: var(--formBorderColor);
+}
+
 .form__textarea {
   resize: none;
-  caret-color: var(--formBorderColor);
+}
+
+.form__textarea::-webkit-input-placeholder,
+.input::-webkit-input-placeholder { 
+  color: var(--formBorderColor);
+  font-size: 0.9rem;
+  font-family: "PT Sans Narrow";
+}
+
+.form__textarea:-ms-input-placeholder,  
+.input:-ms-input-placeholder { 
+  color: var(--formBorderColor);
+  font-size: 0.9rem;
+  font-family: "PT Sans Narrow";
+}
+.form__textarea::-ms-input-placeholder,
+.input::-ms-input-placeholder { 
+  color: var(--formBorderColor);
+  font-size: 0.9rem;
+  font-family: "PT Sans Narrow";
+}
+.input::-webkit-input-placeholder,
+.form__textarea::-webkit-input-placeholder { 
+  color: var(--formBorderColor);
+  font-size: 0.9rem;
+  font-family: "PT Sans Narrow";
+}
+.input:-ms-input-placeholder,
+.form__textarea:-ms-input-placeholder { 
+  color: var(--formBorderColor);
+  font-size: 0.9rem;
+  font-family: "PT Sans Narrow";
+}
+.input::-ms-input-placeholder,
+.form__textarea::-ms-input-placeholder { 
+  color: var(--formBorderColor);
+  font-size: 0.9rem;
+  font-family: "PT Sans Narrow";
+}
+.input::placeholder,
+.form__textarea::placeholder { 
+  color: var(--formBorderColor);
+  font-size: 0.9rem;
+  font-family: "PT Sans Narrow";
+} 
+
+.input_login {
+  padding: 0;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  padding-left: 2rem;
+
+  background-repeat: no-repeat;
+  background-position: 2% center;
+}
+
+.icon-password {
+  position: absolute;
+  top: -2.45rem;
+  left: 15.5rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  content: '';
+  z-index: 1;
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  cursor: pointer;
+}
+
+@media (min-width: 768px) { 
+  .icon-password {
+    left: 20rem;
+  }
+}
+
+.input_user-name {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>');
+}
+
+.input_password {
+  padding-right: 2.2rem;
+  pointer-events: none;
+
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>');
+}
+
+.input_email {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>');
+}
+
+.icon-password_lock {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>');
+}
+
+.icon-password_unlock {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>');
 }
 
 .button  {
@@ -354,19 +470,80 @@ a {
           box-shadow: 0.01rem 0.1rem 0.12rem #052756, 0rem 0.05rem 0.12rem var(--buttonShadowColor);
 }
 
+.button_login {
+  width: 33.3%;
+  min-height: 3rem;
+  padding: 0;
+
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+  text-transform: none;
+  letter-spacing: 0rem;
+  color: var(--formBorderColor);
+
+  background-color: #dbdbdb;
+  background-image: none;
+
+  border: none;
+  border-radius: 0;
+}
+
+@media (min-width: 768px) { 
+  .button_login {
+    font-size: 1.1rem;
+    letter-spacing: 0.1rem;
+  }
+}
+
+.button_login:active {
+  color: var(--formBorderColor);
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+.button_login:hover {
+  color: var(--formBorderColor);
+  border: none;
+  border-left: 1px solid var(--formBorderColor);
+  border-right: 1px solid var(--formBorderColor);
+  color: var(--focuseBorderColor);
+}
+
+.button_login:focus {
+  border: none;
+}
+
+.button_active {
+  background-color: #fff;
+}
+
+
 .error {
   border: 1px solid var(--errorColor);
 }
+
 .tooltip {
   position: absolute;
-  padding: 0.3rem;
+  padding: 0;
 
   font-family: "PT Sans Narrow";
   font-size: 1rem;
-  font-weight: 700;
   color: var(--errorColor);
 
   word-wrap: normal;
+  white-space: nowrap;
+}
+
+.tooltip_error {
+  color: var(--errorColor);
+  font-weight: 700;
+}
+
+.tooltip_placeholder {
+  color: var(--formBorderColor);
 }
 .modal {
   width: 100vw;
@@ -447,7 +624,7 @@ a {
   font-size: 1rem;
 }
 
-.chat__content:empty:after {
+.chat__content_empty:empty:after {
   content: '\412   \447\430\442\435   \43D\435\442   \441\43E\43E\431\449\435\43D\438\439';
   position: absolute;
   top: 3rem;
@@ -457,9 +634,37 @@ a {
   color: var(--buttonBgColorEnd);
 }
 
+@-webkit-keyframes color {
+	from {
+		color: var(--errorColor);
+  }
+  to {
+    color: var(--app-background-color);
+  }
+}
+
+@keyframes color {
+	from {
+		color: var(--errorColor);
+  }
+  to {
+    color: var(--app-background-color);
+  }
+}
+
+.database_error:empty:after {
+  content: 'Database Error';
+  left: 28%;
+  -webkit-animation: color 1s infinite alternate;
+          animation: color 1s infinite alternate;
+}
+
 @media (min-width: 768px) { 
-  .chat__content:empty:after {
+  .chat__content_empty:empty:after {
     left: 28%;
+  }
+  .database_error:empty:after {
+    left: 35%
   }
 }
 
@@ -508,7 +713,7 @@ a {
 }
 
 .user {
-  max-width: 30%;
+  width: 25%;
   margin-left: 0.2rem;
   padding: 0.7rem;
   display: -webkit-box;
@@ -520,13 +725,33 @@ a {
           flex-direction: column;
   -ms-flex-line-pack: center;
       align-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 
   text-align: center;
 }
 
 .user__name {
+  width: 100%;
+  position: relative;
+
+  color: var(--messageUserNameColor);
   white-space: nowrap;
+  overflow-x: hidden; 
+  -o-text-overflow: ellipsis; 
+     text-overflow: ellipsis;
 }
+/* 
+.user__name::after {
+  content: '';
+  position: absolute;
+  right: 0; 
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.2) 70%,var(--buttonBgColorStart) 100%);
+} */
 
 .user__image {
   width: 2.3rem;
@@ -619,56 +844,6 @@ a {
   padding: 0;
 }
 
-.button_login {
-  width: 33.3%;
-  min-height: 3rem;
-  padding: 0;
-
-  font-size: 1rem;
-  font-weight: 400;
-  text-align: center;
-  text-transform: none;
-  letter-spacing: 0rem;
-  color: var(--formBorderColor);
-
-  background-color: #dbdbdb;
-  background-image: none;
-
-  border: none;
-  border-radius: 0;
-}
-
-@media (min-width: 768px) { 
-  .button_login {
-    font-size: 1.1rem;
-    letter-spacing: 0.1rem;
-  }
-}
-
-.button_login:active {
-  color: var(--formBorderColor);
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  border: none;
-  outline: none;
-}
-
-.button_login:hover {
-  color: var(--formBorderColor);
-  border: none;
-  border-left: 1px solid var(--formBorderColor);
-  border-right: 1px solid var(--formBorderColor);
-  color: var(--focuseBorderColor);
-}
-
-.button_login:focus {
-  border: none;
-}
-
-.button_active {
-  background-color: #fff;
-}
-
 .login__content_wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -690,78 +865,19 @@ a {
     min-width: 80%;
   }
 }
-
-.label {
-  position: relative;
+.social {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.icon-password {
-  position: absolute;
-  top: -2.45rem;
-  left: 15.5rem;
-  width: 1.3rem;
-  height: 1.3rem;
-  content: '';
-  z-index: 1;
-  background-repeat: no-repeat;
-  background-size: 100%;
-
-  cursor: pointer;
-}
-
-@media (min-width: 768px) { 
-  .icon-password {
-    left: 20rem;
-  }
-}
-
-.input {
-  display: block;
-  width: var(--inputsWidth);
-  margin: auto;
-  margin-bottom: 0.7rem;
-  padding: 0;
-  padding-top: 0.4rem;
-  padding-bottom: 0.4rem;
-  padding-left: 2rem;
-
-  position: relative;
-
-  line-height: 1.2rem;
-  
-  border: 1px solid var(--formBorderColor);
+.button__fb {
   border-radius: 0.3rem;
-  outline: none;  
-
-  background-repeat: no-repeat;
-  background-position: 2% center;
-
-  caret-color: var(--formBorderColor);
-}
-
-.input:focus {
-  border: 1px solid var(--focuseBorderColor);
-}
-
-.input_user-name {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>');
-}
-
-.input_password {
-  padding-right: 2.2rem;
-  pointer-events: none;
-
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>');
-}
-
-.input_email {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>');
-}
-
-.icon-password_lock {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>');
-}
-
-.icon-password_unlock {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 145, 180)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>');
 }
