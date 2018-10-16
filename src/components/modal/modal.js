@@ -42,7 +42,7 @@ export default class Modal {
   }
 
   /**
-   * @method _createModal
+   * @method removeModal
    * @description Public method - removes modal window.
    */
   removeModal() {
