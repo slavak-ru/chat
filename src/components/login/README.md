@@ -9,16 +9,13 @@
 
 <dl>
 <dt><a href="#_initEvents_new">_initEvents()()</a></dt>
-<dd><p>Inner method - adding EventListener on Submit to the Login forms.</p>
+<dd><p>Inner method - adding EventListener, sets classes on the tab elements and show/hide password</p>
 </dd>
 <dt><a href="#_setTabsClass(elemOnClick)">_setTabsClass(elemOnClick)</a></dt>
 <dd><p>Inner method - adding class to the tabs on loggin page.</p>
 </dd>
 <dt><a href="#_renderForm(template)">_renderForm(template)</a></dt>
-<dd><p>Inner method - creating loggin form.</p>
-</dd>
-<dt><a href="#_clearErrors">_clearErrors()</a></dt>
-<dd><p>Inner method - removing error class from element (input) of the login form.</p>
+<dd><p>Inner method - creating loggin form from template.</p>
 </dd>
 <dt><a href="#onLoginSubmit(data)">onLoginSubmit(data)</a></dt>
 <dd><p>Public method - for behavior on submit login form</p>
@@ -41,12 +38,13 @@
 <a name="new_Login_new"></a>
 
 ### new Login()
-Class Login collect data from form-elements on Submint event.
+Class Login creates the Login page from the template, creates forms (login,registration), collect data from form-elements on Submit
+event and creates modal window if information isn't correct.
 
 <a name="_initEvents_new"></a>
 
-## _initEvents()()
-Inner method - adding EventListener on Submit to the Login forms.
+## _initEvents()
+Inner method - adding EventListener, sets classes on the tab elements and show/hide password
 
 **Kind**: global function
 <a name="_setTabsClass(elemOnClick)"></a>
@@ -63,7 +61,7 @@ Inner method - adding class to the tabs on loggin page.
 <a name="_renderForm(template)"></a>
 
 ## _renderForm(template)
-Inner method - creating loggin form.
+Inner method - creating loggin form from template.
 
 **Kind**: global function
 
@@ -71,12 +69,6 @@ Inner method - creating loggin form.
 | --- | --- | --- |
 | template | <code>object</code> | template for creating loggin form. |
 
-<a name="_clearErrors"></a>
-
-## _clearErrors()
-Inner method - removing error class from element (input) of the login form.
-
-**Kind**: global function
 <a name="onLoginSubmit(data)"></a>
 
 ## onLoginSubmit(data)

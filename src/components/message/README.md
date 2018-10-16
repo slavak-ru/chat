@@ -11,7 +11,7 @@
 <dt><a href="#render">render()</a></dt>
 <dd><p>Public method - create DOM-element for new message and add to the Chat.</p>
 </dd>
-<dt><a href="#_addChatElement_new">_addChatElement()()</a> ⇒ <code>object</code></dt>
+<dt><a href="#_addChatElement">_addChatElement()</a> ⇒ <code>object</code></dt>
 <dd><p>Inner method - adding elements (messages) and return DOM-element.</p>
 </dd>
 <dt><a href="#_scrollElement(element)">_scrollElement(element)</a></dt>
@@ -29,7 +29,7 @@
 <a name="new_Message_new"></a>
 
 ### new Message()
-Class Message add messagees in Chat (DOM-element).
+Class Message add messages in Chat (DOM-element).
 
 <a name="render"></a>
 
@@ -37,9 +37,9 @@ Class Message add messagees in Chat (DOM-element).
 Public method - create DOM-element for new message and add to the Chat.
 
 **Kind**: global function
-<a name="_addChatElement_new"></a>
+<a name="_addChatElement"></a>
 
-## _addChatElement()() ⇒ <code>object</code>
+## _addChatElement() ⇒ <code>object</code>
 Inner method - adding elements (messages) and return DOM-element.
 
 **Kind**: global function
@@ -65,4 +65,3 @@ Public method - adding new key and value to the data-object.
 | Param | Type | Description |
 | --- | --- | --- |
 | message | <code>object</code> | the objest contains user, time and message keys. |
-

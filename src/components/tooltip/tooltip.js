@@ -9,7 +9,7 @@ export default class Tooltip {
    * @description create Tooltip.
    * @param {object} element - target element.
    * @param {string} tooltipContent - tooltip's content.
-   * @param {string} group - group of the tooltip.
+   * @param {string} group - group-name of the tooltip.
    */
   constructor({ element, tooltipContent = 'placeholder', group }) {
     this.target = element;
@@ -24,7 +24,7 @@ export default class Tooltip {
 
   /**
    * @method _initEvents
-   * @description Inner method - creating events for the window resizing.
+   * @description Inner method - creates events listener for the window resizing.
    */
   _initEvents() {
     window.addEventListener('resize', () => {
@@ -34,8 +34,10 @@ export default class Tooltip {
   }
 
   /**
-   * @method _throttle(func, ms)
+   * @method _throttle
    * @description Inner method - throttle (ms - delay time) in the execution of any methods (func).
+   * @param {object} func - callback method
+   * @param {number} ms - delay time in ms
    */
   _throttle(func, ms) {
     let isThrottled = false,
@@ -110,8 +112,12 @@ export default class Tooltip {
       this.top -= this.tooltip.offsetHeight;
     }
 
-    let paddingLeft = parseFloat(getComputedStyle(this.target, null)['paddingLeft']);
-    let marginLeft = parseFloat(getComputedStyle(this.target, null)['marginLeft']);
+    let paddingLeft = parseFloat(
+      getComputedStyle(this.target, null)['paddingLeft']
+    );
+    let marginLeft = parseFloat(
+      getComputedStyle(this.target, null)['marginLeft']
+    );
 
     if (this.group === 'placeholder') {
       this.left =
@@ -131,7 +137,6 @@ export default class Tooltip {
       this.tooltip.offsetWidth -
       this.targetBorderRadius +
       pageXOffset;
-
   }
 
   /**

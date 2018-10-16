@@ -14,10 +14,16 @@
 <dt><a href="#_onSubmit(e)">_onSubmit(e)</a></dt>
 <dd><p>Inner method - initial collect-data method on submit event.</p>
 </dd>
+<dt><a href="#_hidePlaceholder">_hidePlaceholder(e)</a></dt>
+<dd><p>Inner method - hides placeholder value (if value of the input is empty) and creates tooltip from placeholder value of the input element on focus event.</p>
+</dd>
+<dt><a href="#_showPlaceholder">_showPlaceholder(e)</a></dt>
+<dd><p>Inner method - shows the value of the placeholder (if value of the input is empty) and removes tooltip on blur event.</p>
+</dd>
 <dt><a href="#_collectData">_collectData()</a> ⇒ <code>object</code></dt>
 <dd><p>Inner method - collect-data from form-elements.</p>
 </dd>
-<dt><a href="#_setErrorClass(elem)">_setErrorClass(elem, tooltipName)</a></dt>
+<dt><a href="#_setErrorClass(elem)">_setErrorClass(elem, tooltipContent)</a></dt>
 <dd><p>Inner method - set Error class to the from form-elements if value is empty.</p>
 </dd>
 <dt><a href="#_removeErrorClass(elem)">_removeErrorClass()</a></dt>
@@ -35,6 +41,18 @@
 <dt><a href="#render">render()</a></dt>
 <dd><p>Public method - create inners DOM-elements (inputs and submit button) in the Form.</p>
 </dd>
+<dt><a href="#_placeholdersRegister">_placeholdersRegister()</a></dt>
+<dd><p>Inner method - registers all input elements in the form.</p>
+</dd>
+<dt><a href="#_observer">_observer()</a></dt>
+<dd><p>Inner method - observing the parent element of the form, when the target element was remove - removes all tooltips.</p>
+</dd>
+<dt><a href="#_createTooltip">_createTooltip(group, elem, tooltipContent)</a></dt>
+<dd><p>Inner method - creates tooltip.</p>
+</dd>
+<dt><a href="#_removeTooltip">_removeTooltip(group, elem)</a></dt>
+<dd><p>Inner method - removes tooltip.</p>
+</dd>
 </dl>
 
 <a name="Form"></a>
@@ -44,7 +62,7 @@
 <a name="new_Form_new"></a>
 
 ### new Form()
-Class Form collect data from form-elements on Submint event.
+Class Form creates a Form from a template, controls pop-up tooltips on error and on placeholders, collects data from Form elements on the Submit event.
 
 <a name="_initEvents"></a>
 
@@ -63,6 +81,28 @@ Inner method - initial collect-data method on submit event.
 | --- | --- | --- |
 | e | <code>object</code> | event object. |
 
+<a name="_hidePlaceholder"></a>
+
+## _hidePlaceholder(e)
+Inner method - hides placeholder value (if value of the input is empty) and creates tooltip from placeholder value of the input element on focus event.
+
+**Kind**: global function
+
+| Param | Type | Description |
+| --- | --- | --- |
+| e | <code>object</code> | event object. |
+
+<a name="_showPlaceholder"></a>
+
+## _showPlaceholder(e)
+Inner method - shows the value of the placeholder (if value of the input is empty) and removes tooltip on blur event.
+
+**Kind**: global function
+
+| Param | Type | Description |
+| --- | --- | --- |
+| e | <code>object</code> | event object. |
+
 <a name="_collectData"></a>
 
 ## _collectData() ⇒ <code>object</code>
@@ -72,7 +112,7 @@ Inner method - collect-data from form-elements.
 **Returns**: <code>object</code> - collectData - data for post to the database.
 <a name="_setErrorClass(elem)"></a>
 
-## _setErrorClass(elem, tooltipName)
+## _setErrorClass(elem, tooltipContent)
 Inner method - set Error class to the from form-elements if value is empty.
 
 **Kind**: global function
@@ -80,7 +120,7 @@ Inner method - set Error class to the from form-elements if value is empty.
 | Param | Type | Description |
 | --- | --- | --- |
 | elem | <code>object</code> | element (input) without information. |
-| tooltipName | <code>string</code> | tooltip name. |
+| tooltipContent | <code>string</code> | tooltip's content. |
 
 <a name="_removeErrorClass(elem)"></a>
 
@@ -114,3 +154,39 @@ Public method - recive function from app.js.
 Public method - create inners DOM-elements (inputs and submit button) in the Form.
 
 **Kind**: global function
+<a name="_placeholdersRegister"></a>
+
+## _placeholdersRegister()
+Inner method - registers all input elements in the form.
+
+**Kind**: global function
+<a name="_observer"></a>
+
+## _observer()
+Inner method - observing the parent element of the form, when the target element was remove - removes all tooltips.
+
+**Kind**: global function
+<a name="_createTooltip"></a>
+
+## _createTooltip(group, elem, tooltipContent)
+Inner method - creates tooltip.
+
+**Kind**: global function
+
+| Param | Type | Description |
+| --- | --- | --- |
+| group | <code>string</code> | the name of the tooltip group |
+| elem | <code>object</code> | the target element |
+| tooltipContent | <code>string</code> | content for the tooltip |
+
+<a name="_removeTooltip"></a>
+
+## _removeTooltip(group, elem)
+Inner method - removes tooltip.
+
+**Kind**: global function
+
+| Param | Type | Description |
+| --- | --- | --- |
+| group | <code>string</code> | the name of the tooltip group |
+| elem | <code>object</code> | the target element |

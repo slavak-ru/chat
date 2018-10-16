@@ -1,15 +1,20 @@
+/**
+ * @class Router
+ * @description The Router class performs routing to the application pages.
+ *
+ */
+
 export default class Router {
-  constructor() {
-  }
+  constructor() {}
 
   /**
-		* @method start
-    * @description 
-	*/
+   * @method start
+   * @description Public method - is the address bar listener. If address had been change - launches the definite method for creates page
+   */
   start() {
     let addressBarListener = setInterval(() => {
       let location = window.location.pathname;
-      
+
       if (this.currentPage === location) return;
 
       for (let i in this.pages) {
@@ -23,12 +28,12 @@ export default class Router {
 
   /**
    * @method pagesRegistration
-   * @description Inner method - page registration, creating the object with page-name, page-url, method for page and HTMLAnchorElement for page.
+   * @description Public method - page registration, creating the object with page-name, page-url, method for page and HTMLAnchorElement for page.
    */
   pagesRegistration() {
     this.pages = {};
     let anchors = document.querySelectorAll('a');
-    
+
     anchors.forEach(elem => {
       if (elem.getAttribute('href')) {
         this.pages[elem.name] = {};
@@ -42,7 +47,7 @@ export default class Router {
 
   /**
    * @method initEvents(elem)
-   * @description Inner method - creating events for click (click on HTMLAnchorElement).
+   * @description Public method - creating events for click (click on HTMLAnchorElement).
    */
   initEvents(elem) {
     elem.addEventListener(
@@ -59,6 +64,10 @@ export default class Router {
     );
   }
 
+  /**
+   * @method setCurentPage(name)
+   * @description Public method - sets current page name and push url-name in the window history.
+   */
   setCurentPage(name) {
     this.currentPage = this.pages[name].url;
     window.history.pushState({}, '', this.pages[name].url);

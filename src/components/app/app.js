@@ -38,7 +38,7 @@ export default class App {
   }
 
   /**
-		* @method _methodBinding(...args)
+		* @method _methodBinding(args)
     * @description Inner method - for binding of the methods around this.
     * @param {object} ...args - array of the arguments. Each argument is a method.
     * @return {object} method -  method binded around App class.

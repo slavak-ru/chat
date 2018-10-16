@@ -7,7 +7,7 @@ export default class NetworkService {
   constructor() {}
 
   /**
-   * @method httpReq({url, method, data})
+   * @method httpReq
    * @description Public method - gets, put and post infomation from database.
    * @param {string} url - URL for request.
    * @param {string} method - method for request.

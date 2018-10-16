@@ -3,7 +3,7 @@ import formTemplate from './form.templ.pug';
 
 /**
  * @class Form
- * @description Class Form collect data from form-elements on Submint event.
+ * @description Class Form creates a Form from a template, controls pop-up tooltips on error and on placeholders, collects data from Form elements on the Submit event.
  * */
 export default class Form {
   /**
@@ -48,8 +48,8 @@ export default class Form {
 
   /**
    * @method _hidePlaceholder
-   * @description Inner method - .
-   * @return {object} e - .
+   * @description Inner method - hides placeholder value (if value of the input is empty) and creates tooltip from placeholder value of the input element on focus event.
+   * @param {object} e - event object.
    */
   _hidePlaceholder(e) {
     let target = e.target;
@@ -67,8 +67,8 @@ export default class Form {
 
   /**
    * @method _showPlaceholder
-   * @description Inner method - .
-   * @return {object} e - .
+   * @description Inner method - shows the value of the placeholder (if value of the input is empty) and removes tooltip on blur event.
+   * @param {object} e - event object.
    */
   _showPlaceholder(e) {
     let target = e.target;
@@ -195,7 +195,7 @@ export default class Form {
 
   /**
    * @method _placeholdersRegister
-   * @description Inner method - observing the parent element of the form, when the target element was remove - remove tooltip.
+   * @description Inner method - registers all input elements in the form.
    */
   _placeholdersRegister() {
     this.placeholders = {};
@@ -209,7 +209,7 @@ export default class Form {
 
   /**
    * @method _observer
-   * @description Inner method - observing the parent element of the form, when the target element was remove - remove tooltip.
+   * @description Inner method - observing the parent element of the form, when the target element was remove - removes all tooltips.
    */
   _observer() {
     let targets, observer, observerOptions;
@@ -247,6 +247,13 @@ export default class Form {
     });
   }
 
+  /**
+   * @method _createTooltip
+   * @description Inner method - creates tooltip.
+   * @param {string} group - the name of the tooltip group
+   * @param {object} elem - the target element
+   * @param {string} tooltipContent - content for the tooltip
+   */
   _createTooltip({ group, elem, tooltipContent }) {
     if (!this.tooltips[group]) {
       this.tooltips[group] = {};
@@ -262,14 +269,18 @@ export default class Form {
     });
     this.tooltips[group][elem.name].createTooltip();
   }
-
+  /**
+   * @method _removeTooltip
+   * @description Inner method - removes tooltip.
+   * @param {string} group - the name of the tooltip group
+   * @param {object} elem - the target element
+   */
   _removeTooltip({ group, elem }) {
-    if(!this.tooltips[group] || !this.tooltips[group][elem.name]) {
+    if (!this.tooltips[group] || !this.tooltips[group][elem.name]) {
       return;
     }
 
-      this.tooltips[group][elem.name].removeTooltip();
-      delete this.tooltips[group][elem.name];
-
+    this.tooltips[group][elem.name].removeTooltip();
+    delete this.tooltips[group][elem.name];
   }
 }

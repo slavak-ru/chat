@@ -8,6 +8,9 @@
 ## Functions
 
 <dl>
+<dt><a href="#_methodBinding(args)">_methodBinding()</a> ⇒ <code>object</code></dt>
+<dd><p>Inner method - for binding of the methods around this.</p>
+</dd>
 <dt><a href="#_initialStartApp">_initialStartApp()</a></dt>
 <dd><p>Inner method - creats the header of the App, start Router and start Chat</p>
 </dd>
@@ -42,6 +45,18 @@
 
 ### new App()
 Class App - manages Form and Chat of the application
+
+<a name="_methodBinding(args)"></a>
+
+## _methodBinding() ⇒ <code>object</code>
+Inner method - for binding of the methods around this.
+
+**Kind**: global function
+**Returns**: <code>object</code> - method -  method binded around App class.
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ...args | <code>object</code> | array of the arguments. Each argument is a method. |
 
 <a name="_initialStartApp"></a>
 
