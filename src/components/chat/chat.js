@@ -131,8 +131,9 @@ export default class Chat {
 
     newMessage.user = this.currentUser;
 
-    if (window.sessionStorage.getItem('userIP'))
+    if (window.sessionStorage.getItem('userIP')) {
       newMessage.ip = window.sessionStorage.getItem('userIP');
+    }
 
     let json = JSON.stringify(newMessage);
     this.networkService.httpReq({
