@@ -68,6 +68,8 @@ export default class Message {
    * @param {object} element - the DOM-element of the Chat.
    */
   _scrollElement(element) {
+    if(!element) return;
+    
     if (
       element.getBoundingClientRect().bottom - element.offsetHeight <=
       this.chat.clientHeight

@@ -31,7 +31,7 @@ export default class Login {
   }) {
     this.logins = element;
     this.usersUrl = usersUrl;
-    this.networkService = networkService;
+    this.networkService = new networkService();
     this.form = form;
     this.tooltip = tooltip;
     this.users = new users({
@@ -138,7 +138,9 @@ export default class Login {
     if (data.formName != 'login' && !data['e-mail']) return;
     
     data.pass = this.encrypt.hashIt(data.pass);
-    console.log(data.pass)
+    
+    if(data['e-mail']) data['e-mail']= this.encrypt.hashIt(data['e-mail']);
+    if(window.sessionStorage.getItem('userIP')) data.ip = window.sessionStorage.getItem('userIP');
 
     switch (data.formName) {
       case 'sign':
@@ -227,4 +229,5 @@ export default class Login {
 
     this._renderForm(this.tabsList.login.template);
   }
+
 }

@@ -7,7 +7,7 @@
  */
 export default class Users {
   constructor({ usersUrl, networkService }) {
-    this.networkService = new networkService();
+    this.networkService = networkService;
     this.usersUrl = usersUrl;
     this.delay = 0;
     this.usersList;

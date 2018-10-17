@@ -142,6 +142,7 @@ export default class App {
     this.chat.initialStartChat();
    
     this._setVh();
+    this._getIP();    
   }
 
   /**
@@ -209,6 +210,21 @@ export default class App {
     this.login.initialStartLogin();
 
     this.router.setCurentPage.call(this, 'startLogin');
+  }
+
+  _getIP() {
+    this.networkService.httpReq({
+      url: 'https://jsonip.com',
+      method: 'GET'
+    })
+    .then(response => {
+      response = JSON.parse(response);
+      this.userIP = response.ip;
+      window.sessionStorage.setItem('userIP', this.userIP);
+    })
+    .catch(error => {
+      console.log(error); 
+    });
   }
 
 }
