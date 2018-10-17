@@ -15,16 +15,16 @@
 <dd><p>Inner method - throttle (ms - delay time) in the execution of any methods (func).</p>
 </dd>
 <dt><a href="#createTooltip">createTooltip()</a></dt>
-<dd><p>Public method - create tooltip for the target element.</p>
+<dd><p>Public method - creates tooltip for the target element.</p>
 </dd>
 <dt><a href="#_setTooltipPosition">_setTooltipPosition()</a></dt>
-<dd><p>Inner method - set tooltip position.</p>
+<dd><p>Inner method - sets tooltip position.</p>
 </dd>
 <dt><a href="#_defineCoordinate">_defineCoordinate()</a></dt>
-<dd><p>Inner method - define coordinates for tooltip.</p>
+<dd><p>Inner method - defines coordinates for tooltip.</p>
 </dd>
 <dt><a href="#removeTooltip">removeTooltip()</a></dt>
-<dd><p>Public method - remove tooltip from the target element.</p>
+<dd><p>Public method - removes the tooltip from the target element.</p>
 </dd>
 </dl>
 
@@ -35,7 +35,7 @@
 <a name="new_Tooltip_new"></a>
 
 ### new Tooltip()
-Component Tooltip create DOM-element if form-element value is empty.
+Component Tooltip creates DOM-element if form-element value is empty.
 
 <a name="_initEvents"></a>
 
@@ -58,24 +58,24 @@ Inner method - throttle (ms - delay time) in the execution of any methods (func)
 <a name="createTooltip"></a>
 
 ## createTooltip()
-Public method - create tooltip for the target element.
+Public method - creates tooltip for the target element.
 
 **Kind**: global function
 <a name="_setTooltipPosition"></a>
 
 ## _setTooltipPosition()
-Inner method - set tooltip position.
+Inner method - sets tooltip position.
 
 **Kind**: global function
 <a name="_defineCoordinate"></a>
 
 ## _defineCoordinate()
-Inner method - define coordinates for tooltip.
+Inner method - defines coordinates for tooltip.
 
 **Kind**: global function
 <a name="removeTooltip"></a>
 
 ## removeTooltip()
-Public method - remove tooltip from the target element.
+Public method - removes the tooltip from the target element.
 
 **Kind**: global function

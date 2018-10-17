@@ -3,7 +3,6 @@
  * @description The Router class performs routing to the application pages.
  *
  */
-
 export default class Router {
   constructor() {}
 
@@ -48,6 +47,7 @@ export default class Router {
   /**
    * @method initEvents(elem)
    * @description Public method - creating events for click (click on HTMLAnchorElement).
+   * @param {object} elem - target DOM element
    */
   initEvents(elem) {
     elem.addEventListener(
@@ -67,6 +67,7 @@ export default class Router {
   /**
    * @method setCurentPage(name)
    * @description Public method - sets current page name and push url-name in the window history.
+   * @param {string} name - current page name
    */
   setCurentPage(name) {
     this.currentPage = this.pages[name].url;

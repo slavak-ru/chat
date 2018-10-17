@@ -26,10 +26,10 @@
 <dt><a href="#_setErrorClass(elem)">_setErrorClass(elem, tooltipContent)</a></dt>
 <dd><p>Inner method - set Error class to the from form-elements if value is empty.</p>
 </dd>
-<dt><a href="#_removeErrorClass(elem)">_removeErrorClass()</a></dt>
+<dt><a href="#_removeErrorClass(elem)">_removeErrorClass(elem)</a></dt>
 <dd><p>Inner method - remove Error class from the from form-elements if value isn&#39;t empty.</p>
 </dd>
-<dt><a href="#_checkMail(mail)">_checkMail()</a> ⇒ <code>boolean</code></dt>
+<dt><a href="#_checkMail(mail)">_checkMail(mail)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Inner method - to check the e-mail address.</p>
 </dd>
 <dt><a href="#_setMessageTime">_setMessageTime()</a> ⇒ <code>string</code></dt>
@@ -38,7 +38,7 @@
 <dt><a href="#onSubmit(message)">onSubmit()</a></dt>
 <dd><p>Public method - recive function from app.js.</p>
 </dd>
-<dt><a href="#render">render()</a></dt>
+<dt><a href="#render">render(template)</a></dt>
 <dd><p>Public method - create inners DOM-elements (inputs and submit button) in the Form.</p>
 </dd>
 <dt><a href="#_placeholdersRegister">_placeholdersRegister()</a></dt>
@@ -124,17 +124,27 @@ Inner method - set Error class to the from form-elements if value is empty.
 
 <a name="_removeErrorClass(elem)"></a>
 
-## _removeErrorClass()
+## _removeErrorClass(elem)
 Inner method - remove Error class from the from form-elements if value isn't empty.
 
 **Kind**: global function
+
+| Param | Type | Description |
+| --- | --- | --- |
+| elem | <code>object</code> | target DOM element |
+
 <a name="_checkMail(mail)"></a>
 
-## _checkMail() ⇒ <code>boolean</code>
+## _checkMail(mail) ⇒ <code>boolean</code>
 Inner method - to check the e-mail address.
 
 **Kind**: global function
 **Returns**: <code>boolean</code> - return true if e-mail address is true and false if e-mail address wrong.
+
+| Param | Type | Description |
+| --- | --- | --- |
+| mail | <code>string</code> | an e-mail addres for checking |
+
 <a name="_setMessageTime"></a>
 
 ## _setMessageTime() ⇒ <code>string</code>
@@ -150,10 +160,15 @@ Public method - recive function from app.js.
 **Kind**: global function
 <a name="render"></a>
 
-## render()
+## render(template)
 Public method - create inners DOM-elements (inputs and submit button) in the Form.
 
 **Kind**: global function
+
+| Param | Type | Description |
+| --- | --- | --- |
+| template | <code>functon</code> | a template for rendering the form |
+
 <a name="_placeholdersRegister"></a>
 
 ## _placeholdersRegister()

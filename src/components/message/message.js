@@ -4,7 +4,7 @@ import userPic from './user-pic.png';
 
 /**
  * @class Message
- * @description Class Message add messages in Chat (DOM-element).
+ * @description Adds messages in Chat (DOM-element).
  * */
 export default class Message {
   /**
@@ -25,27 +25,26 @@ export default class Message {
 
   /**
    * @method render
-   * @description Public method - create DOM-element for new message and add to the Chat.
+   * @description Public method - creates DOM-element for new message and adds to the Chat.
    */
   render() {
-    
     if (this.messages.length === this.count) return;
-    
+
     if (
       !this.messages[this.count].message.length ||
       !this.messages[this.count].user.length
     ) {
       this.count += 1;
     }
-    
+
     let elements = this._createChatElements();
     this.chat.appendChild(elements);
     this._scrollElement(this.chat.lastElementChild);
   }
 
   /**
-   * @method _addChatElement
-   * @description Inner method - adding elements (messages) and return DOM-element.
+   * @method _createChatElements
+   * @description Inner method - creates fragment and adds elements (messages), return DOM-element.
    * @return {object} - return DOM-element if one message or document fragment with chat's messages DOM-elements (if messages more than one).
    */
   _createChatElements() {
@@ -68,8 +67,8 @@ export default class Message {
    * @param {object} element - the DOM-element of the Chat.
    */
   _scrollElement(element) {
-    if(!element) return;
-    
+    if (!element) return;
+
     if (
       element.getBoundingClientRect().bottom - element.offsetHeight <=
       this.chat.clientHeight

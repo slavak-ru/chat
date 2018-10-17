@@ -8,8 +8,11 @@
 ## Functions
 
 <dl>
-<dt><a href="#_createModal">_createModal()</a></dt>
-<dd><p>Inner method - creates modal window.</p>
+<dt><a href="#createModal">createModal(modalMessage)</a></dt>
+<dd><p>Public method - creates modal window.</p>
+</dd>
+<dt><a href="#removeModal">removeModal()</a></dt>
+<dd><p>Public method - removes modal window.</p>
 </dd>
 <dt><a href="#_initEvent">_initEvent()</a></dt>
 <dd><p>Inner method - sets events listener on the DOM-element.</p>
@@ -28,18 +31,24 @@
 **Kind**: global class
 <a name="new_Modal_new"></a>
 
-### new Modal(string)
+### new Modal()
 Class Modal - creates modal window.
 
+<a name="createModal"></a>
+
+## createModal(modalMessage)
+Public method - creates modal window.
+
+**Kind**: global function
 
 | Param | Type | Description |
 | --- | --- | --- |
-| string | <code>string</code> | information that should be in the modal window. |
+| modalMessage | <code>string</code> | text content for modal window |
 
-<a name="_createModal"></a>
+<a name="removeModal"></a>
 
-## _createModal()
-Inner method - creates modal window.
+## removeModal()
+Public method - removes modal window.
 
 **Kind**: global function
 <a name="_initEvent"></a>

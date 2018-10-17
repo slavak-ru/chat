@@ -3,7 +3,6 @@ import css from './modal.css';
 /**
  * @class Modal
  * @description Class Modal - creates modal window.
- * @param {string} string - information that should be in the modal window.
  */
 export default class Modal {
   constructor() {

@@ -11,7 +11,7 @@ import Encrypt from '../encrypt/encrypt.js';
  * */
 export default class Login {
   /**
-   * @description check and collect data from login forms.
+   * @description creates login page content (render a form), check and collect data from login forms.
    * @param {object} element - the Login (DOM-element).
    * @param {string} usersUrl - URL of the messages in the database.
    * @param {class} networkService - class networkService for obtaining and publishing data in the database over the network.
@@ -115,17 +115,11 @@ export default class Login {
   /**
    * @method _renderForm(template)
    * @description Inner method - creating loggin form from template.
-   * @param {object} template - template for creating loggin form.
+   * @param {function} template - template for creating loggin form.
    */
-
   _renderForm(template) {
-    this.currentForm = new this.form({
-      element: this.loginsContent,
-      template: template,
-      tooltip: this.tooltip,
-    });
-    this.currentForm.render();
-    this.currentForm.onSubmit = this.onLoginSubmit.bind(this);
+    this.form.render(template);
+    this.form.onSubmit = this.onLoginSubmit.bind(this);
   }
 
   /**
@@ -136,11 +130,12 @@ export default class Login {
   onLoginSubmit(data) {
     if (!data['user-name'] || !data.pass) return;
     if (data.formName != 'login' && !data['e-mail']) return;
-    
+
     data.pass = this.encrypt.hashIt(data.pass);
-    
-    if(data['e-mail']) data['e-mail']= this.encrypt.hashIt(data['e-mail']);
-    if(window.sessionStorage.getItem('userIP')) data.ip = window.sessionStorage.getItem('userIP');
+
+    if (data['e-mail']) data['e-mail'] = this.encrypt.hashIt(data['e-mail']);
+    if (window.sessionStorage.getItem('userIP'))
+      data.ip = window.sessionStorage.getItem('userIP');
 
     switch (data.formName) {
       case 'sign':
@@ -227,7 +222,10 @@ export default class Login {
       this.tabsList[tab.value]['template'] = this[tab.value + 'Template'];
     });
 
+    this.form = new this.form({
+      element: this.loginsContent,
+      tooltip: this.tooltip,
+    });
     this._renderForm(this.tabsList.login.template);
   }
-
 }

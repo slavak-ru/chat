@@ -1,6 +1,6 @@
 /**
- * @class Crypt
- * @description Class Encrypt - creates hash for password using SHA1
+ * @class Encrypt
+ * @description Class Encrypt - creates hash for string (password / e-mail address / etc) using SHA1
  * */
 export default class Encrypt {
   constructor() {
@@ -25,7 +25,7 @@ export default class Encrypt {
 
   /**
    * @method _binb2b64
-   * @description  Convert an array of big-endian words to a base-64 string
+   * @description  Inner method - Convert an array of big-endian words to a base-64 string
    * @param {array} binarray - an array of big-endian words
    * @return {string} str - encrypted string
    */
@@ -46,9 +46,13 @@ export default class Encrypt {
     return str;
   }
 
-  /*
-  * Calculate the SHA-1 of an array of big-endian words, and a bit length
-  */
+  /**
+   * @method _core_sha1
+   * @description  Calculate the SHA-1 of an array of big-endian words, and a bit length
+   * @param {array} x - an array of big-endian words
+   * @param {number} len - a bit length
+   * @return {array} array with calculate the SHA-1
+   */
   _core_sha1(x, len) {
     /* append padding */
     x[len >> 5] |= 0x80 << (24 - (len % 32));
@@ -92,10 +96,12 @@ export default class Encrypt {
     return Array(a, b, c, d, e);
   }
 
-  /*
-  * Convert an 8-bit or 16-bit string to an array of big-endian words
-  * In 8-bit function, characters >255 have their hi-byte silently ignored.
-  */
+  /**
+   * @method _str2binb
+   * @description  Convert an 8-bit or 16-bit string to an array of big-endian words In 8-bit function, characters >255 have their hi-byte silently ignored.
+   * @param {string} str - an 8-bit or 16-bit string
+   * @return {array} bin - array of big-endian words
+   */
   _str2binb(str) {
     let bin = Array();
     let mask = (1 << this.chrsz) - 1;
@@ -111,23 +117,31 @@ export default class Encrypt {
   * Add integers, wrapping at 2^32. This uses 16-bit operations internally
   * to work around bugs in some JS interpreters.
   */
+  /**
+   * @method _safe_add
+   * @description  Add integers, wrapping at 2^32. This uses 16-bit operations internally to work around bugs in some JS interpreters.
+   */
   _safe_add(x, y) {
     let lsw = (x & 0xffff) + (y & 0xffff);
     let msw = (x >> 16) + (y >> 16) + (lsw >> 16);
     return (msw << 16) | (lsw & 0xffff);
   }
 
-  /*
-  * Bitwise rotate a 32-bit number to the left.
-  */
+  /**
+   * @method _rol
+   * @description  Bitwise rotate a 32-bit number to the left.
+   * @param {number} num - a 32-bit number
+   * @param {number} cnt - count
+   * @return {number} number after rotated
+   */
   _rol(num, cnt) {
     return (num << cnt) | (num >>> (32 - cnt));
   }
 
-  /*
-  * Perform the appropriate triplet combination function for the current
-  * iteration
-  */
+  /**
+   * @method _sha1_ft
+   * @description  Perform the appropriate triplet combination function for the current iteration.
+   */
   _sha1_ft(t, b, c, d) {
     if (t < 20) return (b & c) | (~b & d);
     if (t < 40) return b ^ c ^ d;
@@ -135,9 +149,12 @@ export default class Encrypt {
     return b ^ c ^ d;
   }
 
-  /*
-  * Determine the appropriate additive constant for the current iteration
-  */
+  /**
+   * @method _sha1_kt
+   * @description  Determine the appropriate additive constant for the current iteration.
+   * @param {number} t - number the current iteration
+   * @return {number} additive constant for the current iteration.
+   */
   _sha1_kt(t) {
     return t < 20
       ? 1518500249

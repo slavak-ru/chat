@@ -62,14 +62,3 @@ Inner method - render Chat and Form DOM-elements.
 | Param | Type | Description |
 | --- | --- | --- |
 | user | <code>string</code> | the name of the current user, if any user is logged in - displays the form element. |
-
-<a name="onSubmit(message)"></a>
-
-## onSubmit(message)
-Public method - adding new message in the Chat.
-
-**Kind**: global function
-
-| Param | Type | Description |
-| --- | --- | --- |
-| message | <code>object</code> | contains user-name, message-content and message time-creation |

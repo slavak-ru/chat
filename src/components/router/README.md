@@ -14,10 +14,10 @@
 <dt><a href="#pagesRegistration">pagesRegistration()</a></dt>
 <dd><p>Public method - page registration, creating the object with page-name, page-url, method for page and HTMLAnchorElement for page.</p>
 </dd>
-<dt><a href="#initEvents(elem)">initEvents()</a></dt>
+<dt><a href="#initEvents(elem)">initEvents(elem)</a></dt>
 <dd><p>Public method - creating events for click (click on HTMLAnchorElement).</p>
 </dd>
-<dt><a href="#setCurentPage(name)">setCurentPage()</a></dt>
+<dt><a href="#setCurentPage(name)">setCurentPage(name)</a></dt>
 <dd><p>Public method - sets current page name and push url-name in the window history.</p>
 </dd>
 </dl>
@@ -45,13 +45,22 @@ Public method - page registration, creating the object with page-name, page-url,
 **Kind**: global function
 <a name="initEvents(elem)"></a>
 
-## initEvents()
+## initEvents(elem)
 Public method - creating events for click (click on HTMLAnchorElement).
 
 **Kind**: global function
+
+| Param | Type | Description |
+| --- | --- | --- |
+| elem | <code>object</code> | target DOM element |
+
 <a name="setCurentPage(name)"></a>
 
-## setCurentPage()
+## setCurentPage(name)
 Public method - sets current page name and push url-name in the window history.
 
 **Kind**: global function
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | current page name |

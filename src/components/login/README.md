@@ -8,7 +8,7 @@
 ## Functions
 
 <dl>
-<dt><a href="#_initEvents_new">_initEvents()()</a></dt>
+<dt><a href="#_initEvents">_initEvents()</a></dt>
 <dd><p>Inner method - adding EventListener, sets classes on the tab elements and show/hide password</p>
 </dd>
 <dt><a href="#_setTabsClass(elemOnClick)">_setTabsClass(elemOnClick)</a></dt>
@@ -38,10 +38,10 @@
 <a name="new_Login_new"></a>
 
 ### new Login()
-Class Login creates the Login page from the template, creates forms (login,registration), collect data from form-elements on Submit
+Class Login creates the Login page from the template, creates forms (login,registration), collect data from form-elements on Submint
 event and creates modal window if information isn't correct.
 
-<a name="_initEvents_new"></a>
+<a name="_initEvents"></a>
 
 ## _initEvents()
 Inner method - adding EventListener, sets classes on the tab elements and show/hide password
@@ -67,7 +67,7 @@ Inner method - creating loggin form from template.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| template | <code>object</code> | template for creating loggin form. |
+| template | <code>function</code> | template for creating loggin form. |
 
 <a name="onLoginSubmit(data)"></a>
 

@@ -1,6 +1,5 @@
 import css from './form.css';
 import formTemplate from './form.templ.pug';
-// import Tooltip from'../tooltip/tooltip.js';
 
 /**
  * @class Form
@@ -10,13 +9,11 @@ export default class Form {
   /**
    * @description check and collect data from form-elements.
    * @param {object} element - the Form (DOM-element).
-   * @param {object} template - the Form template (function from pug).
    * @param {class} tooltip - class Tooltip for create tooltips.
    */
-  constructor({ element, template, tooltip }) {
+  constructor({ element, tooltip }) {
     this.form = element;
     this.tooltip = tooltip;
-    this.template = template;
 
     this.tooltips = {};
 
@@ -135,6 +132,7 @@ export default class Form {
   /**
    * @method _removeErrorClass(elem)
    * @description Inner method - remove Error class from the from form-elements if value isn't empty.
+   * @param {object} elem - target DOM element
    */
   _removeErrorClass(elem) {
     if (elem.classList.contains('error')) {
@@ -147,6 +145,7 @@ export default class Form {
   /**
    * @method _checkMail(mail)
    * @description Inner method - to check the e-mail address.
+   * @param {string} mail - an e-mail addres for checking
    * @return {boolean} return true if e-mail address is true and false if e-mail address wrong.
    */
   _checkMail(mail) {
@@ -185,8 +184,10 @@ export default class Form {
   /**
    * @method render
    * @description Public method - create inners DOM-elements (inputs and submit button) in the Form.
+   * @param {functon} template - a template for rendering the form
    */
-  render() {
+  render(template) {
+    this.template = template;
     this.form.innerHTML = this.template();
 
     this._placeholdersRegister();

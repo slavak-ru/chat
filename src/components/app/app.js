@@ -51,7 +51,7 @@ export default class App {
   }
   /**
    * @method _initialStartApp
-   * @description Inner method - creats the header of the App, start Router and start Chat
+   * @description Inner method - creates the header of the App, start Router and start Chat
    */
   _initialStartApp() {
     this._getUrls()
@@ -213,7 +213,10 @@ export default class App {
 
     this.router.setCurentPage.call(this, 'startLogin');
   }
-
+  /**
+   * @method _getIP
+   * @description Inner method - for define user IP and sets it in session Storage.
+   */
   _getIP() {
     this.networkService
       .httpReq({

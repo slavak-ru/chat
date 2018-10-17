@@ -2,11 +2,10 @@ import css from './tooltip.css';
 
 /**
  * @class Tooltip
- * @description Component Tooltip create DOM-element if form-element value is empty.
+ * @description Component Tooltip creates DOM-element if form-element value is empty.
  * */
 export default class Tooltip {
   /**
-   * @description create Tooltip.
    * @param {object} element - target element.
    * @param {string} tooltipContent - tooltip's content.
    * @param {string} group - group-name of the tooltip.
@@ -69,7 +68,7 @@ export default class Tooltip {
 
   /**
    * @method createTooltip
-   * @description Public method - create tooltip for the target element.
+   * @description Public method - creates tooltip for the target element.
    */
   createTooltip() {
     this.tooltip = document.createElement('div');
@@ -88,7 +87,7 @@ export default class Tooltip {
 
   /**
    * @method _setTooltipPosition
-   * @description Inner method - set tooltip position.
+   * @description Inner method - sets tooltip position.
    */
   _setTooltipPosition() {
     this._defineCoordinate();
@@ -100,7 +99,7 @@ export default class Tooltip {
 
   /**
    * @method _defineCoordinate
-   * @description Inner method - define coordinates for tooltip.
+   * @description Inner method - defines coordinates for tooltip.
    */
   _defineCoordinate() {
     this.top =
@@ -141,7 +140,7 @@ export default class Tooltip {
 
   /**
    * @method removeTooltip
-   * @description Public method - remove tooltip from the target element.
+   * @description Public method - removes the tooltip from the target element.
    */
   removeTooltip() {
     if (this.tooltip) document.body.removeChild(this.tooltip);

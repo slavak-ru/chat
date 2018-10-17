@@ -71,7 +71,6 @@ export default class Chat {
     });
     this.form = new this.form({
       element: document.getElementById('form'),
-      template: formTemplate,
       tooltip: this.tooltip,
     });
     this.form.onSubmit = this.onSubmit.bind(this);
@@ -118,7 +117,7 @@ export default class Chat {
       return;
     }
 
-    this.form.render();
+    this.form.render(formTemplate);
   }
 
   /**

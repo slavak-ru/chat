@@ -12,7 +12,7 @@
 <dd><p>Inner method - for binding of the methods around this.</p>
 </dd>
 <dt><a href="#_initialStartApp">_initialStartApp()</a></dt>
-<dd><p>Inner method - creats the header of the App, start Router and start Chat</p>
+<dd><p>Inner method - creates the header of the App, start Router and start Chat</p>
 </dd>
 <dt><a href="#_getUrls">_getUrls()</a></dt>
 <dd><p>Inner method - get the database URLs for messages and users from json file from server.</p>
@@ -34,6 +34,9 @@
 </dd>
 <dt><a href="#_startLogin">_startLogin()</a></dt>
 <dd><p>Inner method - creating Login and initializing the Logins methods.</p>
+</dd>
+<dt><a href="#_getIP">_getIP()</a></dt>
+<dd><p>Inner method - for define user IP and sets it in session Storage.</p>
 </dd>
 </dl>
 
@@ -61,7 +64,7 @@ Inner method - for binding of the methods around this.
 <a name="_initialStartApp"></a>
 
 ## _initialStartApp()
-Inner method - creats the header of the App, start Router and start Chat
+Inner method - creates the header of the App, start Router and start Chat
 
 **Kind**: global function
 <a name="_getUrls"></a>
@@ -109,5 +112,11 @@ Public method - which sets behavior Login page on submit event.
 
 ## _startLogin()
 Inner method - creating Login and initializing the Logins methods.
+
+**Kind**: global function
+<a name="_getIP"></a>
+
+## _getIP()
+Inner method - for define user IP and sets it in session Storage.
 
 **Kind**: global function

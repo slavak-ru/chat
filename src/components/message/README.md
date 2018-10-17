@@ -9,10 +9,10 @@
 
 <dl>
 <dt><a href="#render">render()</a></dt>
-<dd><p>Public method - create DOM-element for new message and add to the Chat.</p>
+<dd><p>Public method - creates DOM-element for new message and adds to the Chat.</p>
 </dd>
-<dt><a href="#_addChatElement">_addChatElement()</a> ⇒ <code>object</code></dt>
-<dd><p>Inner method - adding elements (messages) and return DOM-element.</p>
+<dt><a href="#_createChatElements">_createChatElements()</a> ⇒ <code>object</code></dt>
+<dd><p>Inner method - creates fragment and adds elements (messages), return DOM-element.</p>
 </dd>
 <dt><a href="#_scrollElement(element)">_scrollElement(element)</a></dt>
 <dd><p>Inner method - scrolls if the element is not visible.</p>
@@ -29,18 +29,18 @@
 <a name="new_Message_new"></a>
 
 ### new Message()
-Class Message add messages in Chat (DOM-element).
+Adds messages in Chat (DOM-element).
 
 <a name="render"></a>
 
 ## render()
-Public method - create DOM-element for new message and add to the Chat.
+Public method - creates DOM-element for new message and adds to the Chat.
 
 **Kind**: global function
-<a name="_addChatElement"></a>
+<a name="_createChatElements"></a>
 
-## _addChatElement() ⇒ <code>object</code>
-Inner method - adding elements (messages) and return DOM-element.
+## _createChatElements() ⇒ <code>object</code>
+Inner method - creates fragment and adds elements (messages), return DOM-element.
 
 **Kind**: global function
 **Returns**: <code>object</code> - - return DOM-element if one message or document fragment with chat's messages DOM-elements (if messages more than one).
