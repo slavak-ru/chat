@@ -3,6 +3,7 @@ import loginHeaderTemplate from '../login/login-header.templ.pug';
 import loginTemplate from '../login/login.templ.pug';
 import signTemplate from '../login/sign.templ.pug';
 import forgotTemplate from '../login/forgot.templ.pug';
+import Encrypt from '../encrypt/encrypt.js';
 
 /**
  * @class Login
@@ -37,12 +38,13 @@ export default class Login {
       usersUrl: this.usersUrl,
       networkService: this.networkService,
     });
-    this.modal = new modal;
+    this.modal = new modal();
     this.modal.onEvent = this._onModalEvent.bind(this);
     this.loginHeaderTemplate = loginHeaderTemplate;
     this.loginTemplate = loginTemplate;
     this.signTemplate = signTemplate;
     this.forgotTemplate = forgotTemplate;
+    this.encrypt = new Encrypt();
     this.currentForm;
     this.userElement;
     this.currentUser;
@@ -53,7 +55,6 @@ export default class Login {
     this.forgotErrorText =
       'Пользователя с таким логином и мейлом не существует';
     this.tabsList = {};
-    
 
     this.currentRadioChecked = document.querySelector(
       'input[type="radio"]:checked'
@@ -135,23 +136,11 @@ export default class Login {
   onLoginSubmit(data) {
     if (!data['user-name'] || !data.pass) return;
     if (data.formName != 'login' && !data['e-mail']) return;
+    
+    data.pass = this.encrypt.hashIt(data.pass);
+    console.log(data.pass)
 
     switch (data.formName) {
-      case 'login':
-        if (
-          !this.users.checkUser({
-            form: data.formName,
-            user: data['user-name'],
-            pass: data.pass,
-          })
-        ) {
-          this.modal.createModal(this.loginErrorText);
-
-          return;
-        }
-        this.onSubmit(data['user-name']);
-        return;
-
       case 'sign':
         if (
           this.users.checkUser({
@@ -168,7 +157,7 @@ export default class Login {
         this.users.setNewUser({ data: data, usersUrl: this.usersUrl });
 
         this.onSubmit(data['user-name']);
-        return;
+        break;
 
       case 'forgot':
         if (
@@ -186,7 +175,21 @@ export default class Login {
         this.users.changePassword({ data: data, usersUrl: this.usersUrl });
 
         this.onSubmit(data['user-name']);
-        return;
+        break;
+
+      default:
+        if (
+          !this.users.checkUser({
+            form: data.formName,
+            user: data['user-name'],
+            pass: data.pass,
+          })
+        ) {
+          this.modal.createModal(this.loginErrorText);
+
+          return;
+        }
+        this.onSubmit(data['user-name']);
     }
   }
 

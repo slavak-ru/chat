@@ -28,15 +28,16 @@ export default class Message {
    * @description Public method - create DOM-element for new message and add to the Chat.
    */
   render() {
+    
     if (this.messages.length === this.count) return;
-    // 0: {message: "", start: "start", time: "", user: ""}length: 1__proto__: Array(0)
+    
     if (
       !this.messages[this.count].message.length ||
       !this.messages[this.count].user.length
     ) {
       this.count += 1;
-      return;
     }
+    
     let elements = this._createChatElements();
     this.chat.appendChild(elements);
     this._scrollElement(this.chat.lastElementChild);

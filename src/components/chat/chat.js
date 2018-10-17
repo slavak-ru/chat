@@ -101,12 +101,11 @@ export default class Chat {
     * @param {string} user - the name of the current user, if any user is logged in - displays the form element.
 	*/
   _render(user) {
+    this.message.render();
     if(!user) {
-      this.message.render();
       return;
     }
 
-    this.message.render();
     this.form.render();
   }
   
