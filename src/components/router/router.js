@@ -4,14 +4,12 @@
  *
  */
 export default class Router {
-  constructor() {}
-
   /**
    * @method start
    * @description Public method - is the address bar listener. If address had been change - launches the definite method for creates page
    */
-  start() {
-    let addressBarListener = setInterval(() => {
+  start () {
+    setInterval(() => {
       let location = window.location.pathname;
 
       if (this.currentPage === location) return;
@@ -29,7 +27,7 @@ export default class Router {
    * @method pagesRegistration
    * @description Public method - page registration, creating the object with page-name, page-url, method for page and HTMLAnchorElement for page.
    */
-  pagesRegistration() {
+  pagesRegistration () {
     this.pages = {};
     let anchors = document.querySelectorAll('a');
 
@@ -49,7 +47,7 @@ export default class Router {
    * @description Public method - creating events for click (click on HTMLAnchorElement).
    * @param {object} elem - target DOM element
    */
-  initEvents(elem) {
+  initEvents (elem) {
     elem.addEventListener(
       'click',
       e => {
@@ -69,7 +67,7 @@ export default class Router {
    * @description Public method - sets current page name and push url-name in the window history.
    * @param {string} name - current page name
    */
-  setCurentPage(name) {
+  setCurentPage (name) {
     this.currentPage = this.pages[name].url;
     window.history.pushState({}, '', this.pages[name].url);
   }

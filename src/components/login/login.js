@@ -20,34 +20,31 @@ export default class Login {
    * @param {class} users - class users for get and put users fromdatabase, check user information.
    * @param {class} modal - class modal creates modal window if information isn't true.
    */
-  constructor({
+  constructor ({
     element,
     usersUrl,
-    networkService,
+    NetworkService,
     form,
-    tooltip,
-    users,
-    modal,
+    Tooltip,
+    Users,
+    Modal
   }) {
     this.logins = element;
     this.usersUrl = usersUrl;
-    this.networkService = new networkService();
-    this.form = form;
-    this.tooltip = tooltip;
-    this.users = new users({
+    this.networkService = new NetworkService();
+    this.Form = form;
+    this.tooltip = Tooltip;
+    this.users = new Users({
       usersUrl: this.usersUrl,
-      networkService: this.networkService,
+      networkService: this.networkService
     });
-    this.modal = new modal();
+    this.modal = new Modal();
     this.modal.onEvent = this._onModalEvent.bind(this);
     this.loginHeaderTemplate = loginHeaderTemplate;
     this.loginTemplate = loginTemplate;
     this.signTemplate = signTemplate;
     this.forgotTemplate = forgotTemplate;
     this.encrypt = new Encrypt();
-    this.currentForm;
-    this.userElement;
-    this.currentUser;
     this.loginErrorText =
       'Введенные данные (логин или пароль) не верны, попробуйте еще раз';
     this.signErrorText =
@@ -67,17 +64,17 @@ export default class Login {
    * @method _initEvents
    * @description Inner method - adding EventListener, sets classes on the tab elements and show/hide password
    */
-  _initEvents() {
+  _initEvents () {
     this.logins.addEventListener('click', e => {
       let elem = e.target;
       if (
         !this.tabsList[elem.value] &&
         !elem.classList.contains('icon-password')
-      )
+      ) {
         return;
+      }
 
-      if (this.tabsList[elem.value])
-        this._setTabsClass(this.tabsList[elem.value]);
+      if (this.tabsList[elem.value]) { this._setTabsClass(this.tabsList[elem.value]); }
 
       if (elem.classList.contains('icon-password')) {
         let input = this.logins.querySelector("input[name='pass']");
@@ -94,7 +91,7 @@ export default class Login {
    * @description Inner method - adding class to the tabs on loggin page.
    * @param {object} elemOnClick - the element of the DOM on which the click occurred.
    */
-  _setTabsClass(elemOnClick) {
+  _setTabsClass (elemOnClick) {
     Object.keys(this.tabsList).forEach(tabName => {
       if (
         elemOnClick.tab === this.tabsList[tabName].tab &&
@@ -117,7 +114,7 @@ export default class Login {
    * @description Inner method - creating loggin form from template.
    * @param {function} template - template for creating loggin form.
    */
-  _renderForm(template) {
+  _renderForm (template) {
     this.form.render(template);
     this.form.onSubmit = this.onLoginSubmit.bind(this);
   }
@@ -127,15 +124,14 @@ export default class Login {
    * @description Public method - for behavior on submit login form
    * @param {object} data - data (user information) from login form.
    */
-  onLoginSubmit(data) {
+  onLoginSubmit (data) {
     if (!data['user-name'] || !data.pass) return;
-    if (data.formName != 'login' && !data['e-mail']) return;
+    if (data.formName !== 'login' && !data['e-mail']) return;
 
     data.pass = this.encrypt.hashIt(data.pass);
 
     if (data['e-mail']) data['e-mail'] = this.encrypt.hashIt(data['e-mail']);
-    if (window.sessionStorage.getItem('userIP'))
-      data.ip = window.sessionStorage.getItem('userIP');
+    if (window.sessionStorage.getItem('userIP')) { data.ip = window.sessionStorage.getItem('userIP'); }
 
     switch (data.formName) {
       case 'sign':
@@ -143,7 +139,7 @@ export default class Login {
           this.users.checkUser({
             form: data.formName,
             user: data['user-name'],
-            mail: data['e-mail'],
+            mail: data['e-mail']
           })
         ) {
           this.modal.createModal(this.signErrorText);
@@ -161,7 +157,7 @@ export default class Login {
           !this.users.checkUser({
             form: data.formName,
             user: data['user-name'],
-            mail: data['e-mail'],
+            mail: data['e-mail']
           })
         ) {
           this.modal.createModal(this.forgotErrorText);
@@ -179,7 +175,7 @@ export default class Login {
           !this.users.checkUser({
             form: data.formName,
             user: data['user-name'],
-            pass: data.pass,
+            pass: data.pass
           })
         ) {
           this.modal.createModal(this.loginErrorText);
@@ -194,7 +190,7 @@ export default class Login {
    * @method _onModalEvent
    * @description Inner method - removing modal window.
    */
-  _onModalEvent() {
+  _onModalEvent () {
     this.modal.removeModal();
   }
 
@@ -203,7 +199,7 @@ export default class Login {
    * @description Public method - for behavior login page on submit login form
    * @param {string} data - user name from login form.
    */
-  onSubmit(data) {
+  onSubmit (data) {
     console.log(console.log('You must set own onSubmit method'));
   }
 
@@ -211,7 +207,7 @@ export default class Login {
    * @method initialStartLogin
    * @description Public method - for initial start login page. Creates tabs of the login form.
    */
-  initialStartLogin() {
+  initialStartLogin () {
     this.logins.innerHTML = this.loginHeaderTemplate();
     this.loginsContent = this.logins.querySelector('.login__content_wrapper');
 
@@ -222,9 +218,9 @@ export default class Login {
       this.tabsList[tab.value]['template'] = this[tab.value + 'Template'];
     });
 
-    this.form = new this.form({
+    this.form = new this.Form({
       element: this.loginsContent,
-      tooltip: this.tooltip,
+      tooltip: this.tooltip
     });
     this._renderForm(this.tabsList.login.template);
   }

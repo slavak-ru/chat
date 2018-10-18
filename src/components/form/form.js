@@ -11,9 +11,9 @@ export default class Form {
    * @param {object} element - the Form (DOM-element).
    * @param {class} tooltip - class Tooltip for create tooltips.
    */
-  constructor({ element, tooltip }) {
+  constructor ({ element, tooltip }) {
     this.form = element;
-    this.tooltip = tooltip;
+    this.Tooltip = tooltip;
 
     this.tooltips = {};
 
@@ -26,7 +26,7 @@ export default class Form {
    * @method _initEvents
    * @description Inner method - adding EventListener on Submit to the Form.
    */
-  _initEvents() {
+  _initEvents () {
     this.form.addEventListener('submit', this._onSubmit);
     this.form.addEventListener('focus', this._hidePlaceholder, true);
     this.form.addEventListener('blur', this._showPlaceholder, true);
@@ -37,7 +37,7 @@ export default class Form {
    * @description Inner method - initial collect-data method on submit event.
    * @param {object} e - event object.
    */
-  _onSubmit(e) {
+  _onSubmit (e) {
     e.preventDefault();
     let data = this._collectData();
 
@@ -49,7 +49,7 @@ export default class Form {
    * @description Inner method - hides placeholder value (if value of the input is empty) and creates tooltip from placeholder value of the input element on focus event.
    * @param {object} e - event object.
    */
-  _hidePlaceholder(e) {
+  _hidePlaceholder (e) {
     let target = e.target;
     if (!target.placeholder) {
       return;
@@ -57,7 +57,7 @@ export default class Form {
     this._createTooltip({
       group: 'placeholder',
       elem: target,
-      tooltipContent: target.placeholder,
+      tooltipContent: target.placeholder
     });
 
     target.placeholder = '';
@@ -68,7 +68,7 @@ export default class Form {
    * @description Inner method - shows the value of the placeholder (if value of the input is empty) and removes tooltip on blur event.
    * @param {object} e - event object.
    */
-  _showPlaceholder(e) {
+  _showPlaceholder (e) {
     let target = e.target;
 
     if (target.value.length) {
@@ -77,9 +77,7 @@ export default class Form {
 
     if (!this.tooltips['placeholder']) return;
 
-    target.placeholder = this.tooltips['placeholder'][
-      target.name
-    ].tooltipContent;
+    target.placeholder = this.tooltips['placeholder'][target.name].tooltipContent;
 
     this._removeTooltip({ group: 'placeholder', elem: target });
   }
@@ -89,7 +87,7 @@ export default class Form {
    * @description Inner method - collect-data from form-elements.
    * @return {object} collectData - data for post to the database.
    */
-  _collectData() {
+  _collectData () {
     let collectData = {};
     let elements = this.form.querySelectorAll('[name]');
 
@@ -119,13 +117,13 @@ export default class Form {
    * @param {object} elem - element (input) without information.
    * @param {string} tooltipContent - tooltip's content.
    */
-  _setErrorClass(elem, tooltipContent) {
+  _setErrorClass (elem, tooltipContent) {
     elem.classList.add('error');
 
     this._createTooltip({
       group: 'error',
       elem: elem,
-      tooltipContent: tooltipContent,
+      tooltipContent: tooltipContent
     });
   }
 
@@ -134,7 +132,7 @@ export default class Form {
    * @description Inner method - remove Error class from the from form-elements if value isn't empty.
    * @param {object} elem - target DOM element
    */
-  _removeErrorClass(elem) {
+  _removeErrorClass (elem) {
     if (elem.classList.contains('error')) {
       elem.classList.remove('error');
     }
@@ -148,7 +146,7 @@ export default class Form {
    * @param {string} mail - an e-mail addres for checking
    * @return {boolean} return true if e-mail address is true and false if e-mail address wrong.
    */
-  _checkMail(mail) {
+  _checkMail (mail) {
     let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
     return reg.test(mail);
@@ -159,14 +157,14 @@ export default class Form {
    * @description Inner method - return message's time.
    * @return {string} time of message (dd.mm.yy; hh:mm:ss).
    */
-  _setMessageTime() {
+  _setMessageTime () {
     let dataOption = {
       day: '2-digit',
       month: '2-digit',
       year: '2-digit',
       minute: '2-digit',
       hour: '2-digit',
-      second: '2-digit',
+      second: '2-digit'
     };
     let messageDate = new Date().toLocaleString('ru', dataOption);
 
@@ -177,7 +175,7 @@ export default class Form {
    * @method onSubmit(message)
    * @description Public method - recive function from app.js.
    */
-  onSubmit(message) {
+  onSubmit (message) {
     console.log('You must set own onSubmit method');
   }
 
@@ -186,7 +184,7 @@ export default class Form {
    * @description Public method - create inners DOM-elements (inputs and submit button) in the Form.
    * @param {functon} template - a template for rendering the form
    */
-  render(template) {
+  render (template) {
     this.template = template;
     this.form.innerHTML = this.template();
 
@@ -199,7 +197,7 @@ export default class Form {
    * @method _placeholdersRegister
    * @description Inner method - registers all input elements in the form.
    */
-  _placeholdersRegister() {
+  _placeholdersRegister () {
     this.placeholders = {};
     let elements = this.form.querySelectorAll('[placeholder]');
     elements.forEach(input => {
@@ -213,13 +211,13 @@ export default class Form {
    * @method _observer
    * @description Inner method - observing the parent element of the form, when the target element was remove - removes all tooltips.
    */
-  _observer() {
+  _observer () {
     let targets, observer, observerOptions;
 
     targets = [
       this.form,
       this.form.parentElement,
-      this.form.parentElement.parentElement,
+      this.form.parentElement.parentElement
     ];
 
     observer = new MutationObserver(mutation => {
@@ -239,7 +237,7 @@ export default class Form {
     });
 
     observerOptions = {
-      childList: true,
+      childList: true
     };
 
     return targets.forEach(target => {
@@ -256,18 +254,18 @@ export default class Form {
    * @param {object} elem - the target element
    * @param {string} tooltipContent - content for the tooltip
    */
-  _createTooltip({ group, elem, tooltipContent }) {
+  _createTooltip ({ group, elem, tooltipContent }) {
     if (!this.tooltips[group]) {
       this.tooltips[group] = {};
     }
 
     if (this.tooltips[group][elem.name]) return;
 
-    this.tooltips[group][elem.name] = new this.tooltip({
+    this.tooltips[group][elem.name] = new this.Tooltip({
       element: elem,
       tooltipContent: tooltipContent,
       form: this.form,
-      group: group,
+      group: group
     });
     this.tooltips[group][elem.name].createTooltip();
   }
@@ -277,7 +275,7 @@ export default class Form {
    * @param {string} group - the name of the tooltip group
    * @param {object} elem - the target element
    */
-  _removeTooltip({ group, elem }) {
+  _removeTooltip ({ group, elem }) {
     if (!this.tooltips[group] || !this.tooltips[group][elem.name]) {
       return;
     }

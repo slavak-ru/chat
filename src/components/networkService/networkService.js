@@ -4,8 +4,6 @@
  *
  */
 export default class NetworkService {
-  constructor() {}
-
   /**
    * @method httpReq
    * @description Public method - gets, put and post infomation from database.
@@ -13,12 +11,12 @@ export default class NetworkService {
    * @param {string} method - method for request.
    * @param {json} data - data for put or post in the database.
    */
-  httpReq({ url, method, data }) {
+  httpReq ({ url, method, data }) {
     return new Promise((resolve, reject) => {
       let req = new XMLHttpRequest();
       req.open(method, url, true);
 
-      req.addEventListener('load', function() {
+      req.addEventListener('load', function () {
         if (this.status !== 200) {
           let error = new Error(this.statusText);
           error.code = this.status;

@@ -14,19 +14,19 @@
 <dt><a href="#_binb2b64">_binb2b64(binarray)</a> ⇒ <code>string</code></dt>
 <dd><p>Inner method - Convert an array of big-endian words to a base-64 string</p>
 </dd>
-<dt><a href="#_core_sha1">_core_sha1(x, len)</a> ⇒ <code>array</code></dt>
+<dt><a href="#_coreSha1">_coreSha1(x, len)</a> ⇒ <code>array</code></dt>
 <dd><p>Calculate the SHA-1 of an array of big-endian words, and a bit length</p>
 </dd>
 <dt><a href="#_str2binb">_str2binb(str)</a> ⇒ <code>array</code></dt>
 <dd><p>Convert an 8-bit or 16-bit string to an array of big-endian words In 8-bit function, characters &gt;255 have their hi-byte silently ignored.</p>
 </dd>
-<dt><a href="#_safe_add">_safe_add()</a></dt>
+<dt><a href="#_safeAdd">_safeAdd()</a></dt>
 <dd><p>Add integers, wrapping at 2^32. This uses 16-bit operations internally to work around bugs in some JS interpreters.</p>
 </dd>
 <dt><a href="#_rol">_rol(num, cnt)</a> ⇒ <code>number</code></dt>
 <dd><p>Bitwise rotate a 32-bit number to the left.</p>
 </dd>
-<dt><a href="#_sha1_ft">_sha1_ft()</a></dt>
+<dt><a href="#_sha1Ft">_sha1Ft()</a></dt>
 <dd><p>Perform the appropriate triplet combination function for the current iteration.</p>
 </dd>
 <dt><a href="#_sha1_kt">_sha1_kt(t)</a> ⇒ <code>number</code></dt>
@@ -67,9 +67,9 @@ Inner method - Convert an array of big-endian words to a base-64 string
 | --- | --- | --- |
 | binarray | <code>array</code> | an array of big-endian words |
 
-<a name="_core_sha1"></a>
+<a name="_coreSha1"></a>
 
-## _core_sha1(x, len) ⇒ <code>array</code>
+## _coreSha1(x, len) ⇒ <code>array</code>
 Calculate the SHA-1 of an array of big-endian words, and a bit length
 
 **Kind**: global function
@@ -92,9 +92,9 @@ Convert an 8-bit or 16-bit string to an array of big-endian words In 8-bit funct
 | --- | --- | --- |
 | str | <code>string</code> | an 8-bit or 16-bit string |
 
-<a name="_safe_add"></a>
+<a name="_safeAdd"></a>
 
-## _safe_add()
+## _safeAdd()
 Add integers, wrapping at 2^32. This uses 16-bit operations internally to work around bugs in some JS interpreters.
 
 **Kind**: global function
@@ -111,9 +111,9 @@ Bitwise rotate a 32-bit number to the left.
 | num | <code>number</code> | a 32-bit number |
 | cnt | <code>number</code> | count |
 
-<a name="_sha1_ft"></a>
+<a name="_sha1Ft"></a>
 
-## _sha1_ft()
+## _sha1Ft()
 Perform the appropriate triplet combination function for the current iteration.
 
 **Kind**: global function

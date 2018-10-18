@@ -5,9 +5,8 @@ import css from './modal.css';
  * @description Class Modal - creates modal window.
  */
 export default class Modal {
-  constructor() {
+  constructor () {
     this._onEvent = this._onEvent.bind(this);
-    this.modal;
   }
 
   /**
@@ -15,7 +14,7 @@ export default class Modal {
    * @description Public method - creates modal window.
    * @param {string} modalMessage - text content for modal window
    */
-  createModal(modalMessage) {
+  createModal (modalMessage) {
     if (this.modal) return;
 
     this.modal = document.createElement('div');
@@ -44,7 +43,7 @@ export default class Modal {
    * @method removeModal
    * @description Public method - removes modal window.
    */
-  removeModal() {
+  removeModal () {
     document.body.removeChild(this.modal);
     this.modal = null;
   }
@@ -53,7 +52,7 @@ export default class Modal {
    * @method _initEvent
    * @description Inner method - sets events listener on the DOM-element.
    */
-  _initEvent() {
+  _initEvent () {
     this.modal.addEventListener('click', this._onEvent, false);
   }
 
@@ -62,10 +61,10 @@ export default class Modal {
    * @description Inner method - sets the behavior of the modal window on events.
    * @param {object} e - event object.
    */
-  _onEvent(e) {
+  _onEvent (e) {
     let target = e.target;
 
-    if (target.type != 'submit' && target != this.modal) return;
+    if (target.type !== 'submit' && target !== this.modal) return;
 
     this.onEvent();
   }
@@ -74,7 +73,7 @@ export default class Modal {
    * @method onEvent
    * @description Public method - sets the behavior of the modal window on events.
    */
-  onEvent() {
+  onEvent () {
     console.log('You must set own onEvent method');
   }
 }

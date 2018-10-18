@@ -13,7 +13,7 @@ export default class Message {
    * @param {object} messages - contains all chat message. Each the message is array.
    * @param {string} currentUser - the name of the registered user.
    */
-  constructor({ element, messages = [], currentUser }) {
+  constructor ({ element, messages = [], currentUser }) {
     this.chat = element;
     this.messages = Array.isArray(messages)
       ? messages
@@ -27,7 +27,7 @@ export default class Message {
    * @method render
    * @description Public method - creates DOM-element for new message and adds to the Chat.
    */
-  render() {
+  render () {
     if (this.messages.length === this.count) return;
 
     if (
@@ -47,7 +47,7 @@ export default class Message {
    * @description Inner method - creates fragment and adds elements (messages), return DOM-element.
    * @return {object} - return DOM-element if one message or document fragment with chat's messages DOM-elements (if messages more than one).
    */
-  _createChatElements() {
+  _createChatElements () {
     let fragment = document.createDocumentFragment();
     for (this.count; this.count < this.messages.length; this.count += 1) {
       let div = document.createElement('div');
@@ -66,17 +66,19 @@ export default class Message {
    * @description Inner method - scrolls if the element is not visible.
    * @param {object} element - the DOM-element of the Chat.
    */
-  _scrollElement(element) {
+  _scrollElement (element) {
     if (!element) return;
 
     if (
       element.getBoundingClientRect().bottom - element.offsetHeight <=
       this.chat.clientHeight
-    )
+    ) {
       return;
+    }
 
     this.chat.parentElement.style.overflowY = 'auto';
-    //this.chat.parentElement.scrollTop = div.getBoundingClientRect().bottom; // other way toscroll
+    /* this.chat.parentElement.scrollTop = div.getBoundingClientRect().bottom;
+    other way toscroll */
     element.scrollIntoView(false);
   }
 
@@ -85,12 +87,12 @@ export default class Message {
    * @description Public method - adding new key and value to the data-object.
    * @param {object} message - the objest contains user, time and message keys.
    */
-  addMessage(message) {
+  addMessage (message) {
     if (!message.user.length || !message.message.length) return;
     this.messages.push({
       user: message.user,
       time: message.time,
-      message: message.message,
+      message: message.message
     });
   }
 }

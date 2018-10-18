@@ -20,16 +20,12 @@ export default class App {
    * @description render DOM and manages Chat and Login pages.
    * @param {object} element - the App DOM-element.
    */
-  constructor({ element }) {
+  constructor ({ element }) {
     this.app = element;
     this.appTemplate = appTemplate.bind(this);
     this.networkService = new NetworkService();
 
     this.pages = {};
-    this.messagesUrl;
-    this.usersUrl;
-    this.currentUser;
-    this.currentPage;
 
     this._methodBinding(this.onLoginSubmit, this._startChat, this._startLogin);
     this._initialStartApp();
@@ -42,7 +38,7 @@ export default class App {
    * @param {object} ...args - array of the arguments. Each argument is a method.
    * @return {object} method -  method binded around App class.
    */
-  _methodBinding(...args) {
+  _methodBinding (...args) {
     args.forEach(method => {
       let name =
         method.name.charAt(0) === '_' ? method.name.slice(1) : method.name;
@@ -53,7 +49,7 @@ export default class App {
    * @method _initialStartApp
    * @description Inner method - creates the header of the App, start Router and start Chat
    */
-  _initialStartApp() {
+  _initialStartApp () {
     this._getUrls()
       .then(response => {
         this._renderAppTemplate();
@@ -79,7 +75,7 @@ export default class App {
    * @method _getUrls
    * @description Inner method - get the database URLs for messages and users from json file from server.
    */
-  _getUrls() {
+  _getUrls () {
     return this.networkService
       .httpReq({ url: urls, method: 'GET' })
       .then(response => {
@@ -97,7 +93,7 @@ export default class App {
    * @method _renderAppTemplate
    * @description Inner method - render App template (header).
    */
-  _renderAppTemplate() {
+  _renderAppTemplate () {
     this.app.innerHTML = this.appTemplate();
   }
 
@@ -105,7 +101,7 @@ export default class App {
    * @method _initEvents
    * @description Inner method - creating events for click (click on HTMLAnchorElement); and events for the window resizing.
    */
-  _initEvents() {
+  _initEvents () {
     window.addEventListener('resize', () => this._setVh());
   }
 
@@ -113,7 +109,7 @@ export default class App {
    * @method _startChat
    * @description Inner method - creating the Chat page and initializing the Chat.
    */
-  _startChat() {
+  _startChat () {
     let element = document.querySelector('.app__content');
 
     if (!element) {
@@ -132,11 +128,11 @@ export default class App {
 
     this.chat = new Chat({
       element: element,
-      networkService: NetworkService,
+      NetworkService: NetworkService,
       messagesUrl: this.messagesUrl,
       form: Form,
       tooltip: Tooltip,
-      currentUser: this.currentUser,
+      currentUser: this.currentUser
     });
     this.chat.initialStartChat();
 
@@ -148,7 +144,7 @@ export default class App {
    * @method _setVh
    * @description Inner method - sets the VH size for window resizing and sets app content height.
    */
-  _setVh() {
+  _setVh () {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
 
@@ -166,9 +162,10 @@ export default class App {
         : formHeight + headerHeight + 'px';
 
     if (!this.currentUser) return;
-    if (chatContent)
+    if (chatContent) {
       chatContent.style.height =
         parseFloat(appContent.style.height) - formHeight + 'px';
+    }
   }
 
   /**
@@ -176,7 +173,7 @@ export default class App {
    * @description Public method - which sets behavior Login page on submit event.
    * @param {object} userName - the current user name.
    */
-  onLoginSubmit(userName) {
+  onLoginSubmit (userName) {
     if (!userName) return;
 
     window.sessionStorage.setItem('currentUser', userName);
@@ -189,7 +186,7 @@ export default class App {
    * @method _startLogin
    * @description Inner method - creating Login and initializing the Logins methods.
    */
-  _startLogin() {
+  _startLogin () {
     let element = document.querySelector('.app__content');
     if (!element) {
       setTimeout(() => {
@@ -202,11 +199,11 @@ export default class App {
     this.login = new Login({
       element: element,
       usersUrl: this.usersUrl,
-      networkService: NetworkService,
+      NetworkService: NetworkService,
       form: Form,
-      tooltip: Tooltip,
-      users: Users,
-      modal: Modal,
+      Tooltip: Tooltip,
+      Users: Users,
+      Modal: Modal
     });
     this.login.onSubmit = this.onLoginSubmit;
     this.login.initialStartLogin();
@@ -217,11 +214,11 @@ export default class App {
    * @method _getIP
    * @description Inner method - for define user IP and sets it in session Storage.
    */
-  _getIP() {
+  _getIP () {
     this.networkService
       .httpReq({
         url: 'https://jsonip.com',
-        method: 'GET',
+        method: 'GET'
       })
       .then(response => {
         response = JSON.parse(response);
@@ -229,6 +226,7 @@ export default class App {
         window.sessionStorage.setItem('userIP', this.userIP);
       })
       .catch(error => {
+        this.userIP = 'n/a';
         console.log(error);
       });
   }

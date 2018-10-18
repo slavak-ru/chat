@@ -6,11 +6,10 @@
  *
  */
 export default class Users {
-  constructor({ usersUrl, networkService }) {
+  constructor ({ usersUrl, networkService }) {
     this.networkService = networkService;
     this.usersUrl = usersUrl;
     this.delay = 0;
-    this.usersList;
 
     this.getUsers();
   }
@@ -20,7 +19,7 @@ export default class Users {
    * @description Public method - for get users information from database.
    * @return {object} return object with users informations.
    */
-  getUsers() {
+  getUsers () {
     this._makeRequest({}).then(response => {
       this.usersList = Array.isArray(JSON.parse(response))
         ? JSON.parse(response)
@@ -37,7 +36,7 @@ export default class Users {
    * @param {object} data - data for publishing in the database.
    * @return {object} return object with users informations.
    */
-  _makeRequest({ url = this.usersUrl, method = 'GET', data }) {
+  _makeRequest ({ url = this.usersUrl, method = 'GET', data }) {
     return this.networkService.httpReq({ url, method, data });
   }
 
@@ -47,7 +46,7 @@ export default class Users {
    * @param {object} userData - user information for check.
    * @return {boolean} return true if user information is correct, or false.
    */
-  checkUser(userData) {
+  checkUser (userData) {
     let isUser = Object.keys(this.usersList).some(obj => {
       let check;
       if (userData.form === 'login') {
@@ -76,13 +75,13 @@ export default class Users {
    * @param {object} data - user information for publish.
    * @param {string} usersUrl - URL for publish.
    */
-  setNewUser({ data, usersUrl }) {
+  setNewUser ({ data, usersUrl }) {
     let json = JSON.stringify(data);
 
     this._makeRequest({
       url: usersUrl,
       method: 'POST',
-      data: json,
+      data: json
     }).then(() => {
       this.getUsers();
     });
@@ -94,7 +93,7 @@ export default class Users {
    * @param {object} data - user information for publish.
    * @param {string} usersUrl - URL for publish.
    */
-  changePassword({ data, usersUrl }) {
+  changePassword ({ data, usersUrl }) {
     this._makeRequest({ url: this.usersUrl, method: 'GET' })
       .then(response => {
         response = JSON.parse(response);
@@ -113,7 +112,7 @@ export default class Users {
         this.networkService.httpReq({
           url: usersUrl,
           method: 'PUT',
-          data: json,
+          data: json
         });
       })
       .then(() => {
@@ -126,7 +125,7 @@ export default class Users {
    * @description Public method - for recive users informtion.
    * @return {object} return users information.
    */
-  getUsersList() {
+  getUsersList () {
     return this.usersList;
   }
 }

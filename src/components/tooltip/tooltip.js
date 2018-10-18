@@ -10,12 +10,11 @@ export default class Tooltip {
    * @param {string} tooltipContent - tooltip's content.
    * @param {string} group - group-name of the tooltip.
    */
-  constructor({ element, tooltipContent = 'placeholder', group }) {
+  constructor ({ element, tooltipContent = 'placeholder', group }) {
     this.target = element;
     this.tooltipContent = tooltipContent;
     this.group = group;
 
-    this.tooltip;
     this.trotting = this._throttle(this._setTooltipPosition, 500);
 
     this._initEvents();
@@ -25,7 +24,7 @@ export default class Tooltip {
    * @method _initEvents
    * @description Inner method - creates events listener for the window resizing.
    */
-  _initEvents() {
+  _initEvents () {
     window.addEventListener('resize', () => {
       if (!this.tooltip) return;
       this.trotting();
@@ -38,12 +37,12 @@ export default class Tooltip {
    * @param {object} func - callback method
    * @param {number} ms - delay time in ms
    */
-  _throttle(func, ms) {
-    let isThrottled = false,
-      savedArgs,
-      savedThis;
+  _throttle (func, ms) {
+    let isThrottled = false;
+    let savedArgs;
+    let savedThis;
 
-    function wrapper() {
+    function wrapper () {
       if (isThrottled) {
         savedArgs = arguments;
         savedThis = this;
@@ -54,7 +53,7 @@ export default class Tooltip {
 
       isThrottled = true;
 
-      setTimeout(function() {
+      setTimeout(function () {
         isThrottled = false;
         if (savedArgs) {
           wrapper.apply(savedThis, savedArgs);
@@ -70,7 +69,7 @@ export default class Tooltip {
    * @method createTooltip
    * @description Public method - creates tooltip for the target element.
    */
-  createTooltip() {
+  createTooltip () {
     this.tooltip = document.createElement('div');
     this.tooltip.className = `tooltip tooltip_${this.group}`;
     this.tooltip.dataset.show = 'show-tooltip';
@@ -89,7 +88,7 @@ export default class Tooltip {
    * @method _setTooltipPosition
    * @description Inner method - sets tooltip position.
    */
-  _setTooltipPosition() {
+  _setTooltipPosition () {
     this._defineCoordinate();
 
     this.tooltip.style.top = Math.round(this.top) + 'px';
@@ -101,7 +100,7 @@ export default class Tooltip {
    * @method _defineCoordinate
    * @description Inner method - defines coordinates for tooltip.
    */
-  _defineCoordinate() {
+  _defineCoordinate () {
     this.top =
       this.target.getBoundingClientRect().top -
       this.tooltip.offsetHeight +
@@ -142,7 +141,7 @@ export default class Tooltip {
    * @method removeTooltip
    * @description Public method - removes the tooltip from the target element.
    */
-  removeTooltip() {
+  removeTooltip () {
     if (this.tooltip) document.body.removeChild(this.tooltip);
     this.tooltip = null;
   }

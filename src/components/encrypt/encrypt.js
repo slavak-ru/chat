@@ -3,10 +3,10 @@
  * @description Class Encrypt - creates hash for string (password / e-mail address / etc) using SHA1
  * */
 export default class Encrypt {
-  constructor() {
-    this.chrsz = 8; /* bits per input character. 8 - ASCII; 16 - Unicode*/
+  constructor () {
+    this.chrsz = 8; // bits per input character. 8 - ASCII; 16 - Unicode
     this.b64pad =
-      ''; /* base-64 pad character. "=" for strict RFC compliance   */
+      ''; // base-64 pad character. "=" for strict RFC compliance
   }
 
   /**
@@ -15,10 +15,10 @@ export default class Encrypt {
    * @param {string} str - the string to be encrypted
    * @return {string} encrypted string
    */
-  hashIt(str) {
+  hashIt (str) {
     let pass = str;
     let secPass = this._binb2b64(
-      this._core_sha1(this._str2binb(pass), str.length * this.chrsz)
+      this._coreSha1(this._str2binb(pass), str.length * this.chrsz)
     );
     return secPass;
   }
@@ -29,7 +29,7 @@ export default class Encrypt {
    * @param {array} binarray - an array of big-endian words
    * @return {string} str - encrypted string
    */
-  _binb2b64(binarray) {
+  _binb2b64 (binarray) {
     var tab =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
     var str = '';
@@ -47,13 +47,13 @@ export default class Encrypt {
   }
 
   /**
-   * @method _core_sha1
+   * @method _coreSha1
    * @description  Calculate the SHA-1 of an array of big-endian words, and a bit length
    * @param {array} x - an array of big-endian words
    * @param {number} len - a bit length
    * @return {array} array with calculate the SHA-1
    */
-  _core_sha1(x, len) {
+  _coreSha1 (x, len) {
     /* append padding */
     x[len >> 5] |= 0x80 << (24 - (len % 32));
     x[(((len + 64) >> 9) << 4) + 15] = len;
@@ -76,9 +76,9 @@ export default class Encrypt {
       for (var j = 0; j < 80; j++) {
         if (j < 16) w[j] = x[i + j];
         else w[j] = this._rol(w[j - 3] ^ w[j - 8] ^ w[j - 14] ^ w[j - 16], 1);
-        var t = this._safe_add(
-          this._safe_add(this._rol(a, 5), this._sha1_ft(j, b, c, d)),
-          this._safe_add(this._safe_add(e, w[j]), this._sha1_kt(j))
+        var t = this._safeAdd(
+          this._safeAdd(this._rol(a, 5), this._sha1Ft(j, b, c, d)),
+          this._safeAdd(this._safeAdd(e, w[j]), this._sha1_kt(j))
         );
         e = d;
         d = c;
@@ -87,13 +87,13 @@ export default class Encrypt {
         a = t;
       }
 
-      a = this._safe_add(a, olda);
-      b = this._safe_add(b, oldb);
-      c = this._safe_add(c, oldc);
-      d = this._safe_add(d, oldd);
-      e = this._safe_add(e, olde);
+      a = this._safeAdd(a, olda);
+      b = this._safeAdd(b, oldb);
+      c = this._safeAdd(c, oldc);
+      d = this._safeAdd(d, oldd);
+      e = this._safeAdd(e, olde);
     }
-    return Array(a, b, c, d, e);
+    return [a, b, c, d, e];
   }
 
   /**
@@ -102,14 +102,15 @@ export default class Encrypt {
    * @param {string} str - an 8-bit or 16-bit string
    * @return {array} bin - array of big-endian words
    */
-  _str2binb(str) {
-    let bin = Array();
+  _str2binb (str) {
+    let bin = [];
     let mask = (1 << this.chrsz) - 1;
     let max = str.length;
 
-    for (let i = 0; i < max * this.chrsz; i += this.chrsz)
+    for (let i = 0; i < max * this.chrsz; i += this.chrsz) {
       bin[i >> 5] |=
         (str.charCodeAt(i / this.chrsz) & mask) << (32 - this.chrsz - (i % 32));
+    }
     return bin;
   }
 
@@ -118,10 +119,10 @@ export default class Encrypt {
   * to work around bugs in some JS interpreters.
   */
   /**
-   * @method _safe_add
+   * @method _safeAdd
    * @description  Add integers, wrapping at 2^32. This uses 16-bit operations internally to work around bugs in some JS interpreters.
    */
-  _safe_add(x, y) {
+  _safeAdd (x, y) {
     let lsw = (x & 0xffff) + (y & 0xffff);
     let msw = (x >> 16) + (y >> 16) + (lsw >> 16);
     return (msw << 16) | (lsw & 0xffff);
@@ -134,15 +135,15 @@ export default class Encrypt {
    * @param {number} cnt - count
    * @return {number} number after rotated
    */
-  _rol(num, cnt) {
+  _rol (num, cnt) {
     return (num << cnt) | (num >>> (32 - cnt));
   }
 
   /**
-   * @method _sha1_ft
+   * @method _sha1Ft
    * @description  Perform the appropriate triplet combination function for the current iteration.
    */
-  _sha1_ft(t, b, c, d) {
+  _sha1Ft (t, b, c, d) {
     if (t < 20) return (b & c) | (~b & d);
     if (t < 40) return b ^ c ^ d;
     if (t < 60) return (b & c) | (b & d) | (c & d);
@@ -155,7 +156,7 @@ export default class Encrypt {
    * @param {number} t - number the current iteration
    * @return {number} additive constant for the current iteration.
    */
-  _sha1_kt(t) {
+  _sha1_kt (t) {
     return t < 20
       ? 1518500249
       : t < 40

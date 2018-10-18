@@ -17,18 +17,18 @@ export default class Chat {
    * @param {object} tooltip - the class for creating tooltips on errors the Form.
    * @param {string} currentUser - name of the current user.
    */
-  constructor({
+  constructor ({
     element,
     messagesUrl,
-    networkService,
+    NetworkService,
     form,
     tooltip,
-    currentUser,
+    currentUser
   }) {
     this.chat = element;
     this.messagesUrl = messagesUrl;
-    this.networkService = new networkService();
-    this.form = form;
+    this.networkService = new NetworkService();
+    this.Form = form;
     this.tooltip = tooltip;
     this.currentUser = currentUser;
     this.chatTemplate = chatTemplate.bind(this);
@@ -40,7 +40,7 @@ export default class Chat {
    * @method initialStartChat
    * @description Public method - creates chat page from template and retrieves messages from the database.
    */
-  initialStartChat() {
+  initialStartChat () {
     this.chat.innerHTML = this.chatTemplate();
     this.networkService
       .httpReq({ url: this.messagesUrl, method: 'GET' })
@@ -63,15 +63,15 @@ export default class Chat {
    * @method _startChat
    * @description Inner method - create initial Chat and Form DOM-elements.
    */
-  _startChat() {
+  _startChat () {
     this.message = new Message({
       element: document.getElementById('chat'),
       messages: this.messages,
-      currentUser: this.currentUser,
+      currentUser: this.currentUser
     });
-    this.form = new this.form({
+    this.form = new this.Form({
       element: document.getElementById('form'),
-      tooltip: this.tooltip,
+      tooltip: this.tooltip
     });
     this.form.onSubmit = this.onSubmit.bind(this);
     this._updateMessages();
@@ -82,10 +82,10 @@ export default class Chat {
    * @method _updateMessages
    * @description Inner method - updates messages from databse every time set by delay.
    */
-  _updateMessages() {
+  _updateMessages () {
     let self = this;
 
-    setTimeout(function request() {
+    setTimeout(function request () {
       self.networkService
         .httpReq({ url: self.messagesUrl, method: 'GET' })
         .then(response => {
@@ -111,7 +111,7 @@ export default class Chat {
    * @description Inner method - render Chat and Form DOM-elements.
    * @param {string} user - the name of the current user, if any user is logged in - displays the form element.
    */
-  _render(user) {
+  _render (user) {
     this.message.render();
     if (!user) {
       return;
@@ -125,7 +125,7 @@ export default class Chat {
    * @description Public method - adding new message in the Chat.
    * @param {object} message - contains user-name, message-content and message time-creation
    */
-  onSubmit(newMessage) {
+  onSubmit (newMessage) {
     if (!newMessage.message) return;
 
     newMessage.user = this.currentUser;
@@ -138,7 +138,7 @@ export default class Chat {
     this.networkService.httpReq({
       url: this.messagesUrl,
       method: 'POST',
-      data: json,
+      data: json
     });
     this.messagesLength += 1;
     this.message.addMessage(newMessage);
