@@ -1,5 +1,5 @@
 # CHAT
-Educational project - Single Page Application on JavaScript components
+Educational project - Single Page Application on JavaScript components. Without server side.
 
 Build system - webpack (#4.16.5).
 
