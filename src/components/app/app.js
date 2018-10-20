@@ -50,25 +50,21 @@ export default class App {
    * @description Inner method - creates the header of the App, start Router and start Chat
    */
   _initialStartApp () {
-    this._getUrls()
-      .then(response => {
-        this._renderAppTemplate();
-        return response;
-      })
-      .then(() => {
-        this.router = new Router();
-        this.router.pagesRegistration.call(this, this.app);
-        this.router.initEvents.call(this, this.app);
-        this.router.setCurentPage.call(this, 'startChat');
-        this.router.start.call(this);
-      })
-      .then(() => this._startChat())
-      .catch(error => {
+    return (async () => {
+      await this._getUrls().catch(error => {
         let chat = document.getElementById('chat');
         chat.classList.remove('chat__content_empty');
         chat.classList.add('network_error');
         console.log(error);
       });
+      this._renderAppTemplate();
+      this.router = new Router();
+      this.router.pagesRegistration.call(this, this.app);
+      this.router.initEvents.call(this, this.app);
+      this.router.setCurentPage.call(this, 'startChat');
+      this.router.start.call(this);
+      this._startChat();
+    })();
   }
 
   /**
@@ -76,17 +72,17 @@ export default class App {
    * @description Inner method - get the database URLs for messages and users from json file from server.
    */
   _getUrls () {
-    return this.networkService
-      .httpReq({ url: urls, method: 'GET' })
-      .then(response => {
-        response = JSON.parse(response);
-        this.messagesUrl = response.messages;
-        this.usersUrl = response.users;
-        return response;
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    return (async () => {
+      let response = await this.networkService
+        .httpReq({ url: urls, method: 'GET' })
+        .catch(error => {
+          console.log(error);
+        });
+
+      response = JSON.parse(response);
+      this.messagesUrl = response.messages;
+      this.usersUrl = response.users;
+    })();
   }
 
   /**
@@ -215,19 +211,35 @@ export default class App {
    * @description Inner method - for define user IP and sets it in session Storage.
    */
   _getIP () {
-    this.networkService
-      .httpReq({
-        url: 'https://jsonip.com',
-        method: 'GET'
-      })
-      .then(response => {
-        response = JSON.parse(response);
-        this.userIP = response.ip;
-        window.sessionStorage.setItem('userIP', this.userIP);
-      })
-      .catch(error => {
-        this.userIP = 'n/a';
-        console.log(error);
-      });
+    (async () => {
+      let data = await this.networkService
+        .httpReq({
+          url: 'https://jsonip.com',
+          method: 'GET'
+        })
+        .catch(error => {
+          this.userIP = 'n/a';
+          console.log(error);
+        });
+
+      data = JSON.parse(data);
+      this.userIP = data.ip;
+      window.sessionStorage.setItem('userIP', this.userIP);
+    })();
   }
+  //   this.networkService
+  //     .httpReq({
+  //       url: 'https://jsonip.com',
+  //       method: 'GET'
+  //     })
+  //     .then(response => {
+  //       response = JSON.parse(response);
+  //       this.userIP = response.ip;
+  //       window.sessionStorage.setItem('userIP', this.userIP);
+  //     })
+  //     .catch(error => {
+  //       this.userIP = 'n/a';
+  //       console.log(error);
+  //     });
+  // }
 }

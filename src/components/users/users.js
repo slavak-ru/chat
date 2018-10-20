@@ -20,12 +20,15 @@ export default class Users {
    * @return {object} return object with users informations.
    */
   getUsers () {
-    this._makeRequest({}).then(response => {
+    return (async () => {
+      let response = await this._makeRequest({}).catch(error => {
+        console.log(error);
+      });
       this.usersList = Array.isArray(JSON.parse(response))
         ? JSON.parse(response)
         : Object.values(JSON.parse(response));
       return this.usersList;
-    });
+    })();
   }
 
   /**
@@ -78,13 +81,17 @@ export default class Users {
   setNewUser ({ data, usersUrl }) {
     let json = JSON.stringify(data);
 
-    this._makeRequest({
-      url: usersUrl,
-      method: 'POST',
-      data: json
-    }).then(() => {
+    return (async () => {
+      await this._makeRequest({
+        url: usersUrl,
+        method: 'POST',
+        data: json
+      }).catch(error => {
+        console.log(error);
+      });
+
       this.getUsers();
-    });
+    })();
   }
 
   /**
@@ -94,30 +101,29 @@ export default class Users {
    * @param {string} usersUrl - URL for publish.
    */
   changePassword ({ data, usersUrl }) {
-    this._makeRequest({ url: this.usersUrl, method: 'GET' })
-      .then(response => {
-        response = JSON.parse(response);
-        Object.keys(response).forEach(key => {
-          if (
-            data['user-name'] === response[key]['user-name'] &&
-            data['e-mail'] === response[key]['e-mail']
-          ) {
-            response[key].pass = data.pass;
-          }
-        });
-        let json = JSON.stringify(response);
-        return json;
-      })
-      .then(json => {
-        this.networkService.httpReq({
-          url: usersUrl,
-          method: 'PUT',
-          data: json
-        });
-      })
-      .then(() => {
-        this.getUsers();
+    return (async () => {
+      let response = await this._makeRequest({
+        url: this.usersUrl,
+        method: 'GET'
       });
+
+      response = JSON.parse(response);
+      Object.keys(response).forEach(key => {
+        if (
+          data['user-name'] === response[key]['user-name'] &&
+          data['e-mail'] === response[key]['e-mail']
+        ) {
+          response[key].pass = data.pass;
+        }
+      });
+      let json = JSON.stringify(response);
+
+      this.networkService.httpReq({
+        url: usersUrl,
+        method: 'PUT',
+        data: json
+      });
+    })();
   }
 
   /**

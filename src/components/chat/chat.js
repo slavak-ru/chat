@@ -42,21 +42,24 @@ export default class Chat {
    */
   initialStartChat () {
     this.chat.innerHTML = this.chatTemplate();
-    this.networkService
-      .httpReq({ url: this.messagesUrl, method: 'GET' })
-      .then(response => {
-        response = JSON.parse(response);
-        this.messages = Array.isArray(response)
-          ? response
-          : Object.values(response);
-        this.messagesLength = this.messages.length;
-        this._startChat();
-      })
-      .catch(error => {
-        let chat = document.getElementById('chat');
-        chat.classList.add('database_error');
-        console.log(error);
-      });
+    (async () => {
+      let response = await this.networkService
+        .httpReq({
+          url: this.messagesUrl,
+          method: 'GET'
+        })
+        .catch(error => {
+          let chat = document.getElementById('chat');
+          chat.classList.add('database_error');
+          console.log(error);
+        });
+      response = JSON.parse(response);
+      this.messages = Array.isArray(response)
+        ? response
+        : Object.values(response);
+      this.messagesLength = this.messages.length;
+      this._startChat();
+    })();
   }
 
   /**
