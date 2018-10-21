@@ -229,7 +229,7 @@ export default class Login {
    * @param {string} data - user name from login form.
    */
   onSubmit (data) {
-    console.log(console.log('You must set own onSubmit method'));
+    console.log('You must set own onSubmit method');
   }
 
   /**

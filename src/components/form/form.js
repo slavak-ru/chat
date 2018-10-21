@@ -217,7 +217,7 @@ export default class Form {
     let targets, observer, observerOptions;
 
     targets = this._addObserverTargets(this.form);
-    console.log(targets)
+
     observer = new MutationObserver(mutation => {
       if (!document.querySelector(`[name=${this.form.name}]`)) {
         if (!Object.values(this.tooltips).length) return;
