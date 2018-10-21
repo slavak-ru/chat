@@ -47,6 +47,9 @@
 <dt><a href="#_observer">_observer()</a></dt>
 <dd><p>Inner method - observing the parent element of the form, when the target element was remove - removes all tooltips.</p>
 </dd>
+<dt><a href="#_addObserverTargets">_addObserverTargets(element)</a> ⇒ <code>array</code></dt>
+<dd><p>Inner method - creates the array of elements for MutationObserver as targets.</p>
+</dd>
 <dt><a href="#_createTooltip">_createTooltip(group, elem, tooltipContent)</a></dt>
 <dd><p>Inner method - creates tooltip.</p>
 </dd>
@@ -84,7 +87,8 @@ Inner method - initial collect-data method on submit event.
 <a name="_hidePlaceholder"></a>
 
 ## _hidePlaceholder(e)
-Inner method - hides placeholder value (if value of the input is empty) and creates tooltip from placeholder value of the input element on focus event.
+Inner method - hides placeholder value (if value of the input is empty) and creates tooltip from placeholder value of the input
+element on focus event.
 
 **Kind**: global function
 
@@ -181,6 +185,18 @@ Inner method - registers all input elements in the form.
 Inner method - observing the parent element of the form, when the target element was remove - removes all tooltips.
 
 **Kind**: global function
+<a name="_addObserverTargets"></a>
+
+## _addObserverTargets(element) ⇒ <code>array</code>
+Inner method - creates the array of elements for MutationObserver as targets.
+
+**Kind**: global function
+**Returns**: <code>array</code> - the array of elements for MutationObserver as targets.
+
+| Param | Type | Description |
+| --- | --- | --- |
+| element | <code>object</code> | is a DOM-element as a first target |
+
 <a name="_createTooltip"></a>
 
 ## _createTooltip(group, elem, tooltipContent)

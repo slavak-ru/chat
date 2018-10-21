@@ -77,7 +77,9 @@ export default class Form {
 
     if (!this.tooltips['placeholder']) return;
 
-    target.placeholder = this.tooltips['placeholder'][target.name].tooltipContent;
+    target.placeholder = this.tooltips['placeholder'][
+      target.name
+    ].tooltipContent;
 
     this._removeTooltip({ group: 'placeholder', elem: target });
   }
@@ -214,14 +216,8 @@ export default class Form {
   _observer () {
     let targets, observer, observerOptions;
 
-    targets = [
-      this.form,
-      this.form.parentElement,
-      this.form.parentElement.parentElement,
-      this.form.parentElement.parentElement.parentElement,
-      this.form.parentElement.parentElement.parentElement.parentElement
-    ];
-
+    targets = this._addObserverTargets(this.form);
+    console.log(targets)
     observer = new MutationObserver(mutation => {
       if (!document.querySelector(`[name=${this.form.name}]`)) {
         if (!Object.values(this.tooltips).length) return;
@@ -247,6 +243,28 @@ export default class Form {
 
       return observer.observe(target, observerOptions);
     });
+  }
+
+  /**
+   * @method _addObserverTargets
+   * @description Inner method - creates the array of elements for MutationObserver as targets.
+   * @param {object} element - is a DOM-element as a first target
+   * @return {array} the array of elements for MutationObserver as targets.
+   */
+  _addObserverTargets (element) {
+    let target = element;
+    let targets = [];
+
+    function addTarget () {
+      while (target) {
+        targets.push(target);
+        if (target['parentElement'] === document.body) return;
+        target = target['parentElement'];
+      }
+    }
+
+    addTarget();
+    return targets;
   }
 
   /**
