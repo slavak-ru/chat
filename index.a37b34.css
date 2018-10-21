@@ -133,12 +133,74 @@ a {
   background-image: linear-gradient(to bottom, var(--buttonBgColorStart), var(--buttonBgColorEnd));
 }
 
-.app__header_user {
-  max-width: 40%;
+.header__toggle {
+  min-width: 30%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.header__user {
+  min-width: 40%;
   white-space: nowrap;
   overflow-x: hidden; 
   -o-text-overflow: ellipsis; 
      text-overflow: ellipsis;
+
+  cursor: default;
+}
+
+.toggle {
+  width: 3rem;
+  height: 1rem;
+  position: relative;
+  background-color: var(--buttonShadowColor);
+  border-radius: 0.6rem;
+  -webkit-box-shadow: inset 0rem 0.05rem 0rem rgb(5, 39, 86), 0rem 0.05rem 0rem var(--buttonShadowColor);
+          box-shadow: inset 0rem 0.05rem 0rem rgb(5, 39, 86), 0rem 0.05rem 0rem var(--buttonShadowColor);
+}
+
+.toggle::after {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  top: 0;
+  left: 2rem;
+  content: '';
+  background-color: var(--buttonBgColorEnd);
+  border-radius: 50%;
+  -webkit-box-shadow: inset 0rem 0.05rem 0rem rgb(5, 39, 86), 0rem 0.05rem 0rem var(--buttonShadowColor);
+          box-shadow: inset 0rem 0.05rem 0rem rgb(5, 39, 86), 0rem 0.05rem 0rem var(--buttonShadowColor);
+}
+.toggle_left::after{
+  left: 0;
+}
+
+.flag {
+  width: 25px;
+  height: 15px;
+}
+
+.flag_ru {
+  margin-right: 0.2rem;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="15" viewBox="0 0 25 15" enable-background="new 0 0 25 15"><rect x="0" y="5" fill="rgb(0, 0, 238)" width="25" height="5"/><rect x="0" y="10" fill="rgb(255, 0, 0)" width="25" height="5"/><rect x="0" y="0" fill="rgb(255, 255, 255)" width="25" height="5"/></svg>');
+}
+
+.flag_eng {
+  margin-left: 0.2rem;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="15" viewBox="0 0 25 15" enable-background="new 0 0 25 15"><rect y="0" fill="rgb(0, 20, 104)" width="25" height="15"/><path fill="rgb(255,255,255)" d="M25,15h-2.6l-7-4.9V15H10v-4.9L2.8,15H0v-1.6l5.4-3.7H0V5.3h5.4L0,1.4V0h2.8L10,4.9V0h5.3v4.9L22.6,0H25v1.4l-5.3,3.9H25v4.4h-5.3l5.3,3.6V15z"/><path fill="rgb(255, 0, 0)" d="M23.5,15l-7.7-5.3H18l7,4.9V15H23.5zM14.2,15h-3.6V8.9H0V6.1h10.6V0h3.6v6.1L25,6v3L14.2,9.1V15z M15.8,5.3L23.5,0L25,0v0.4l-6.8,4.8H15.8zM0,0.4V0h1.4l7.4,5.3H6.7L0,0.4z M8.9,9.7L1.4,15H0v-0.4l6.7-4.9C6.7,9.7,8.9,9.7,8.9,9.7z"/></svg>');
 }
 
 .menu__item {
@@ -622,16 +684,21 @@ a {
   padding: 0;
 
   font-size: 1rem;
+  text-align: center;
 }
 
-.chat__content_empty:empty:after {
-  content: '\412   \447\430\442\435   \43D\435\442   \441\43E\43E\431\449\435\43D\438\439';
-  position: absolute;
-  top: 3rem;
-  left: 15%;
+.chat__content_empty:empty:after,
+.chat__content_empty_eng:empty:after {
   font-size: 1.5rem;
   text-align: center;
   color: var(--buttonBgColorEnd);
+}
+
+.chat__content_empty:empty:after {
+  content: '\41D\435\442   \441\43E\43E\431\449\435\43D\438\439';
+}
+.chat__content_empty_eng:empty:after {
+  content: 'No messages';
 }
 
 @-webkit-keyframes color {
@@ -654,17 +721,15 @@ a {
 
 .database_error:empty:after {
   content: 'Database Error';
-  left: 28%;
   -webkit-animation: color 1s infinite alternate;
           animation: color 1s infinite alternate;
 }
 
 @media (min-width: 768px) { 
-  .chat__content_empty:empty:after {
-    left: 28%;
-  }
+  .chat__content_empty:empty:after,
+  .chat__content_empty_eng:empty:after,
   .database_error:empty:after {
-    left: 35%
+    left: 35%;
   }
 }
 
