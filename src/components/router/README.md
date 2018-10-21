@@ -14,11 +14,14 @@
 <dt><a href="#pagesRegistration">pagesRegistration()</a></dt>
 <dd><p>Public method - page registration, creating the object with page-name, page-url, method for page and HTMLAnchorElement for page.</p>
 </dd>
-<dt><a href="#initEvents(elem)">initEvents(elem)</a></dt>
+<dt><a href="#initEvents">initEvents(elem)</a></dt>
 <dd><p>Public method - creating events for click (click on HTMLAnchorElement).</p>
 </dd>
-<dt><a href="#setCurentPage(name)">setCurentPage(name)</a></dt>
+<dt><a href="#setCurrentPage">setCurrentPage(name)</a></dt>
 <dd><p>Public method - sets current page name and push url-name in the window history.</p>
+</dd>
+<dt><a href="#getCurrentPage">getCurrentPage()</a> ⇒ <code>string</code></dt>
+<dd><p>Public method - returns the name of the current page.</p>
 </dd>
 </dl>
 
@@ -43,7 +46,7 @@ Public method - is the address bar listener. If address had been change - launch
 Public method - page registration, creating the object with page-name, page-url, method for page and HTMLAnchorElement for page.
 
 **Kind**: global function
-<a name="initEvents(elem)"></a>
+<a name="initEvents"></a>
 
 ## initEvents(elem)
 Public method - creating events for click (click on HTMLAnchorElement).
@@ -54,9 +57,9 @@ Public method - creating events for click (click on HTMLAnchorElement).
 | --- | --- | --- |
 | elem | <code>object</code> | target DOM element |
 
-<a name="setCurentPage(name)"></a>
+<a name="setCurrentPage"></a>
 
-## setCurentPage(name)
+## setCurrentPage(name)
 Public method - sets current page name and push url-name in the window history.
 
 **Kind**: global function
@@ -64,3 +67,11 @@ Public method - sets current page name and push url-name in the window history.
 | Param | Type | Description |
 | --- | --- | --- |
 | name | <code>string</code> | current page name |
+
+<a name="getCurrentPage"></a>
+
+## getCurrentPage() ⇒ <code>string</code>
+Public method - returns the name of the current page.
+
+**Kind**: global function
+**Returns**: <code>string</code> - - current page name

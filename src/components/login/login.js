@@ -1,8 +1,12 @@
 import css from './login.css';
-import loginHeaderTemplate from '../login/login-header.templ.pug';
-import loginTemplate from '../login/login.templ.pug';
-import signTemplate from '../login/sign.templ.pug';
-import forgotTemplate from '../login/forgot.templ.pug';
+import loginHeaderTemplateRu from '../login/login-header.templ-ru.pug';
+import loginHeaderTemplateEng from '../login/login-header.templ-eng.pug';
+import loginTemplateRu from '../login/login.templ-ru.pug';
+import loginTemplateEng from '../login/login.templ-eng.pug';
+import signTemplateRu from '../login/sign.templ-ru.pug';
+import signTemplateEng from '../login/sign.templ-eng.pug';
+import forgotTemplateRu from '../login/forgot.templ-ru.pug';
+import forgotTemplateEng from '../login/forgot.templ-eng.pug';
 import Encrypt from '../encrypt/encrypt.js';
 
 /**
@@ -40,17 +44,25 @@ export default class Login {
     });
     this.modal = new Modal();
     this.modal.onEvent = this._onModalEvent.bind(this);
-    this.loginHeaderTemplate = loginHeaderTemplate;
-    this.loginTemplate = loginTemplate;
-    this.signTemplate = signTemplate;
-    this.forgotTemplate = forgotTemplate;
+    this.loginHeaderTemplateRu = loginHeaderTemplateRu;
+    this.loginHeaderTemplateEng = loginHeaderTemplateEng;
+    this.loginTemplateRu = loginTemplateRu;
+    this.loginTemplateEng = loginTemplateEng;
+    this.signTemplateRu = signTemplateRu;
+    this.signTemplateEng = signTemplateEng;
+    this.forgotTemplateRu = forgotTemplateRu;
+    this.forgotTemplateEng = forgotTemplateEng;
     this.encrypt = new Encrypt();
-    this.loginErrorText =
+    this.loginErrorTextRu =
       'Введенные данные (логин или пароль) не верны, попробуйте еще раз';
-    this.signErrorText =
+    this.loginErrorTextEng =
+      'The data you entered (username or password) is incorrect, please try again';
+    this.signErrorTextRu =
       'Пользователь с таким логином или мейлом уже существует';
-    this.forgotErrorText =
+    this.signErrorTextEng = 'User with this login or email already exists';
+    this.forgotErrorTextRu =
       'Пользователя с таким логином и мейлом не существует';
+    this.forgotErrorTextEng = 'User with this login and email does not exist';
     this.tabsList = {};
 
     this.currentRadioChecked = document.querySelector(
@@ -74,7 +86,9 @@ export default class Login {
         return;
       }
 
-      if (this.tabsList[elem.value]) { this._setTabsClass(this.tabsList[elem.value]); }
+      if (this.tabsList[elem.value]) {
+        this._setTabsClass(this.tabsList[elem.value]);
+      }
 
       if (elem.classList.contains('icon-password')) {
         let input = this.logins.querySelector("input[name='pass']");
@@ -131,7 +145,9 @@ export default class Login {
     data.pass = this.encrypt.hashIt(data.pass);
 
     if (data['e-mail']) data['e-mail'] = this.encrypt.hashIt(data['e-mail']);
-    if (window.sessionStorage.getItem('userIP')) { data.ip = window.sessionStorage.getItem('userIP'); }
+    if (window.sessionStorage.getItem('userIP')) {
+      data.ip = window.sessionStorage.getItem('userIP');
+    }
 
     switch (data.formName) {
       case 'sign':
@@ -142,7 +158,7 @@ export default class Login {
             mail: data['e-mail']
           })
         ) {
-          this.modal.createModal(this.signErrorText);
+          this._createModal('sign');
 
           return;
         }
@@ -160,8 +176,7 @@ export default class Login {
             mail: data['e-mail']
           })
         ) {
-          this.modal.createModal(this.forgotErrorText);
-
+          this._createModal('forgot');
           return;
         }
 
@@ -178,12 +193,26 @@ export default class Login {
             pass: data.pass
           })
         ) {
-          this.modal.createModal(this.loginErrorText);
+          this._createModal('login');
 
           return;
         }
         this.onSubmit(data['user-name']);
     }
+  }
+
+  /**
+   * @method _createModal
+   * @description Inner method - selects content for a modal window and creates a modal window.
+   * @param {string} name - the name of the form where the error occured.
+   */
+  _createModal (name) {
+    let lanuage =
+      window.sessionStorage.getItem('currentLanguage') === 'eng' ? 'Eng' : 'Ru';
+
+    let modalContent = this[name + 'ErrorText' + lanuage];
+
+    this.modal.createModal(modalContent);
   }
 
   /**
@@ -208,14 +237,25 @@ export default class Login {
    * @description Public method - for initial start login page. Creates tabs of the login form.
    */
   initialStartLogin () {
-    this.logins.innerHTML = this.loginHeaderTemplate();
+    let currentLangauge = window.sessionStorage.getItem('currentLanguage');
+
+    this.logins.innerHTML =
+      currentLangauge === 'eng'
+        ? this.loginHeaderTemplateEng()
+        : this.loginHeaderTemplateRu();
+
     this.loginsContent = this.logins.querySelector('.login__content_wrapper');
 
     this.tabs = this.logins.querySelectorAll('.button_login');
+    let templateName =
+      currentLangauge && currentLangauge === 'eng'
+        ? 'TemplateEng'
+        : 'TemplateRu';
+
     this.tabs.forEach(tab => {
       this.tabsList[tab.value] = {};
       this.tabsList[tab.value]['tab'] = tab;
-      this.tabsList[tab.value]['template'] = this[tab.value + 'Template'];
+      this.tabsList[tab.value]['template'] = this[tab.value + templateName];
     });
 
     this.form = new this.Form({

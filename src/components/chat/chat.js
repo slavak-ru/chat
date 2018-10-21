@@ -1,7 +1,9 @@
 import css from './chat.css';
-import chatTemplate from './chat.templ.pug';
+import chatTemplateRu from './chat.templ-ru.pug';
+import chatTemplateEng from './chat.templ-eng.pug';
 import Message from '../message/message.js';
-import formTemplate from '../form/form.templ.pug';
+import formTemplateRu from '../form/form.templ-ru.pug';
+import formTemplateEng from '../form/form.templ-eng.pug';
 
 /**
  * @class Chat
@@ -31,7 +33,8 @@ export default class Chat {
     this.Form = form;
     this.tooltip = tooltip;
     this.currentUser = currentUser;
-    this.chatTemplate = chatTemplate.bind(this);
+    this.chatTemplateRu = chatTemplateRu.bind(this);
+    this.chatTemplateEng = chatTemplateEng.bind(this);
     this.messagesLength = 0;
     this.delay = 1000;
   }
@@ -41,7 +44,11 @@ export default class Chat {
    * @description Public method - creates chat page from template and retrieves messages from the database.
    */
   initialStartChat () {
-    this.chat.innerHTML = this.chatTemplate();
+    this.chat.innerHTML =
+      window.sessionStorage.getItem('currentLanguage') === 'ru'
+        ? this.chatTemplateRu()
+        : this.chatTemplateEng();
+
     (async () => {
       let response = await this.networkService
         .httpReq({
@@ -120,7 +127,11 @@ export default class Chat {
       return;
     }
 
-    this.form.render(formTemplate);
+    if (window.sessionStorage.getItem('currentLanguage') === 'ru') {
+      this.form.render(formTemplateRu);
+      return;
+    }
+    this.form.render(formTemplateEng);
   }
 
   /**

@@ -1,5 +1,5 @@
 import css from './form.css';
-import formTemplate from './form.templ.pug';
+import formTemplateRu from './form.templ-ru.pug';
 
 /**
  * @class Form
@@ -217,7 +217,9 @@ export default class Form {
     targets = [
       this.form,
       this.form.parentElement,
-      this.form.parentElement.parentElement
+      this.form.parentElement.parentElement,
+      this.form.parentElement.parentElement.parentElement,
+      this.form.parentElement.parentElement.parentElement.parentElement
     ];
 
     observer = new MutationObserver(mutation => {
@@ -269,6 +271,7 @@ export default class Form {
     });
     this.tooltips[group][elem.name].createTooltip();
   }
+
   /**
    * @method _removeTooltip
    * @description Inner method - removes tooltip.

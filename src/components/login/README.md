@@ -20,6 +20,9 @@
 <dt><a href="#onLoginSubmit(data)">onLoginSubmit(data)</a></dt>
 <dd><p>Public method - for behavior on submit login form</p>
 </dd>
+<dt><a href="#_createModal">_createModal(name)</a></dt>
+<dd><p>Inner method - selects content for a modal window and creates a modal window.</p>
+</dd>
 <dt><a href="#_onModalEvent">_onModalEvent()</a></dt>
 <dd><p>Inner method - removing modal window.</p>
 </dd>
@@ -38,8 +41,7 @@
 <a name="new_Login_new"></a>
 
 ### new Login()
-Class Login creates the Login page from the template, creates forms (login,registration), collect data from form-elements on Submint
-event and creates modal window if information isn't correct.
+Class Login creates the Login page from the template, creates forms (login,registration), collect data from form-elements on Submint event and creates modal window if information isn't correct.
 
 <a name="_initEvents"></a>
 
@@ -79,6 +81,17 @@ Public method - for behavior on submit login form
 | Param | Type | Description |
 | --- | --- | --- |
 | data | <code>object</code> | data (user information) from login form. |
+
+<a name="_createModal"></a>
+
+## _createModal(name)
+Inner method - selects content for a modal window and creates a modal window.
+
+**Kind**: global function
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | the name of the form where the error occured. |
 
 <a name="_onModalEvent"></a>
 

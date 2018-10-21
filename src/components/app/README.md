@@ -23,8 +23,14 @@
 <dt><a href="#_initEvents">_initEvents()</a></dt>
 <dd><p>Inner method - creating events for click (click on HTMLAnchorElement); and events for the window resizing.</p>
 </dd>
+<dt><a href="#_language">_language(e)</a></dt>
+<dd><p>Inner method - switches the languages in the application  and reloads the content.</p>
+</dd>
 <dt><a href="#_startChat">_startChat()</a></dt>
 <dd><p>Inner method - creating the Chat page and initializing the Chat.</p>
+</dd>
+<dt><a href="#_isCurrentUser">_isCurrentUser()</a></dt>
+<dd><p>Inner method - to check the user&#39;s login and replace the language switch with the user name.</p>
 </dd>
 <dt><a href="#_setVh">_setVh()</a></dt>
 <dd><p>Inner method - sets the VH size for window resizing and sets app content height.</p>
@@ -85,10 +91,27 @@ Inner method - render App template (header).
 Inner method - creating events for click (click on HTMLAnchorElement); and events for the window resizing.
 
 **Kind**: global function
+<a name="_language"></a>
+
+## _language(e)
+Inner method - switches the languages in the application  and reloads the content.
+
+**Kind**: global function
+
+| Param | Type | Description |
+| --- | --- | --- |
+| e | <code>object</code> | event on click. |
+
 <a name="_startChat"></a>
 
 ## _startChat()
 Inner method - creating the Chat page and initializing the Chat.
+
+**Kind**: global function
+<a name="_isCurrentUser"></a>
+
+## _isCurrentUser()
+Inner method - to check the user's login and replace the language switch with the user name.
 
 **Kind**: global function
 <a name="_setVh"></a>

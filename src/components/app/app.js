@@ -1,5 +1,6 @@
 import css from './app.css';
-import appTemplate from './app.templ.pug';
+import appTemplateRu from './app.templ-ru.pug';
+import appTemplateEng from './app.templ-eng.pug';
 import urls from './urls.json';
 import NetworkService from '../networkService/networkService.js';
 import Form from '../form/form.js';
@@ -22,14 +23,14 @@ export default class App {
    */
   constructor ({ element }) {
     this.app = element;
-    this.appTemplate = appTemplate.bind(this);
+    this.appTemplateRu = appTemplateRu;
+    this.appTemplateEng = appTemplateEng;
     this.networkService = new NetworkService();
 
     this.pages = {};
 
     this._methodBinding(this.onLoginSubmit, this._startChat, this._startLogin);
     this._initialStartApp();
-    this._initEvents();
   }
 
   /**
@@ -45,6 +46,7 @@ export default class App {
       return (this[name] = method.bind(this));
     });
   }
+
   /**
    * @method _initialStartApp
    * @description Inner method - creates the header of the App, start Router and start Chat
@@ -57,13 +59,30 @@ export default class App {
         chat.classList.add('network_error');
         console.log(error);
       });
-      this._renderAppTemplate();
+
+      if (
+        !window.sessionStorage.getItem('currentLanguage') ||
+        window.sessionStorage.getItem('currentLanguage') === 'ru'
+      ) {
+        this._renderAppTemplate(this.appTemplateRu);
+        window.sessionStorage.setItem('currentLanguage', 'ru');
+      } else {
+        this._renderAppTemplate(this.appTemplateEng);
+        window.sessionStorage.setItem('currentLanguage', 'eng');
+      }
+
+      this._initEvents();
       this.router = new Router();
       this.router.pagesRegistration.call(this, this.app);
       this.router.initEvents.call(this, this.app);
-      this.router.setCurentPage.call(this, 'startChat');
+      this.router.setCurrentPage.call(this, 'startChat');
       this.router.start.call(this);
-      this._startChat();
+
+      if (window.sessionStorage.getItem('currentPage') === '/chat/login') {
+        this._startLogin();
+      } else {
+        this._startChat();
+      }
     })();
   }
 
@@ -89,8 +108,8 @@ export default class App {
    * @method _renderAppTemplate
    * @description Inner method - render App template (header).
    */
-  _renderAppTemplate () {
-    this.app.innerHTML = this.appTemplate();
+  _renderAppTemplate (template) {
+    this.app.innerHTML = template();
   }
 
   /**
@@ -99,6 +118,51 @@ export default class App {
    */
   _initEvents () {
     window.addEventListener('resize', () => this._setVh());
+    window.addEventListener('click', e => this._language(e));
+  }
+
+  /**
+   * @method _language
+   * @description Inner method - switches the languages in the application  and reloads the content.
+   * @param {object} e - event on click.
+   */
+  _language (e) {
+    let target = e.target;
+    let toggleBlock = document.getElementById('user-toggle');
+    if (!toggleBlock) return;
+
+    let toggle = toggleBlock.querySelector('.toggle');
+    let flags = toggleBlock.querySelectorAll('.flag');
+
+    if (
+      target !== toggleBlock &&
+      target !== toggle &&
+      target !== flags[0] &&
+      target !== flags[1]
+    ) {
+      return;
+    }
+
+    let currentPage;
+    if (toggle.classList.contains('ru')) {
+      this._renderAppTemplate(this.appTemplateEng);
+      window.sessionStorage.setItem('currentLanguage', 'eng');
+      currentPage = this.router.getCurrentPage.call(this);
+      if (currentPage === '/chat') {
+        this._startChat();
+        return;
+      }
+      this._startLogin();
+    } else {
+      this._renderAppTemplate(this.appTemplateRu);
+      window.sessionStorage.setItem('currentLanguage', 'ru');
+      currentPage = this.router.getCurrentPage.call(this);
+      if (currentPage === '/chat') {
+        this._startChat();
+        return;
+      }
+      this._startLogin();
+    }
   }
 
   /**
@@ -115,12 +179,9 @@ export default class App {
     }
     if (!element) return;
 
-    this.currentUser = document.getElementById('username').innerHTML
-      ? document.getElementById('username').innerHTML
-      : window.sessionStorage.getItem('currentUser');
+    this._isCurrentUser();
 
-    document.getElementById('username').innerHTML = this.currentUser;
-    this.router.setCurentPage.call(this, 'startChat');
+    this.router.setCurrentPage.call(this, 'startChat');
 
     this.chat = new Chat({
       element: element,
@@ -130,10 +191,31 @@ export default class App {
       tooltip: Tooltip,
       currentUser: this.currentUser
     });
-    this.chat.initialStartChat();
-
     this._setVh();
     this._getIP();
+    window.sessionStorage.setItem('currentPage', '/chat');
+
+    this.chat.initialStartChat();
+  }
+
+  /**
+   * @method _isCurrentUser
+   * @description Inner method - to check the user's login and replace the language switch with the user name.
+   */
+  _isCurrentUser () {
+    let userElement = document.getElementById('user-toggle');
+
+    if (window.sessionStorage.getItem('currentUser')) {
+      this.currentUser = window.sessionStorage.getItem('currentUser');
+    }
+    if (userElement.classList.contains('header__user')) {
+      this.currentUser = document.getElementById('user-toggle').innerHTML;
+    }
+
+    if (this.currentUser) {
+      document.getElementById('user-toggle').innerHTML = this.currentUser;
+      userElement.classList.add('header__user');
+    }
   }
 
   /**
@@ -174,7 +256,9 @@ export default class App {
 
     window.sessionStorage.setItem('currentUser', userName);
     this.messagesLength = 0;
-    this.currentUser = document.getElementById('username').innerHTML = userName;
+    this.currentUser = document.getElementById(
+      'user-toggle'
+    ).innerHTML = userName;
     this.startChat();
   }
 
@@ -203,9 +287,12 @@ export default class App {
     });
     this.login.onSubmit = this.onLoginSubmit;
     this.login.initialStartLogin();
+    window.sessionStorage.setItem('currentPage', '/chat/login');
+    this._isCurrentUser();
 
-    this.router.setCurentPage.call(this, 'startLogin');
+    this.router.setCurrentPage.call(this, 'startLogin');
   }
+
   /**
    * @method _getIP
    * @description Inner method - for define user IP and sets it in session Storage.
@@ -227,19 +314,4 @@ export default class App {
       window.sessionStorage.setItem('userIP', this.userIP);
     })();
   }
-  //   this.networkService
-  //     .httpReq({
-  //       url: 'https://jsonip.com',
-  //       method: 'GET'
-  //     })
-  //     .then(response => {
-  //       response = JSON.parse(response);
-  //       this.userIP = response.ip;
-  //       window.sessionStorage.setItem('userIP', this.userIP);
-  //     })
-  //     .catch(error => {
-  //       this.userIP = 'n/a';
-  //       console.log(error);
-  //     });
-  // }
 }

@@ -43,7 +43,7 @@ export default class Router {
   }
 
   /**
-   * @method initEvents(elem)
+   * @method initEvents
    * @description Public method - creating events for click (click on HTMLAnchorElement).
    * @param {object} elem - target DOM element
    */
@@ -63,12 +63,21 @@ export default class Router {
   }
 
   /**
-   * @method setCurentPage(name)
+   * @method setCurrentPage
    * @description Public method - sets current page name and push url-name in the window history.
    * @param {string} name - current page name
    */
-  setCurentPage (name) {
+  setCurrentPage (name) {
     this.currentPage = this.pages[name].url;
     window.history.pushState({}, '', this.pages[name].url);
+  }
+
+  /**
+   * @method getCurrentPage
+   * @description Public method - returns the name of the current page.
+   * @return {string}  - current page name
+   */
+  getCurrentPage () {
+    return this.currentPage;
   }
 }
